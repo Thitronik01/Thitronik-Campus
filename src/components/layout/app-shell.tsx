@@ -72,6 +72,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return (
         <div className="min-h-screen flex flex-col">
             <XpPopup />
+            {/* ── Fullscreen Toggle (fixed overlay, always visible) ── */}
+            <FullscreenToggle />
             {/* ── Header ─────────────────────────────── */}
             <header className="sticky top-0 z-50 bg-brand-navy text-white border-b border-white/10 shadow-lg">
                 <div className="max-w-[1400px] mx-auto flex items-center justify-between h-16 px-4 md:px-8">
@@ -165,8 +167,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                             ))}
                         </div>
 
-                        {/* Fullscreen */}
-                        <FullscreenToggle />
+                        {/* Fullscreen toggle moved to fixed overlay above */}
 
                         {/* Notifications */}
                         <DropdownMenu>
@@ -328,13 +329,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </main>
 
             {/* ── Footer ─────────────────────────────── */}
-            <footer className="border-t border-border bg-white py-6">
-                <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+            <footer className="border-t border-white/10 bg-brand-navy/80 backdrop-blur-sm py-6" style={{ borderTopColor: 'rgba(59,169,211,0.2)' }}>
+                <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
                     <span>© 2026 THITRONIK GmbH · Händler Akademie</span>
                     <div className="flex gap-4">
-                        <Link href="/impressum" className="hover:text-brand-navy transition-colors">Impressum</Link>
-                        <Link href="/datenschutz" className="hover:text-brand-navy transition-colors">Datenschutz</Link>
-                        <Link href="/kontakt" className="hover:text-brand-navy transition-colors">Kontakt</Link>
+                        <Link href="/impressum" className="hover:text-brand-sky transition-colors">Impressum</Link>
+                        <Link href="/datenschutz" className="hover:text-brand-sky transition-colors">Datenschutz</Link>
+                        <Link href="/kontakt" className="hover:text-brand-sky transition-colors">Kontakt</Link>
                     </div>
                 </div>
             </footer>

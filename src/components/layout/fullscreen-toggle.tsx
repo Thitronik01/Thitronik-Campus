@@ -45,8 +45,12 @@ export function FullscreenToggle() {
         <button
             type="button"
             onClick={toggle}
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-lime text-brand-navy shadow-lg hover:scale-110 active:scale-95 transition-all z-[999] cursor-pointer"
-            title="Vollbild"
+            className={`fullscreen-toggle-btn fixed z-[9999] flex h-10 w-10 items-center justify-center rounded-lg shadow-lg transition-all cursor-pointer
+                ${isFS
+                    ? "top-4 right-4 bg-brand-lime text-brand-navy hover:scale-110 active:scale-95"
+                    : "top-3 right-4 bg-brand-lime text-brand-navy hover:scale-110 active:scale-95 opacity-90"
+                }`}
+            title={isFS ? "Vollbild beenden" : "Vollbild"}
         >
             {isFS ? <Minimize size={20} /> : <Maximize size={20} />}
         </button>

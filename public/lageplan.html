@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THITRONIK – Lageplan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --navy-mid: #1D3661;
+      --navy-light: #243758;
+      --lime: #A3E635;
+      --lime-dim: rgba(163,230,53,0.15);
+      --lime-border: rgba(163,230,53,0.35);
+      --white: #ffffff;
+      --white-80: rgba(255,255,255,0.80);
+      --white-60: rgba(255,255,255,0.60);
+      --white-20: rgba(255,255,255,0.12);
+      --white-10: rgba(255,255,255,0.07);
+      --card-bg: rgba(255,255,255,0.05);
+      --card-border: rgba(255,255,255,0.10);
+      --shadow: 0 16px 48px rgba(0,0,0,0.45);
+      --radius: 20px;
+      /* Room fill colors – kept readable but muted for dark bg */
+      --office:    #1e3a6e;
+      --workshop:  #4a2e10;
+      --sanitary:  #0d3a2e;
+      --tech:      #2e1a4e;
+      --storage:   #3a2e0a;
+      --hall:      #1a3a1a;
+      --reception: #0e2e3a;
+      --meeting:   #3a1a2e;
+      --social:    #3a2a10;
+      --corridor:  #12213a;
+      --shell:     #0d1f38;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; width: 100%;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+    .app { max-width: 1600px; margin: 0 auto; padding: 20px 20px 32px; }
+
+    /* ── Header ── */
+    .header {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 14px; margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .brand-logo {
+      color: var(--lime); font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+    }
+    .brand-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); }
+    .header-title { font-size: 17px; font-weight: 700; color: var(--white-80); }
+    .header-meta { font-size: 12px; color: var(--white-60); margin-top: 2px; }
+    .pillbar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      background: var(--white-10); border: 1px solid var(--card-border);
+      border-radius: 99px; padding: 5px 12px; font-size: 12px; font-weight: 600;
+      color: var(--white-60);
+    }
+    .pill-lime {
+      background: var(--lime-dim); border: 1px solid var(--lime-border);
+      color: var(--lime);
+    }
+
+    /* ── Toolbar (tabs) ── */
+    .toolbar { display: grid; gap: 10px; margin-bottom: 18px; }
+    .tabs {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 8px; display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .tabs button {
+      border: 0; background: transparent; color: var(--white-60);
+      cursor: pointer; padding: 10px 18px; border-radius: 12px;
+      font-size: 14px; font-weight: 700; letter-spacing: .01em;
+      transition: all 0.18s ease; font-family: inherit;
+    }
+    .tabs button:hover { background: var(--white-10); color: var(--white); }
+    .tabs button.active {
+      background: linear-gradient(135deg, var(--lime) 0%, #84cc16 100%);
+      color: var(--navy);
+      box-shadow: 0 6px 20px rgba(163,230,53,0.30);
+    }
+
+    /* ── Layout ── */
+    .layout { display: grid; grid-template-columns: 280px minmax(0,1fr) 300px; gap: 16px; align-items: start; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      box-shadow: var(--shadow); border-radius: var(--radius); padding: 18px;
+    }
+    .card h3 {
+      font-size: 14px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--lime); margin-bottom: 14px;
+    }
+    .small { font-size: 13px; color: var(--white-60); line-height: 1.55; }
+
+    /* Legend */
+    .legend { display: grid; gap: 9px; margin-top: 14px; }
+    .legend-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--white-80); }
+    .swatch { width: 16px; height: 16px; border-radius: 5px; border: 1.5px solid rgba(255,255,255,0.20); flex: 0 0 auto; }
+
+    /* Search */
+    .search-wrap { margin-top: 16px; }
+    .search-label { font-size: 12px; font-weight: 700; color: var(--white-60); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: 8px; }
+    .search {
+      width: 100%; padding: 10px 14px; border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: rgba(255,255,255,0.06);
+      color: var(--white); font-size: 14px; outline: none;
+      font-family: inherit; transition: border-color 0.2s;
+    }
+    .search::placeholder { color: var(--white-60); }
+    .search:focus { border-color: var(--lime-border); box-shadow: 0 0 0 3px rgba(163,230,53,0.12); }
+
+    /* Room info */
+    .info-title { font-size: 18px; font-weight: 800; margin-bottom: 6px; color: var(--white); }
+    .info-type {
+      display: inline-flex; align-items: center; padding: 5px 10px;
+      border-radius: 99px; background: var(--lime-dim); color: var(--lime);
+      font-weight: 700; font-size: 12px; margin-bottom: 12px;
+      border: 1px solid var(--lime-border);
+    }
+    .info-box {
+      background: var(--white-10); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 14px; margin-top: 14px;
+    }
+    .info-box strong { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--white-60); }
+    .rooms-list { display: grid; gap: 7px; max-height: 280px; overflow-y: auto; margin-top: 10px; padding-right: 2px; }
+    .rooms-list::-webkit-scrollbar { width: 4px; }
+    .rooms-list::-webkit-scrollbar-track { background: transparent; }
+    .rooms-list::-webkit-scrollbar-thumb { background: var(--white-20); border-radius: 4px; }
+    .room-chip {
+      display: flex; justify-content: space-between; gap: 8px;
+      border: 1px solid var(--card-border); background: var(--white-10);
+      border-radius: 10px; padding: 8px 10px; font-size: 12px;
+      cursor: pointer; text-align: left; width: 100%;
+      font-family: inherit; color: var(--white); transition: background 0.15s;
+    }
+    .room-chip:hover { background: rgba(163,230,53,0.10); border-color: var(--lime-border); }
+    .room-chip strong { display: block; font-size: 12px; }
+    .muted { color: var(--white-60); }
+
+    /* Plan card */
+    .plan-card { padding: 0; overflow: hidden; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+    .plan-top {
+      padding: 18px 20px 12px; display: flex;
+      justify-content: space-between; gap: 16px; align-items: flex-start; flex-wrap: wrap;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .plan-top h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; color: var(--white); }
+    .plan-meta { color: var(--white-60); font-size: 13px; line-height: 1.5; max-width: 560px; }
+    .badge {
+      background: var(--lime-dim); color: var(--lime);
+      border: 1px solid var(--lime-border); border-radius: 99px;
+      padding: 6px 14px; font-size: 12px; font-weight: 700; white-space: nowrap;
+    }
+    .svg-wrap { padding: 12px 16px 16px; }
+
+    /* SVG elements */
+    svg { width: 100%; height: auto; display: block; border-radius: 12px; }
+    .grid { stroke: rgba(255,255,255,0.06); stroke-width: 1; }
+    .shell { fill: var(--shell); stroke: rgba(163,230,53,0.50); stroke-width: 5; stroke-linejoin: round; }
+    .corridor { fill: var(--corridor); stroke: rgba(255,255,255,0.10); stroke-width: 1.5; }
+    .zone-label { font-size: 11px; fill: rgba(255,255,255,0.35); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .north { font-size: 13px; font-weight: 800; fill: var(--lime); }
+
+    /* Room fills */
+    .room rect, .room path, .room polygon { stroke: rgba(255,255,255,0.18); stroke-width: 2.5; transition: all 0.16s ease; }
+    .room text { fill: rgba(255,255,255,0.88); font-size: 15px; font-weight: 700; pointer-events: none; font-family: 'Inter', Arial, sans-serif; }
+    .room .sub { font-size: 11px; font-weight: 600; fill: rgba(255,255,255,0.50); }
+    .room.type-office    rect, .room.type-office    path { fill: var(--office); }
+    .room.type-workshop  rect, .room.type-workshop  path { fill: var(--workshop); }
+    .room.type-sanitary  rect, .room.type-sanitary  path { fill: var(--sanitary); }
+    .room.type-tech      rect, .room.type-tech      path { fill: var(--tech); }
+    .room.type-storage   rect, .room.type-storage   path { fill: var(--storage); }
+    .room.type-hall      rect, .room.type-hall      path { fill: var(--hall); }
+    .room.type-reception rect, .room.type-reception path { fill: var(--reception); }
+    .room.type-meeting   rect, .room.type-meeting   path { fill: var(--meeting); }
+    .room.type-social    rect, .room.type-social    path { fill: var(--social); }
+    .room { cursor: pointer; }
+    .room:hover rect, .room:hover path,
+    .room.active rect, .room.active path {
+      stroke: var(--lime); stroke-width: 3.5;
+      filter: drop-shadow(0 0 10px rgba(163,230,53,0.40));
+    }
+    .room.dim { opacity: 0.2; }
+    .door { stroke: rgba(255,255,255,0.30); stroke-width: 2; fill: none; }
+    .furniture { stroke: rgba(255,255,255,0.15); stroke-width: 1.5; fill: rgba(255,255,255,0.05); }
+
+    @media (max-width: 1200px) { .layout { grid-template-columns: 1fr; } .card.plan-card { order: -1; } }
+    @media (max-width: 720px) { .app { padding: 12px; } .tabs button { flex: 1 1 auto; } .room text { font-size: 12px; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <div class="header-brand">
+          <div class="brand-logo">THITRONIK</div>
+          <div class="brand-dot"></div>
+          <div class="header-title">Interaktiver Lageplan</div>
+        </div>
+        <div class="header-meta">Visuell überarbeiteter Grundriss für Campus-Mitarbeiter und Besucher</div>
+        <div class="pillbar" style="margin-top:10px">
+          <span class="pill">Gebäude 1 · EG &amp; OG</span>
+          <span class="pill">Gebäude 2 · EG &amp; OG</span>
+          <span class="pill pill-lime">Nur zur Orientierung</span>
+        </div>
+      </div>
+      <div class="pill">Stand: Visualisierte Entwurfsfassung</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="toolbar">
+      <div class="tabs" id="buildingTabs">
+        <button class="active" data-building="b1">Gebäude 1</button>
+        <button data-building="b2">Gebäude 2</button>
+      </div>
+      <div class="tabs" id="floorTabs">
+        <button class="active" data-floor="eg">Erdgeschoss</button>
+        <button data-floor="og">Obergeschoss</button>
+      </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="layout">
+      <!-- Sidebar Left -->
+      <aside class="card">
+        <h3>Legende</h3>
+        <p class="small">Farben zeigen die Nutzungsart. Klicke auf einen Raum für Details.</p>
+        <div class="legend">
+          <div class="legend-row"><span class="swatch" style="background:var(--office)"></span> Büro</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--reception)"></span> Empfang / Besucher</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--meeting)"></span> Besprechung</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--social)"></span> Sozialbereich</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--workshop)"></span> Werkstatt</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--hall)"></span> Halle / Produktion</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--storage)"></span> Lager</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--tech)"></span> Technik</div>
+          <div class="legend-row"><span class="swatch" style="background:var(--sanitary)"></span> Sanitär</div>
+        </div>
+        <div class="search-wrap">
+          <label for="search" class="search-label">Raum suchen</label>
+          <input id="search" class="search" type="search" placeholder="z. B. Empfang, Werkstatt …" />
+        </div>
+      </aside>
+
+      <!-- Plan -->
+      <main class="card plan-card">
+
+        <!-- B1 EG -->
+        <div class="panel active" data-panel="b1-eg">
+          <div class="plan-top">
+            <div>
+              <h2>Gebäude 1 – Erdgeschoss</h2>
+              <div class="plan-meta">Empfangszone, Entwicklung, Labor, Werkstatt und Hallenbereich.</div>
+            </div>
+            <div class="badge">Externe Orientierung</div>
+          </div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 1280 800" aria-label="Grundriss Gebäude 1 Erdgeschoss">
+              <defs>
+                <pattern id="grid1" width="32" height="32" patternUnits="userSpaceOnUse">
+                  <path d="M 32 0 L 0 0 0 32" class="grid" fill="none"/>
+                </pattern>
+              </defs>
+              <rect x="0" y="0" width="1280" height="800" fill="url(#grid1)"/>
+              <text x="1170" y="58" class="north">N ↑</text>
+              <path class="shell" d="M70 110H430V86H760V70H1120V700H70Z"/>
+              <rect class="corridor" x="430" y="206" width="108" height="374" rx="22"/>
+              <rect class="corridor" x="430" y="306" width="600" height="104" rx="22"/>
+              <rect class="corridor" x="950" y="200" width="80" height="160" rx="20"/>
+              <text x="456" y="196" class="zone-label">Flur / Hauptachse</text>
+
+              <g class="room type-reception" data-room="Empfang" data-type="Empfang" data-desc="Zentrale Anlaufstelle für Besucher und externe Mitarbeiter. Kurze Wege zu Besprechung und Verwaltung." data-floor="Gebäude 1 · EG">
+                <rect x="86" y="126" width="170" height="130" rx="20"/>
+                <text x="171" y="184" text-anchor="middle">Empfang</text>
+                <text x="171" y="204" text-anchor="middle" class="sub">Besucher / Anmeldung</text>
+              </g>
+              <g class="room type-reception" data-room="Foyer" data-type="Empfang" data-desc="Offene Foyerfläche mit Sitzmöglichkeit und kurzem Zugang zur Hauptachse." data-floor="Gebäude 1 · EG">
+                <rect x="272" y="126" width="140" height="130" rx="20"/>
+                <text x="342" y="184" text-anchor="middle">Foyer</text>
+                <text x="342" y="204" text-anchor="middle" class="sub">Wartebereich</text>
+              </g>
+              <g class="room type-meeting" data-room="Besprechung Nord" data-type="Besprechung" data-desc="Großer Besprechungsraum für Einweisung, Termine mit Partnern und Teamrunden." data-floor="Gebäude 1 · EG">
+                <rect x="86" y="278" width="206" height="150" rx="22"/>
+                <text x="189" y="344" text-anchor="middle">Besprechung Nord</text>
+                <text x="189" y="364" text-anchor="middle" class="sub">12 Plätze</text>
+              </g>
+              <g class="room type-social" data-room="Pausenraum" data-type="Sozialbereich" data-desc="Aufenthaltsraum mit Küchenzeile und Platz für Mittagspause oder kurze Abstimmungen." data-floor="Gebäude 1 · EG">
+                <rect x="86" y="448" width="206" height="156" rx="22"/>
+                <text x="189" y="516" text-anchor="middle">Pausenraum</text>
+                <text x="189" y="536" text-anchor="middle" class="sub">mit Küche</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC Damen" data-type="Sanitär" data-desc="Sanitärraum im westlichen Gebäudeteil." data-floor="Gebäude 1 · EG">
+                <rect x="312" y="278" width="100" height="70" rx="16"/>
+                <text x="362" y="318" text-anchor="middle">WC D</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC Herren" data-type="Sanitär" data-desc="Sanitärraum im westlichen Gebäudeteil." data-floor="Gebäude 1 · EG">
+                <rect x="312" y="356" width="100" height="72" rx="16"/>
+                <text x="362" y="397" text-anchor="middle">WC H</text>
+              </g>
+              <g class="room type-sanitary" data-room="Barrierefrei WC" data-type="Sanitär" data-desc="Barrierearmes WC nahe der Hauptachse." data-floor="Gebäude 1 · EG">
+                <rect x="312" y="448" width="100" height="156" rx="16"/>
+                <text x="362" y="523" text-anchor="middle">WC</text>
+                <text x="362" y="543" text-anchor="middle" class="sub">barrierearm</text>
+              </g>
+              <g class="room type-tech" data-room="IT / Technik" data-type="Technik" data-desc="Netzwerk, Drucker und kleine technische Infrastruktur nahe dem Kernflur." data-floor="Gebäude 1 · EG">
+                <rect x="556" y="88" width="148" height="122" rx="20"/>
+                <text x="630" y="146" text-anchor="middle">IT / Technik</text>
+                <text x="630" y="166" text-anchor="middle" class="sub">Drucker · Netzwerk</text>
+              </g>
+              <g class="room type-office" data-room="Entwicklung 1" data-type="Büro" data-desc="Arbeitsbereich Entwicklung mit acht Arbeitsplätzen." data-floor="Gebäude 1 · EG">
+                <rect x="556" y="232" width="180" height="164" rx="20"/>
+                <text x="646" y="305" text-anchor="middle">Entwicklung 1</text>
+                <text x="646" y="325" text-anchor="middle" class="sub">8 Arbeitsplätze</text>
+              </g>
+              <g class="room type-office" data-room="Entwicklung 2" data-type="Büro" data-desc="Zweiter Entwicklungsbereich mit Projekttischen und Kurzbesprechung." data-floor="Gebäude 1 · EG">
+                <rect x="556" y="424" width="180" height="164" rx="20"/>
+                <text x="646" y="497" text-anchor="middle">Entwicklung 2</text>
+                <text x="646" y="517" text-anchor="middle" class="sub">Projektfläche</text>
+              </g>
+              <g class="room type-office" data-room="Leitung Entwicklung" data-type="Büro" data-desc="Leitungsbüro mit Sichtkontakt zur Entwicklung und kurzer Distanz zum Labor." data-floor="Gebäude 1 · EG">
+                <rect x="556" y="606" width="180" height="78" rx="18"/>
+                <text x="646" y="651" text-anchor="middle">Leitung Entwicklung</text>
+              </g>
+              <g class="room type-tech" data-room="Elektronik-Labor" data-type="Technik" data-desc="Fiktiv erweitertes Labor für Tests, Musteraufbau und Diagnose." data-floor="Gebäude 1 · EG">
+                <rect x="758" y="232" width="158" height="164" rx="20"/>
+                <text x="837" y="305" text-anchor="middle">Elektronik-Labor</text>
+                <text x="837" y="325" text-anchor="middle" class="sub">Messplätze</text>
+              </g>
+              <g class="room type-workshop" data-room="Werkstatt Metall" data-type="Werkstatt" data-desc="Werkstattbereich für Prototypen, Montagehilfen und Metallbearbeitung." data-floor="Gebäude 1 · EG">
+                <rect x="758" y="424" width="158" height="124" rx="20"/>
+                <text x="837" y="488" text-anchor="middle">Werkstatt Metall</text>
+              </g>
+              <g class="room type-workshop" data-room="Werkstatt Holz" data-type="Werkstatt" data-desc="Separater Werkstattbereich für leichte Holzarbeiten und Musterbau." data-floor="Gebäude 1 · EG">
+                <rect x="930" y="424" width="170" height="124" rx="20"/>
+                <text x="1015" y="488" text-anchor="middle">Werkstatt Holz</text>
+              </g>
+              <g class="room type-hall" data-room="Einbauhalle" data-type="Halle" data-desc="Großzügige Hallenfläche für Einbau, Service und Zwischenlagerung von Komponenten." data-floor="Gebäude 1 · EG">
+                <rect x="758" y="88" width="342" height="122" rx="24"/>
+                <text x="929" y="146" text-anchor="middle">Einbauhalle</text>
+                <text x="929" y="166" text-anchor="middle" class="sub">Service · Montage · Test</text>
+              </g>
+              <g class="room type-hall" data-room="Montagefläche" data-type="Halle" data-desc="Offene Montagefläche zwischen Werkstatt und Halle." data-floor="Gebäude 1 · EG">
+                <rect x="930" y="232" width="170" height="164" rx="20"/>
+                <text x="1015" y="305" text-anchor="middle">Montagefläche</text>
+                <text x="1015" y="325" text-anchor="middle" class="sub">Zwischenzone</text>
+              </g>
+              <g class="room type-storage" data-room="Materiallager" data-type="Lager" data-desc="Kleines Materiallager direkt an Werkstatt und Halle." data-floor="Gebäude 1 · EG">
+                <rect x="930" y="566" width="170" height="118" rx="20"/>
+                <text x="1015" y="632" text-anchor="middle">Materiallager</text>
+              </g>
+              <g class="room type-meeting" data-room="Projektlounge" data-type="Besprechung" data-desc="Informeller Bereich für Kurztermine, Kundenabstimmungen oder spontane Projektgespräche." data-floor="Gebäude 1 · EG">
+                <rect x="758" y="566" width="158" height="118" rx="20"/>
+                <text x="837" y="624" text-anchor="middle">Projektlounge</text>
+                <text x="837" y="644" text-anchor="middle" class="sub">Kurzmeeting</text>
+              </g>
+              <path class="door" d="M256 218 A36 36 0 0 1 292 182"/>
+              <path class="door" d="M412 338 A26 26 0 0 1 438 312"/>
+              <path class="door" d="M538 154 A26 26 0 0 1 564 128"/>
+              <path class="door" d="M538 322 A26 26 0 0 1 564 296"/>
+              <path class="door" d="M736 322 A22 22 0 0 1 758 300"/>
+              <path class="door" d="M916 482 A22 22 0 0 1 938 460"/>
+              <rect class="furniture" x="122" y="315" width="40" height="22" rx="8"/>
+              <rect class="furniture" x="170" y="315" width="40" height="22" rx="8"/>
+              <rect class="furniture" x="142" y="486" width="94" height="34" rx="12"/>
+              <rect class="furniture" x="590" y="274" width="42" height="28" rx="8"/>
+              <rect class="furniture" x="650" y="274" width="42" height="28" rx="8"/>
+              <rect class="furniture" x="796" y="270" width="84" height="32" rx="10"/>
+              <rect class="furniture" x="784" y="120" width="290" height="38" rx="12"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- B1 OG -->
+        <div class="panel" data-panel="b1-og">
+          <div class="plan-top">
+            <div>
+              <h2>Gebäude 1 – Obergeschoss</h2>
+              <div class="plan-meta">Verwaltungs- und Büroebene mit Assistenz, Vertrieb, Arbeitszonen und Besprechungsräumen.</div>
+            </div>
+            <div class="badge">Fiktiv optimiert</div>
+          </div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 1280 760" aria-label="Grundriss Gebäude 1 Obergeschoss">
+              <defs><pattern id="grid2" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" class="grid" fill="none"/></pattern></defs>
+              <rect x="0" y="0" width="1280" height="760" fill="url(#grid2)"/>
+              <text x="1170" y="58" class="north">N ↑</text>
+              <path class="shell" d="M72 122H540V86H1120V662H72Z"/>
+              <rect class="corridor" x="530" y="206" width="110" height="330" rx="24"/>
+              <rect class="corridor" x="530" y="206" width="500" height="96" rx="24"/>
+              <rect class="corridor" x="690" y="318" width="340" height="92" rx="24"/>
+              <rect class="corridor" x="950" y="206" width="80" height="340" rx="22"/>
+              <text x="560" y="190" class="zone-label">Galerie / Hauptflur</text>
+              <g class="room type-storage" data-room="Archiv" data-type="Lager" data-desc="Archiv- und Serverfläche im Kern des Obergeschosses." data-floor="Gebäude 1 · OG">
+                <rect x="88" y="144" width="188" height="480" rx="24"/>
+                <text x="182" y="374" text-anchor="middle">Archiv</text>
+                <text x="182" y="394" text-anchor="middle" class="sub">Server · Akten · Reserve</text>
+              </g>
+              <g class="room type-tech" data-room="IT-Backoffice" data-type="Technik" data-desc="Technischer Nebenraum für Drucker, Netzwerk und Schließsysteme." data-floor="Gebäude 1 · OG">
+                <rect x="294" y="144" width="220" height="178" rx="22"/>
+                <text x="404" y="224" text-anchor="middle">IT-Backoffice</text>
+                <text x="404" y="244" text-anchor="middle" class="sub">Support · Systeme</text>
+              </g>
+              <g class="room type-office" data-room="Büro Nord 1" data-type="Büro" data-desc="Ruhiges Einzel- oder Doppelbüro in Nordlage." data-floor="Gebäude 1 · OG">
+                <rect x="660" y="104" width="126" height="108" rx="20"/>
+                <text x="723" y="160" text-anchor="middle">Büro Nord 1</text>
+              </g>
+              <g class="room type-office" data-room="Büro Nord 2" data-type="Büro" data-desc="Ruhiges Einzel- oder Doppelbüro in Nordlage." data-floor="Gebäude 1 · OG">
+                <rect x="804" y="104" width="126" height="108" rx="20"/>
+                <text x="867" y="160" text-anchor="middle">Büro Nord 2</text>
+              </g>
+              <g class="room type-office" data-room="Büro Vertrieb / Support" data-type="Büro" data-desc="Gemeinsame Fläche für Vertrieb und Support." data-floor="Gebäude 1 · OG">
+                <rect x="948" y="104" width="154" height="108" rx="20"/>
+                <text x="1025" y="156" text-anchor="middle">Vertrieb / Support</text>
+              </g>
+              <g class="room type-office" data-room="Assistenz" data-type="Büro" data-desc="Assistenzarbeitsplätze im Zentrum der Büroebene." data-floor="Gebäude 1 · OG">
+                <rect x="690" y="232" width="172" height="134" rx="22"/>
+                <text x="776" y="296" text-anchor="middle">Assistenz</text>
+                <text x="776" y="316" text-anchor="middle" class="sub">2–3 Arbeitsplätze</text>
+              </g>
+              <g class="room type-meeting" data-room="Galerie-Lounge" data-type="Besprechung" data-desc="Offener Kommunikationsbereich für spontane Abstimmungen." data-floor="Gebäude 1 · OG">
+                <rect x="880" y="232" width="222" height="134" rx="22"/>
+                <text x="991" y="296" text-anchor="middle">Galerie-Lounge</text>
+              </g>
+              <g class="room type-meeting" data-room="Meeting West" data-type="Besprechung" data-desc="Kleiner Besprechungsraum für 4–6 Personen." data-floor="Gebäude 1 · OG">
+                <rect x="294" y="340" width="220" height="134" rx="22"/>
+                <text x="404" y="404" text-anchor="middle">Meeting West</text>
+                <text x="404" y="424" text-anchor="middle" class="sub">4–6 Personen</text>
+              </g>
+              <g class="room type-office" data-room="Büro GF" data-type="Büro" data-desc="Leitungsbüro im ruhigen Südostbereich." data-floor="Gebäude 1 · OG">
+                <rect x="690" y="430" width="172" height="134" rx="22"/>
+                <text x="776" y="501" text-anchor="middle">Büro GF</text>
+              </g>
+              <g class="room type-office" data-room="Assistenz Süd" data-type="Büro" data-desc="Unterstützende Arbeitsplätze mit Nähe zur Galerie." data-floor="Gebäude 1 · OG">
+                <rect x="880" y="430" width="222" height="134" rx="22"/>
+                <text x="991" y="493" text-anchor="middle">Assistenz Süd</text>
+                <text x="991" y="513" text-anchor="middle" class="sub">Admin · Organisation</text>
+              </g>
+              <g class="room type-social" data-room="Balkon-Lounge" data-type="Sozialbereich" data-desc="Fiktiv erweiterter Balkon als informelle Warte- und Pausenfläche." data-floor="Gebäude 1 · OG">
+                <rect x="1120" y="430" width="96" height="134" rx="22"/>
+                <text x="1168" y="490" text-anchor="middle">Balkon</text>
+                <text x="1168" y="510" text-anchor="middle" class="sub">Lounge</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC Damen OG" data-type="Sanitär" data-desc="Sanitärbereich Damen." data-floor="Gebäude 1 · OG">
+                <rect x="558" y="144" width="84" height="62" rx="14"/>
+                <text x="600" y="181" text-anchor="middle">WC D</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC Herren OG" data-type="Sanitär" data-desc="Sanitärbereich Herren." data-floor="Gebäude 1 · OG">
+                <rect x="558" y="474" width="84" height="62" rx="14"/>
+                <text x="600" y="511" text-anchor="middle">WC H</text>
+              </g>
+              <path class="door" d="M514 228 A28 28 0 0 1 542 200"/>
+              <path class="door" d="M642 190 A20 20 0 0 1 662 170"/>
+              <path class="door" d="M862 300 A20 20 0 0 1 882 280"/>
+              <rect class="furniture" x="720" y="260" width="44" height="30" rx="8"/>
+              <rect class="furniture" x="778" y="260" width="44" height="30" rx="8"/>
+              <rect class="furniture" x="736" y="465" width="80" height="42" rx="12"/>
+              <rect class="furniture" x="338" y="380" width="132" height="34" rx="10"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- B2 EG -->
+        <div class="panel" data-panel="b2-eg">
+          <div class="plan-top">
+            <div>
+              <h2>Gebäude 2 – Erdgeschoss</h2>
+              <div class="plan-meta">Wareneingang, Lagerkern, Vormontage und Büroflächen.</div>
+            </div>
+            <div class="badge">Neu ergänzt</div>
+          </div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 1280 760" aria-label="Grundriss Gebäude 2 Erdgeschoss">
+              <defs><pattern id="grid3" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" class="grid" fill="none"/></pattern></defs>
+              <rect x="0" y="0" width="1280" height="760" fill="url(#grid3)"/>
+              <text x="1170" y="58" class="north">N ↑</text>
+              <path class="shell" d="M96 108H930V88H1150V660H96Z"/>
+              <rect class="corridor" x="904" y="178" width="96" height="402" rx="24"/>
+              <rect class="corridor" x="672" y="370" width="328" height="96" rx="24"/>
+              <text x="892" y="162" class="zone-label">Logistikachse</text>
+              <g class="room type-reception" data-room="Anmeldung Logistik" data-type="Empfang" data-desc="Kleine Anlaufstelle für Lieferanten und Fremdfirmen." data-floor="Gebäude 2 · EG">
+                <rect x="970" y="108" width="162" height="120" rx="20"/>
+                <text x="1051" y="163" text-anchor="middle">Anmeldung Logistik</text>
+                <text x="1051" y="183" text-anchor="middle" class="sub">Wareneingang</text>
+              </g>
+              <g class="room type-office" data-room="Büro Versand" data-type="Büro" data-desc="Kompaktes Büro für Versand, Lieferscheine und Koordination." data-floor="Gebäude 2 · EG">
+                <rect x="970" y="246" width="162" height="118" rx="20"/>
+                <text x="1051" y="309" text-anchor="middle">Büro Versand</text>
+              </g>
+              <g class="room type-office" data-room="Büro Lagerleitung" data-type="Büro" data-desc="Büro der Lager- und Logistikkoordination." data-floor="Gebäude 2 · EG">
+                <rect x="970" y="382" width="162" height="118" rx="20"/>
+                <text x="1051" y="445" text-anchor="middle">Lagerleitung</text>
+              </g>
+              <g class="room type-social" data-room="Teeküche" data-type="Sozialbereich" data-desc="Kleiner Aufenthalts- und Kaffeepunkt am Flurende." data-floor="Gebäude 2 · EG">
+                <rect x="970" y="518" width="162" height="118" rx="20"/>
+                <text x="1051" y="581" text-anchor="middle">Teeküche</text>
+              </g>
+              <g class="room type-storage" data-room="Hochregallager" data-type="Lager" data-desc="Fiktiv vergrößertes Lager für Material, Versandkartons und Ersatzteile." data-floor="Gebäude 2 · EG">
+                <rect x="118" y="128" width="340" height="496" rx="26"/>
+                <text x="288" y="374" text-anchor="middle">Hochregallager</text>
+                <text x="288" y="394" text-anchor="middle" class="sub">Wareneingang · Kommissionierung</text>
+              </g>
+              <g class="room type-storage" data-room="Kleinteilelager" data-type="Lager" data-desc="Kompaktlager für häufig benötigte Komponenten." data-floor="Gebäude 2 · EG">
+                <rect x="480" y="128" width="170" height="220" rx="22"/>
+                <text x="565" y="242" text-anchor="middle">Kleinteilelager</text>
+              </g>
+              <g class="room type-hall" data-room="Vormontage" data-type="Halle" data-desc="Offene Vormontagefläche mit Werkbänken und Materialwagen." data-floor="Gebäude 2 · EG">
+                <rect x="480" y="388" width="170" height="236" rx="22"/>
+                <text x="565" y="504" text-anchor="middle">Vormontage</text>
+                <text x="565" y="524" text-anchor="middle" class="sub">Arbeitsinseln</text>
+              </g>
+              <g class="room type-workshop" data-room="Servicewerkstatt" data-type="Werkstatt" data-desc="Werkstatt für Aufbereitung, Rückläufer und kleinere Reparaturen." data-floor="Gebäude 2 · EG">
+                <rect x="672" y="128" width="214" height="220" rx="22"/>
+                <text x="779" y="242" text-anchor="middle">Servicewerkstatt</text>
+              </g>
+              <g class="room type-hall" data-room="Pack- und Versandfläche" data-type="Halle" data-desc="Packtische und Übergabezone für den Versand." data-floor="Gebäude 2 · EG">
+                <rect x="672" y="488" width="214" height="136" rx="22"/>
+                <text x="779" y="555" text-anchor="middle">Pack- und Versandfläche</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC EG Gebäude 2" data-type="Sanitär" data-desc="Sanitärbereich im östlichen Gebäudekopf." data-floor="Gebäude 2 · EG">
+                <rect x="672" y="388" width="96" height="80" rx="16"/>
+                <text x="720" y="434" text-anchor="middle">WC</text>
+              </g>
+              <g class="room type-tech" data-room="Haustechnik" data-type="Technik" data-desc="Haustechnik und Medienanschlüsse für das Nebengebäude." data-floor="Gebäude 2 · EG">
+                <rect x="790" y="388" width="96" height="80" rx="16"/>
+                <text x="838" y="434" text-anchor="middle">Technik</text>
+              </g>
+              <path class="door" d="M458 250 A22 22 0 0 1 480 228"/>
+              <path class="door" d="M650 250 A22 22 0 0 1 672 228"/>
+              <path class="door" d="M886 562 A18 18 0 0 1 904 544"/>
+              <rect class="furniture" x="168" y="182" width="240" height="18" rx="9"/>
+              <rect class="furniture" x="168" y="236" width="240" height="18" rx="9"/>
+              <rect class="furniture" x="505" y="458" width="120" height="34" rx="10"/>
+              <rect class="furniture" x="712" y="202" width="134" height="34" rx="10"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- B2 OG -->
+        <div class="panel" data-panel="b2-og">
+          <div class="plan-top">
+            <div>
+              <h2>Gebäude 2 – Obergeschoss</h2>
+              <div class="plan-meta">Mehrzweckraum, Galerieflur und Nebenräume.</div>
+            </div>
+            <div class="badge">Ruhigere Darstellung</div>
+          </div>
+          <div class="svg-wrap">
+            <svg viewBox="0 0 1280 760" aria-label="Grundriss Gebäude 2 Obergeschoss">
+              <defs><pattern id="grid4" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M 32 0 L 0 0 0 32" class="grid" fill="none"/></pattern></defs>
+              <rect x="0" y="0" width="1280" height="760" fill="url(#grid4)"/>
+              <text x="1170" y="58" class="north">N ↑</text>
+              <path class="shell" d="M294 118H858V88H1100V654H294Z"/>
+              <rect class="corridor" x="842" y="204" width="94" height="260" rx="24"/>
+              <rect class="corridor" x="506" y="390" width="430" height="90" rx="22"/>
+              <text x="806" y="188" class="zone-label">Galerieflur</text>
+              <g class="room type-hall" data-room="Mehrzweckraum" data-type="Halle" data-desc="Großer Raum für Schulung, Präsentation und interne Veranstaltungen." data-floor="Gebäude 2 · OG">
+                <rect x="314" y="140" width="500" height="230" rx="28"/>
+                <text x="564" y="248" text-anchor="middle">Mehrzweckraum</text>
+                <text x="564" y="268" text-anchor="middle" class="sub">Schulung · Event · Aufbau</text>
+              </g>
+              <g class="room type-storage" data-room="Lager allgemein" data-type="Lager" data-desc="Allgemeines Lager mit Zugriff vom Galerieflur." data-floor="Gebäude 2 · OG">
+                <rect x="314" y="390" width="170" height="224" rx="22"/>
+                <text x="399" y="503" text-anchor="middle">Lager allgemein</text>
+              </g>
+              <g class="room type-storage" data-room="Stuhllager" data-type="Lager" data-desc="Zusätzlicher Lagerraum für Möbel und temporäre Ausstattung." data-floor="Gebäude 2 · OG">
+                <rect x="506" y="500" width="148" height="114" rx="20"/>
+                <text x="586" y="560" text-anchor="middle">Stuhllager</text>
+              </g>
+              <g class="room type-hall" data-room="Luftraum Halle" data-type="Halle" data-desc="Offene Galerie über der Halle." data-floor="Gebäude 2 · OG">
+                <rect x="670" y="500" width="172" height="114" rx="20"/>
+                <text x="756" y="553" text-anchor="middle">Luftraum Halle</text>
+              </g>
+              <g class="room type-office" data-room="Büro Ost" data-type="Büro" data-desc="Kleines Büro mit Blick zum Außenzugang." data-floor="Gebäude 2 · OG">
+                <rect x="958" y="140" width="122" height="140" rx="20"/>
+                <text x="1019" y="214" text-anchor="middle">Büro Ost</text>
+              </g>
+              <g class="room type-office" data-room="Büro Süd" data-type="Büro" data-desc="Weiteres kleines Büro oder Besprechungszimmer." data-floor="Gebäude 2 · OG">
+                <rect x="958" y="380" width="122" height="140" rx="20"/>
+                <text x="1019" y="454" text-anchor="middle">Büro Süd</text>
+              </g>
+              <g class="room type-sanitary" data-room="WC OG Gebäude 2" data-type="Sanitär" data-desc="Sanitärbereich am Treppenkern." data-floor="Gebäude 2 · OG">
+                <rect x="858" y="500" width="84" height="114" rx="18"/>
+                <text x="900" y="562" text-anchor="middle">WC</text>
+              </g>
+              <g class="room type-tech" data-room="Technikschacht" data-type="Technik" data-desc="Technik- und Medienbereich am Flurkopf." data-floor="Gebäude 2 · OG">
+                <rect x="858" y="140" width="84" height="114" rx="18"/>
+                <text x="900" y="202" text-anchor="middle">Technik</text>
+              </g>
+              <g class="room type-meeting" data-room="Galerie-Besprechung" data-type="Besprechung" data-desc="Kleine Nische für kurze Termine oder Wartebereich im Obergeschoss." data-floor="Gebäude 2 · OG">
+                <rect x="958" y="540" width="122" height="74" rx="18"/>
+                <text x="1019" y="583" text-anchor="middle">Galerie</text>
+                <text x="1019" y="603" text-anchor="middle" class="sub">Besprechung</text>
+              </g>
+              <path class="door" d="M814 250 A28 28 0 0 1 842 222"/>
+              <path class="door" d="M938 214 A20 20 0 0 1 958 194"/>
+              <rect class="furniture" x="386" y="208" width="356" height="46" rx="14"/>
+              <rect class="furniture" x="982" y="180" width="74" height="32" rx="10"/>
+            </svg>
+          </div>
+        </div>
+      </main>
+
+      <!-- Sidebar Right -->
+      <aside class="card">
+        <h3>Raumdetails</h3>
+        <div id="roomInfo">
+          <div class="info-title">Kein Raum gewählt</div>
+          <div class="small">Klicke auf einen Raum im Plan für Details.</div>
+        </div>
+
+        <div class="info-box">
+          <strong>Aktive Ansicht</strong>
+          <p class="small" id="panelSummary" style="margin:8px 0 0">Gebäude 1 – EG mit Empfang, Entwicklung, Werkstatt und Hallenfläche.</p>
+        </div>
+
+        <div class="info-box">
+          <strong>Räume im aktiven Plan</strong>
+          <div id="roomList" class="rooms-list"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    const summaries = {
+      'b1-eg': 'Gebäude 1 – EG mit Empfang, Entwicklung, Labor, Werkstatt und Hallenfläche.',
+      'b1-og': 'Gebäude 1 – OG als Büro- und Verwaltungsebene mit Galeriecharakter.',
+      'b2-eg': 'Gebäude 2 – EG als Logistik- und Vormontageebene.',
+      'b2-og': 'Gebäude 2 – OG mit Mehrzweckraum, Lager und Nebenräumen.'
+    };
+
+    const buildingTabs = document.querySelectorAll('#buildingTabs button');
+    const floorTabs    = document.querySelectorAll('#floorTabs button');
+    const panels       = document.querySelectorAll('.panel');
+    const search       = document.getElementById('search');
+    const roomInfo     = document.getElementById('roomInfo');
+    const roomList     = document.getElementById('roomList');
+    const panelSummary = document.getElementById('panelSummary');
+
+    let state = { building: 'b1', floor: 'eg' };
+
+    function currentKey() { return `${state.building}-${state.floor}`; }
+    function activePanel() { return document.querySelector(`.panel[data-panel="${currentKey()}"]`); }
+
+    function setTabs(group, value, attr) {
+      group.forEach(btn => btn.classList.toggle('active', btn.dataset[attr] === value));
+    }
+
+    function renderPanel() {
+      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === currentKey()));
+      setTabs(buildingTabs, state.building, 'building');
+      setTabs(floorTabs, state.floor, 'floor');
+      panelSummary.textContent = summaries[currentKey()] || '';
+      search.value = '';
+      updateSearch();
+      populateRoomList();
+      resetInfo();
+      // Re-bind room clicks for the newly active panel
+      activePanel().querySelectorAll('.room').forEach(room => {
+        room.addEventListener('click', () => showRoom(room));
+      });
+    }
+
+    function resetInfo() {
+      activePanel().querySelectorAll('.room').forEach(r => r.classList.remove('active'));
+      roomInfo.innerHTML = `
+        <div class="info-title">Kein Raum gewählt</div>
+        <div class="small">Klicke auf einen Raum im Plan für Details.</div>
+      `;
+    }
+
+    function showRoom(room) {
+      activePanel().querySelectorAll('.room').forEach(r => r.classList.remove('active'));
+      room.classList.add('active');
+      roomInfo.innerHTML = `
+        <div class="info-title">${room.dataset.room}</div>
+        <div class="info-type">${room.dataset.type}</div>
+        <div class="small"><strong style="color:rgba(255,255,255,0.5)">${room.dataset.floor}</strong></div>
+        <div class="small" style="margin-top:8px">${room.dataset.desc}</div>
+      `;
+    }
+
+    function updateSearch() {
+      const val = search.value.trim().toLowerCase();
+      activePanel().querySelectorAll('.room').forEach(room => {
+        const hit = !val || room.dataset.room.toLowerCase().includes(val) || room.dataset.type.toLowerCase().includes(val);
+        room.classList.toggle('dim', !hit);
+      });
+      populateRoomList(val);
+    }
+
+    function populateRoomList(filter = '') {
+      const rooms = [...activePanel().querySelectorAll('.room')]
+        .map(r => ({ name: r.dataset.room, type: r.dataset.type, node: r }))
+        .filter(item => !filter || item.name.toLowerCase().includes(filter) || item.type.toLowerCase().includes(filter));
+
+      roomList.innerHTML = rooms.map(item => `
+        <button class="room-chip" type="button" data-room-target="${item.name.replace(/"/g,'&quot;')}">
+          <span>
+            <strong>${item.name}</strong>
+            <span class="muted">${item.type}</span>
+          </span>
+          <span class="muted" style="font-size:16px">→</span>
+        </button>
+      `).join('') || '<div class="small">Keine Treffer.</div>';
+
+      roomList.querySelectorAll('[data-room-target]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const room = [...activePanel().querySelectorAll('.room')].find(r => r.dataset.room === btn.dataset.roomTarget);
+          if (room) showRoom(room);
+        });
+      });
+    }
+
+    buildingTabs.forEach(btn => btn.addEventListener('click', () => {
+      state.building = btn.dataset.building;
+      renderPanel();
+    }));
+    floorTabs.forEach(btn => btn.addEventListener('click', () => {
+      state.floor = btn.dataset.floor;
+      renderPanel();
+    }));
+
+    // Initial
+    document.querySelectorAll('.room').forEach(room => {
+      room.addEventListener('click', () => showRoom(room));
+    });
+    renderPanel();
+  </script>
+</body>
+</html>

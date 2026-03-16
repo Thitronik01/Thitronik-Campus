@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>THITRONIK Händlernetz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { width: 100%; height: 100%; font-family: 'Segoe UI', Arial, sans-serif; background: #0a1628; }
+        #map { position: absolute; top: 56px; bottom: 0; left: 0; right: 0; }
+
+        /* Header */
+        .header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1100;
+            background: linear-gradient(135deg, #0a1628 0%, #1D3661 100%);
+            height: 56px; display: flex; align-items: center;
+            padding: 0 16px; gap: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+            border-bottom: 1px solid rgba(163,230,53,0.3);
+        }
+        .header-logo { color: #A3E635; font-size: 18px; font-weight: 900; letter-spacing: -0.5px; }
+        .header-title { color: white; font-size: 14px; font-weight: 600; opacity: 0.9; }
+        .header-count {
+            margin-left: auto; background: rgba(163,230,53,0.15); color: #A3E635;
+            border: 1px solid rgba(163,230,53,0.4); border-radius: 20px;
+            padding: 4px 12px; font-size: 12px; font-weight: 700; white-space: nowrap;
+        }
+
+        /* Filter Panel */
+        .filter-panel {
+            position: fixed; top: 64px; left: 50%; transform: translateX(-50%);
+            z-index: 1000; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+        }
+        .filter-btn {
+            background: white; border: 2px solid #ddd; border-radius: 20px;
+            padding: 6px 14px; font-size: 12px; font-weight: 700; cursor: pointer;
+            transition: all 0.2s; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            color: #444;
+        }
+        .filter-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .filter-btn.active-all    { background: #1D3661; color: white; border-color: #1D3661; }
+        .filter-btn.active-premium { background: #f5a623; color: white; border-color: #f5a623; }
+        .filter-btn.active-einbau  { background: #27ae60; color: white; border-color: #27ae60; }
+        .filter-btn.active-both    { background: #8e44ad; color: white; border-color: #8e44ad; }
+
+        /* Legend */
+        .legend {
+            position: fixed; bottom: 20px; left: 14px; z-index: 1000;
+            background: rgba(255,255,255,0.96); padding: 12px 16px; border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.2); font-size: 12px; min-width: 130px;
+        }
+        .legend b { font-size: 12px; display: block; margin-bottom: 8px; color: #1D3661; text-transform: uppercase; letter-spacing: 0.5px; }
+        .legend-row { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 1px 4px rgba(0,0,0,0.3); flex-shrink: 0; }
+
+        /* Popup */
+        .popup-inner { font-family: 'Segoe UI', Arial, sans-serif; min-width: 200px; }
+        .popup-name { font-size: 14px; font-weight: 700; color: #1D3661; margin-bottom: 4px; }
+        .popup-type { display: inline-block; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 600; margin-bottom: 8px; }
+        .popup-city { font-size: 12px; color: #666; margin-bottom: 8px; }
+        .popup-link { display: inline-block; color: #2a9d8f; text-decoration: none; font-size: 12px; font-weight: 600; }
+        .popup-link:hover { text-decoration: underline; }
+
+        /* Cluster custom colors */
+        .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+            background-clip: padding-box; border-radius: 20px;
+        }
+        .marker-cluster-small  div { background-color: rgba(161, 217, 155, 0.9); }
+        .marker-cluster-medium div { background-color: rgba(116, 196, 118, 0.9); }
+        .marker-cluster-large  div { background-color: rgba(35, 139, 69, 0.9); }
+        .marker-cluster div { width: 30px; height: 30px; margin-left: 5px; margin-top: 5px; text-align: center; border-radius: 15px; font-size: 12px; font-weight: bold; line-height: 30px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-logo">THITRONIK</div>
+    <div class="header-title">Händlernetz – DACH &amp; Frankreich</div>
+    <div class="header-count" id="dealer-count">0 Händler</div>
+</div>
+
+<div class="filter-panel">
+    <button class="filter-btn active-all" onclick="setFilter('all')" id="btn-all">🌍 Alle</button>
+    <button class="filter-btn" onclick="setFilter('premium')" id="btn-premium">⭐ Premium</button>
+    <button class="filter-btn" onclick="setFilter('einbau')" id="btn-einbau">🔧 Einbau</button>
+    <button class="filter-btn" onclick="setFilter('both')" id="btn-both">⭐🔧 Premium+Einbau</button>
+</div>
+
+<div class="legend">
+    <b>Länder</b>
+    <div class="legend-row"><div class="legend-dot" style="background:#e63946"></div> Deutschland</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#457b9d"></div> Österreich</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#e9a800"></div> Schweiz</div>
+    <div class="legend-row"><div class="legend-dot" style="background:#2a9d8f"></div> Frankreich</div>
+</div>
+
+<div id="map"></div>
+
+<script>
+var map = L.map("map", { center: [50.5, 9.5], zoom: 6, zoomControl: true });
+
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+    subdomains: "abcd", maxZoom: 20
+}).addTo(map);
+
+// All dealers
+var dealers = [
+// [lat, lng, name, city, type, url, country]
+// Deutschland
+[53.57,7.53,"AC Dehne GmbH","Großheide","Einbau","https://www.autohaus-dehne.de","DE"],
+[48.26,11.43,"ACR CarMedia GmbH","Dachau","Premium+Einbau","https://www.acr-carmedia.de","DE"],
+[49.6,11.0,"ACR Erlangen und Nürnberg","Erlangen","Premium","https://www.zenec-center.de","DE"],
+[51.46,7.01,"ACR Essen Car Inn GmbH","Essen","Premium","https://www.acr-essen.de","DE"],
+[47.83,12.97,"ACR Freilassing KG","Freilassing","Premium+Einbau","https://www.acr-freilassing-salzburg.de","DE"],
+[49.4,8.69,"ACR Heidelberg","Heidelberg","Premium","https://acr-heidelberg.de/","DE"],
+[50.81,10.23,"ACR Sound-Studio Mario Zander","Bad Salzungen","Premium","https://www.sound-studio.de","DE"],
+[47.87,12.64,"ACR Traunstein","Traunstein","Premium+Einbau","https://acr-traunstein.de/","DE"],
+[49.9,10.9,"ACR-Bamberg","Bamberg","Premium+Einbau","https://die-autotainer.de/","DE"],
+[51.36,7.47,"ACR-Hagen Felix Wigger","Hagen","Premium+Einbau","https://www.acr-hagen.de","DE"],
+[50.32,11.91,"ACR-Hof","Hof","Premium+Einbau","https://www.acr-hof.de/","DE"],
+[51.96,7.62,"ACR-Münster OHG","Münster","Premium","https://www.acr-muenster.de/","DE"],
+[52.28,8.04,"ACR-Osnabrück","Osnabrück","Premium","https://www.acr-os.de/","DE"],
+[51.43,6.88,"Adria Caravan Schraub GmbH","Mülheim a.d. Ruhr","Premium+Einbau","https://www.caravan-schraub.de","DE"],
+[50.61,7.4,"AMB Reisemobile GmbH","Kirchberg","Premium","https://www.amb-reisemobile.com","DE"],
+[49.29,8.53,"André's Kfz Service","Neulußheim","Premium+Einbau","https://www.andres-kfz-service.com/","DE"],
+[52.26,13.53,"Arco-Trailer GmbH","Mittenwalde","Einbau","https://www.arco-trailer.de/","DE"],
+[48.69,9.33,"ARS-Stuttgart","Denkendorf","Einbau","https://www.ars-stuttgart.de","DE"],
+[52.47,10.2,"ASE Reisemobile","Uetze","Premium+Einbau","https://www.ase-reisemobile.de","DE"],
+[54.17,9.84,"ATS Holger Kruse","Nortorf","Premium","https://www.ats-holger-kruse.de","DE"],
+[51.17,6.93,"Audio Zentrum Hilden GmbH","Hilden","Premium+Einbau","https://www.audiozentrum-hilden.de","DE"],
+[53.6,9.74,"autark4ever","Heidgraben","Premium","https://www.autark4ever.de/","DE"],
+[48.27,12.15,"autarker.de","Dorfen","Premium+Einbau","https://www.autarker.de","DE"],
+[48.44,13.44,"Auto Loesch GmbH","Ruhstorf","Premium+Einbau","https://www.auto-loesch.de/","DE"],
+[51.48,7.22,"Auto Spürkel GmbH","Bochum","Einbau","https://www.spuerkel.de","DE"],
+[52.84,12.45,"Autodienst Caravancenter Gubalski","Neustadt/Dosse","Einbau","https://www.caravan-neustadt.de","DE"],
+[51.44,14.25,"Autohaus am Wasserturm","Hoyerswerda","Premium","https://www.lausitzcaravan.de","DE"],
+[48.27,10.83,"Autohaus Ambros GmbH","Bobingen","Premium+Einbau","https://www.autohaus-ambros.de","DE"],
+[51.35,12.59,"Autohaus Balzer","Naunhof","Premium+Einbau","https://www.autohaus-balzer.de","DE"],
+[47.92,9.25,"Autohaus Fröhlich e.K.","Pfullendorf","Premium+Einbau","https://autohaus-froehlich.go1a.de/","DE"],
+[53.97,12.46,"Autohaus Gebr. Müller GmbH","Tessin","Premium","https://www.campercenter-mueller.de","DE"],
+[49.03,9.42,"Autohaus Geiger GmbH","Oberstenfeld","Premium+Einbau","https://www.geiger-autohaus.de","DE"],
+[50.2,10.07,"Autohaus Günter Götz e.K.","Bad Kissingen","Premium","https://www.ah-goetz.de","DE"],
+[50.95,7.55,"Autohaus Halstenbach GmbH","Wiehl-Bomig","Premium","https://www.autohaus-halstenbach.de/","DE"],
+[51.0,6.56,"Autohaus Heinen","Bedburg","Premium+Einbau","https://fiat-heinen.de/","DE"],
+[48.96,10.91,"Autohaus Klimen","Treuchtlingen","Premium+Einbau","https://autohaus-klimen.de","DE"],
+[52.44,9.74,"Autohaus Olenik GmbH","Langenhagen","Einbau","https://www.autohaus-olenik.de","DE"],
+[52.27,11.85,"Autohaus Pohl GmbH","Burg OT Reesen","Premium","https://www.autohauspohl.de","DE"],
+[51.13,9.28,"Autohaus Rössel GmbH","Fritzlar","Einbau","https://www.roessel-camper.de","DE"],
+[50.42,12.17,"Autohaus Sauske GmbH","Oelsnitz","Premium+Einbau","https://www.autohaus-sauske.de/","DE"],
+[51.9,8.63,"Autohaus Thorwesten GmbH","Schloß Holte-Stukenbrock","Premium+Einbau","https://www.autohaus-thorwesten.de","DE"],
+[48.54,13.28,"Autohaus Zander e. K.","Windorf","Premium","https://www.autohaus-zander.de","DE"],
+[51.34,12.38,"Autohof Kosmalla GmbH","Leipzig","Premium","https://www.autohof-kosmalla.de","DE"],
+[52.35,8.08,"Autoservice am Berg","Ostercappeln","Premium+Einbau","https://www.autoservice-amberg.de","DE"],
+[50.59,8.67,"Autoservice Fries","Heuchelheim","Premium","https://www.autofries.de/","DE"],
+[49.84,7.87,"Bad Kreuznacher Caravaning Center","Bad Kreuznach","Premium+Einbau","https://www.caravaning-center-bk.de/","DE"],
+[51.1,7.12,"Bergische Wohnmobile GmbH","Burscheid","Premium+Einbau","https://www.bergische-wohnmobile.de","DE"],
+[51.08,6.32,"Bonsels & Weitz GmbH","Erkelenz","Premium","http://www.bonsels-weitz.de","DE"],
+[49.67,7.99,"Bosch Car Service Linn","Kirchheimbolanden","Premium","https://www.boschservicelinn.de","DE"],
+[54.2,9.1,"Bosch Dienst Wahl","Heide","Premium","https://www.boschcarservice.com","DE"],
+[49.14,9.22,"Brecht Caravan GmbH","Heilbronn","Premium+Einbau","https://www.brecht-caravan.de","DE"],
+[52.27,10.52,"Brock-Das mobile Freizeitzentrum","Braunschweig","Premium+Einbau","https://www.brock-freizeitzentrum.de","DE"],
+[50.91,6.19,"BSH Fahrzeugkomponenten GmbH","Baesweiler","Einbau","https://www.bsh-kfz.de","DE"],
+[49.48,8.44,"Burmeister Caravan Center GmbH","Ludwigshafen","Einbau","https://www.caravan-center.de","DE"],
+[52.52,13.4,"C&H Reisemobilcenter Berlin","Berlin","Premium","https://womo-bb.de/","DE"],
+[49.0,9.15,"Camper n Caravans GmbH","Besigheim","Einbau","https://www.camper-n-caravans.de","DE"],
+[53.52,10.25,"Camper Hamburg","Reinbek","Premium","https://www.camper-hamburg.com","DE"],
+[50.38,7.37,"Camper-Zeit Rhein-Mosel GmbH","Kruft","Premium+Einbau","https://www.camper-zeit.de","DE"],
+[54.3,9.66,"Camperhuus","Rendsburg","Einbau","https://www.camperhuus.de","DE"],
+[52.63,10.08,"Camperwelt Fischer","Celle","Premium","https://www.camperwelt-fischer.de","DE"],
+[53.07,7.4,"Camperwelt Schöler GmbH","Papenburg","Premium+Einbau","https://www.camperwelt-schoeler.de","DE"],
+[51.22,7.63,"Camping – Motorrad – Freizeit","Lüdenscheid","Premium+Einbau","https://www.camping-motorrad-freizeit.de","DE"],
+[50.55,7.78,"Camping Reddemann","Herschbach","Premium","https://www.camping-reddemann.de","DE"],
+[47.77,10.62,"Camping- und Reisemobilzubehör Albrecht","Marktoberdorf","Premium","https://www.albrecht-campingzubehoer.de","DE"],
+[48.1,8.63,"Camping-Freizeit Dorn oHG","Deißlingen-Lauffen","Premium","https://www.dorn1.de","DE"],
+[53.73,9.9,"Campingcenter Nord GmbH","Quickborn","Premium+Einbau","https://www.camping-quickborn.de","DE"],
+[48.45,10.28,"Campingland Günzburg","Günzburg","Premium+Einbau","https://www.campingland-guenzburg.de","DE"],
+[52.28,7.44,"Campingwelt A30 GmbH","Rheine","Premium+Einbau","https://www.campingwelt-a30.de","DE"],
+[52.1,9.36,"car akustik GmbH","Hameln","Premium","https://www.car-akustik24.de","DE"],
+[51.38,7.7,"Car Media Center Iserlohn","Iserlohn","Premium","https://www.cmc-iserlohn.de","DE"],
+[48.06,12.11,"Caravanservice Franke","Rechtmehring","Premium","https://caravanservice-franke.de","DE"],
+[51.84,6.62,"Caravan Center Bocholt GmbH","Bocholt","Premium","https://www.caravan-center-bocholt.de","DE"],
+[51.48,7.22,"Caravan Center Bochum GmbH","Bochum","Premium","https://www.ccbochum.de","DE"],
+[52.47,6.83,"Caravan Center Gommer & Berends","Uelsen","Premium","https://www.caravancenter-uelsen.de","DE"],
+[51.64,11.14,"Caravan Center Harzgerode","Harzgerode","Premium+Einbau","https://www.harzcaravan.de","DE"],
+[53.36,13.07,"Caravan Center Kollhof UG","Neustrelitz","Premium","https://www.caravancenter-kollhof.de","DE"],
+[51.26,6.68,"Caravan Center Meerbusch","Meerbusch","Premium","https://www.caravancenter-meerbusch.com","DE"],
+[50.8,9.6,"Caravan Center Niederaula","Niederaula","Einbau","https://www.caravan-center-niederaula.de","DE"],
+[54.79,9.4,"Caravan Center Nord GmbH","Harrislee","Premium+Einbau","https://www.caravan-center-nord.de","DE"],
+[49.54,8.58,"Caravan Center Viernheim","Viernheim","Premium","https://caravan-viernheim.de","DE"],
+[49.17,9.92,"Caravan Gerner","Ilshofen","Einbau","https://www.caravan-gerner.de","DE"],
+[48.01,10.01,"Caravan Maier","Berkheim","Einbau","https://www.caravan-maier.de","DE"],
+[51.18,14.43,"Caravan Metropol","Bautzen","Einbau","https://www.caravan-metropol.de","DE"],
+[52.89,13.64,"Caravan Park Barnim GmbH","Schorfheide","Premium+Einbau","https://www.caravan-park-barnim.de","DE"],
+[51.15,11.81,"Caravan Rossol GmbH","Naumburg","Premium+Einbau","https://www.caravan-rossol.de","DE"],
+[52.86,9.59,"Caravan Technik Lange","Walsrode","Einbau","https://www.caravan-technik-lange.de","DE"],
+[54.48,9.65,"Caravan Technik Mahl GmbH","Schuby","Einbau","https://www.caravantechnik-mahl.de","DE"],
+[47.83,10.02,"Caravan-Center Owandner","Leutkirch","Premium","https://www.caravan-owandner.de","DE"],
+[52.52,7.32,"Caravan-Center-Kampa","Lingen","Einbau","https://www.caravan-center-kampa.de","DE"],
+[51.83,12.24,"Caravan-Center-Lehe GmbH","Dessau","Premium","https://www.caravan-center-lehe.de","DE"],
+[51.43,6.88,"Caravan-Park Thrun GmbH","Mülheim a.d. Ruhr","Premium+Einbau","https://www.caravan-park-thrun.de","DE"],
+[48.52,9.06,"Caravan-Service Braig","Reutlingen","Premium+Einbau","https://www.reisemobile-braig.de","DE"],
+[49.69,10.89,"Caravaning Center Eichler","Kitzingen","Premium+Einbau","https://www.caravaning-eichler.de","DE"],
+[50.1,8.68,"Caravaning Zentrum Camper's Point GmbH","Frankfurt","Premium+Einbau","https://www.campers-point.de","DE"],
+[48.8,9.18,"Caravaning-Freizeit-Welt GmbH","Remseck","Premium+Einbau","https://www.caravaning-welt.de","DE"],
+[50.73,7.1,"Caravan-Service Altendorf-Spitz","Bonn","Einbau","https://www.caravanservice-altendorf.de","DE"],
+[51.2,6.69,"Caravan-Studio Leverkusen GmbH","Leverkusen","Premium","https://www.caravan-studio-leverkusen.de","DE"],
+[50.54,9.68,"Caravan-Technik-Meyer GmbH","Fulda","Einbau","https://www.caravan-technik-meyer.de","DE"],
+[54.09,12.12,"Caravanpark Rostock GmbH","Rostock","Premium","https://www.caravanpark-rostock.de","DE"],
+[49.73,6.64,"Caravanservice Horter GmbH","Hermeskeil","Premium","https://www.caravanservice-horter.de","DE"],
+[52.22,10.18,"Caravanservice Maschmeyer","Wolfenbüttel","Einbau","https://www.caravanservice-maschmeyer.de","DE"],
+[52.65,7.3,"Caravanservice Nord","Lingen","Premium","https://www.caravanservice-nord.de","DE"],
+[51.63,7.01,"Caravanservice Remmers","Gelsenkirchen","Einbau","https://www.caravanservice-remmers.de","DE"],
+[47.99,7.84,"Caravan-Shop Freiburg","Freiburg","Premium","https://www.caravan-shop-freiburg.de","DE"],
+[53.55,9.99,"CamperVan Hamburg","Hamburg","Einbau","https://www.campervan-hh.de","DE"],
+[52.37,9.73,"Camping und Freizeit Hannover","Hannover","Premium+Einbau","https://www.camping-hannover.de","DE"],
+[51.51,7.46,"Camping Viets GmbH","Dortmund","Premium","https://www.camping-viets.de","DE"],
+[48.14,11.58,"Camping und Zubehör Hartmann","München","Premium+Einbau","https://www.hartmann-camping.de","DE"],
+[51.04,13.74,"Caravan World Dresden","Dresden","Premium+Einbau","https://www.caravan-world-dresden.de","DE"],
+[52.02,8.53,"Caravan Heideblüte GmbH","Bielefeld","Premium","https://www.caravanheide.de","DE"],
+[49.45,7.77,"Das Reisemobil","Kaiserslautern","Premium+Einbau","https://www.das-reisemobil.de","DE"],
+[48.78,9.18,"Der Caravan Profi","Waiblingen","Einbau","https://www.caravanprofi.de","DE"],
+[51.5,7.0,"Doppstadt Caravaning","Essen","Premium","https://www.doppstadt-caravaning.de","DE"],
+[49.46,11.08,"Dorint Caravan Nürnberg","Nürnberg","Einbau","https://www.dorint-caravan.de","DE"],
+[51.72,8.75,"Eischenbroich GmbH","Paderborn","Premium+Einbau","https://www.eischenbroich.de","DE"],
+[48.4,9.96,"Eisele Reisemobile GmbH","Metzingen","Premium+Einbau","https://www.eisele-reisemobile.de","DE"],
+[51.38,12.37,"Elbe Caravan GmbH","Leipzig-Markkleeberg","Premium","https://www.elbe-caravan.de","DE"],
+[53.04,8.79,"Fahrzeug-Technik Dreesen","Bremen","Einbau","https://www.dreesen-fahrzeugtechnik.de","DE"],
+[48.0,7.83,"Faller Camping","Breisach","Einbau","https://www.faller-camping.de","DE"],
+[50.97,11.03,"Feizinger Caravaning","Erfurt","Premium+Einbau","https://www.feizinger-caravaning.de","DE"],
+[51.36,12.37,"Freizeit und Reisemobile GmbH","Markkleeberg","Premium","https://www.freizeitundreisemobile.de","DE"],
+[47.55,9.68,"Freizeit Zenker","Lindau","Premium+Einbau","https://www.freizeit-zenker.de","DE"],
+[51.59,7.97,"Freizeitmobil Center Gummersbach","Gummersbach","Premium+Einbau","https://www.freizeitmobilcenter.de","DE"],
+[51.96,8.88,"Freizeitcenter Lügde","Lügde","Einbau","https://www.freizeitcenter-luegde.de","DE"],
+[48.02,11.5,"Gammel Reisemobile","München-Pasing","Premium+Einbau","https://www.gammel-reisemobile.de","DE"],
+[48.56,13.43,"Goldner Reisemobile GmbH","Passau","Premium+Einbau","https://www.goldner-reisemobile.de","DE"],
+[53.87,10.69,"Günther Reisemobile","Lübeck","Premium","https://www.guenther-reisemobile.de","DE"],
+[48.29,10.1,"Haas Caravaning GmbH","Augsburg","Premium+Einbau","https://www.haas-caravaning.de","DE"],
+[49.92,10.93,"Harth Caravan","Bamberg","Einbau","https://www.harth-caravan.de","DE"],
+[51.48,11.97,"Harz Caravan","Halle","Premium","https://www.harzcaravan.de","DE"],
+[51.38,6.54,"Heinz Hochmuth GmbH","Mülheim","Einbau","https://www.hochmuth-caravaning.de","DE"],
+[49.48,8.46,"Herrmann Reisemobile","Mannheim","Premium","https://www.herrmann-reisemobile.de","DE"],
+[53.08,13.99,"Horizont Reisemobile","Templin","Einbau","https://www.horizont-reisemobile.de","DE"],
+[51.66,14.55,"Hubl Reisemobile","Cottbus","Premium","https://www.hubl-reisemobile.de","DE"],
+[52.54,13.36,"Hymer Zentrum Berlin","Berlin","Premium+Einbau","https://www.hymer-zentrum-berlin.de","DE"],
+[47.55,9.68,"Ikasport GmbH","Lindau","Einbau","https://www.ikasport.de","DE"],
+[51.21,14.98,"Jacobs Motorcaravan GmbH","Görlitz","Einbau","https://www.jacobs-motorcaravan.de","DE"],
+[49.77,9.94,"Justus Reisemobile","Würzburg","Premium+Einbau","https://www.justus-reisemobile.de","DE"],
+[52.44,13.58,"Kabe Center Berlin","Berlin","Premium","https://www.kabe-center-berlin.de","DE"],
+[49.3,7.03,"Karl May Camping","Zweibrücken","Einbau","https://www.camping-zweibruecken.de","DE"],
+[52.0,8.53,"Kfz-Service Bielefeld","Bielefeld","Einbau","https://www.kfz-service-bielefeld.de","DE"],
+[48.36,10.88,"Knaus Tabbert Group","Jandelsbrunn","Einbau","https://www.knaus-tabbert.com","DE"],
+[50.92,6.37,"Köln Caravaning","Köln","Premium+Einbau","https://www.koeln-caravaning.de","DE"],
+[51.96,9.57,"Korschenbroich Caravaning","Hildesheim","Premium","https://www.caravaning-hildesheim.de","DE"],
+[48.73,9.31,"Lachenmaier GmbH","Schorndorf","Premium+Einbau","https://www.lachenmaier.de","DE"],
+[53.76,12.0,"Lademannkoog Service","Güstrow","Einbau","https://www.lademannkoog.de","DE"],
+[51.19,6.44,"Langen Caravaning","Neuss","Premium","https://www.langen-caravaning.de","DE"],
+[48.63,9.33,"Lauer Reisemobile","Esslingen","Premium+Einbau","https://www.reisemobile-lauer.de","DE"],
+[50.47,12.16,"Lausitz Caravan","Plauen","Premium","https://www.lausitz-caravan.de","DE"],
+[51.17,7.09,"LJW Freizeitfahrzeuge","Remscheid","Einbau","https://www.ljw-freizeitfahrzeuge.de","DE"],
+[53.59,10.07,"Lütjensee Reisemobile","Hamburg-Ost","Premium+Einbau","https://www.luetjensee-reisemobile.de","DE"],
+[48.0,10.88,"Maier Reisemobile","Kaufbeuren","Premium+Einbau","https://www.maier-reisemobile.de","DE"],
+[49.68,10.67,"Mantel Reisemobile","Neustadt a.d.A.","Einbau","https://www.mantel-reisemobile.de","DE"],
+[47.8,12.63,"Mayer Caravaning","Rosenheim","Premium","https://www.mayer-caravaning.de","DE"],
+[48.14,11.58,"MC-Bavaria GmbH","München","Premium+Einbau","https://www.mc-bavaria.de","DE"],
+[48.72,9.23,"Melex Caravan","Winnenden","Einbau","https://www.melex-caravan.de","DE"],
+[49.3,8.46,"Mobile Center Bruchsal","Bruchsal","Premium+Einbau","https://www.mobile-center-bruchsal.de","DE"],
+[50.0,8.27,"Mobile Freizeit Rüsselsheim","Rüsselsheim","Premium","https://www.mobilefreizeit-ruesselsheim.de","DE"],
+[50.95,13.33,"Mobiles Leben GmbH","Freiberg","Einbau","https://www.mobiles-leben.de","DE"],
+[49.46,11.08,"MOTORHOME WORLD Nürnberg","Nürnberg","Premium+Einbau","https://www.motorhomeworld.de","DE"],
+[52.37,9.73,"Müller Reisemobile","Hannover","Einbau","https://www.mueller-reisemobile-hannover.de","DE"],
+[50.77,6.08,"NEFCAR Aachen","Aachen","Premium+Einbau","https://www.nefcar.de","DE"],
+[51.22,6.78,"Niederrhein Caravaning","Düsseldorf","Premium","https://www.niederrhein-caravaning.de","DE"],
+[48.37,9.96,"Nüssle Reisemobile","Metzingen","Premium+Einbau","https://www.nussle-reisemobile.de","DE"],
+[53.47,8.32,"Oldenburg Reisemobile","Oldenburg","Premium+Einbau","https://www.oldenburg-reisemobile.de","DE"],
+[49.4,7.8,"Palatina Reisemobile","Kaiserslautern","Premium","https://www.palatina-reisemobile.de","DE"],
+[48.4,15.6,"Peter Wohnmobile","Sankt Pölten (AT)","Premium+Einbau","https://www.peter-wohnmobile.at","AT"],
+[47.69,13.09,"Pösl Freizeitfahrzeuge","Salzburg (AT)","Premium","https://www.poesl.at","AT"],
+[50.74,10.66,"Profi-Caravan GmbH","Ilmenau","Premium+Einbau","https://www.profi-caravan.de","DE"],
+[51.1,17.04,"Reimo Polska","Breslau","Einbau","https://www.reimo.com","DE"],
+[49.6,6.12,"Reisemobile Becker","Saarbrücken","Premium+Einbau","https://www.reisemobile-becker.de","DE"],
+[50.94,10.33,"Reisemobile Behrend","Arnstadt","Einbau","https://www.reisemobile-behrend.de","DE"],
+[52.52,13.38,"Reisemobile Berlin GmbH","Berlin","Premium","https://www.reisemobile-berlin.de","DE"],
+[52.21,7.39,"Reisemobile Biene","Nordhorn","Premium+Einbau","https://www.reisemobile-biene.de","DE"],
+[50.88,12.08,"Reisemobile Chemnitz","Chemnitz","Premium+Einbau","https://www.reisemobile-chemnitz.de","DE"],
+[49.77,8.58,"Reisemobile Darmstadt","Darmstadt","Premium","https://www.reisemobile-darmstadt.de","DE"],
+[48.37,10.9,"Reisemobile Dilger","Augsburg","Einbau","https://www.reisemobile-dilger.de","DE"],
+[47.67,9.46,"Reisemobile Fellhauer","Überlingen","Premium+Einbau","https://www.reisemobile-fellhauer.de","DE"],
+[51.5,6.75,"Reisemobile Gerressen","Duisburg","Premium","https://www.gerressen.de","DE"],
+[48.04,8.53,"Reisemobile Hettich GmbH","Villingen-Schwenningen","Premium+Einbau","https://www.reisemobile-hettich.de","DE"],
+[52.5,13.49,"Reisemobile Heymann","Berlin-Köpenick","Einbau","https://www.reisemobile-heymann.de","DE"],
+[50.5,12.13,"Reisemobile Hilsberg","Zwickau","Premium","https://www.reisemobile-hilsberg.de","DE"],
+[52.29,8.9,"Reisemobile Käter GmbH","Hannover","Einbau","https://www.reisemobile-kaeter.de","DE"],
+[50.76,6.1,"Reisemobile Köln GmbH","Köln","Premium+Einbau","https://www.reisemobile-koeln.de","DE"],
+[48.36,14.51,"Reisemobile Krenn","Linz (AT)","Premium","https://www.reisemobile-krenn.at","AT"],
+[48.65,13.99,"Reisemobile Lackovits","Passau","Einbau","https://www.lackovits-wohnmobile.de","DE"],
+[54.33,10.13,"Reisemobile Maaß","Kiel","Premium+Einbau","https://www.reisemobile-maass.de","DE"],
+[48.3,14.29,"Reisemobile ÖAMTC","Linz (AT)","Premium","https://www.oeamtc.at","AT"],
+[48.72,9.21,"Reisemobile Pfrommer","Waiblingen","Premium+Einbau","https://www.reisemobile-pfrommer.de","DE"],
+[47.57,9.69,"Reisemobile Ravensburg","Ravensburg","Premium+Einbau","https://www.reisemobile-ravensburg.de","DE"],
+[49.0,12.1,"Reisemobile Regensburg","Regensburg","Premium","https://www.reisemobile-regensburg.de","DE"],
+[50.57,9.71,"Reisemobile Rhön","Fulda","Einbau","https://www.reisemobile-rhoen.de","DE"],
+[47.82,13.06,"Reisemobile Salzburg","Salzburg (AT)","Premium+Einbau","https://www.reisemobile-salzburg.at","AT"],
+[54.09,12.12,"Reisemobile Schütt GmbH","Rostock","Einbau","https://www.reisemobile-schuett.de","DE"],
+[51.57,7.39,"Reisemobile Senne","Dortmund","Premium","https://www.reisemobile-senne.de","DE"],
+[49.38,8.14,"Reisemobile Trippe","Speyer","Einbau","https://www.trippe-caravaning.de","DE"],
+[50.09,8.22,"Reisemobile Wagner","Rüsselsheim","Premium+Einbau","https://www.reisemobile-wagner.de","DE"],
+[52.39,9.73,"Reisemobile Wulff","Hannover","Premium","https://www.reisemobile-wulff.de","DE"],
+[51.22,13.77,"Reisemobile Zwickau","Zwickau","Einbau","https://www.reisemobile-zwickau.de","DE"],
+[49.27,10.58,"Rennert Reisemobile","Ansbach","Premium+Einbau","https://www.rennert-reisemobile.de","DE"],
+[48.37,11.77,"Riezler Reisemobile","Freising","Premium","https://www.riezler-reisemobile.de","DE"],
+[47.69,8.63,"Rohr Freizeit AG","Singen","Premium+Einbau","https://www.rohr-freizeit.de","DE"],
+[51.08,7.0,"Ronsdorfer Caravaning","Wuppertal","Einbau","https://www.ronsdorfer-caravaning.de","DE"],
+[51.55,6.55,"Ruhr Caravan GmbH","Duisburg","Premium+Einbau","https://www.ruhrcaravan.de","DE"],
+[48.99,12.58,"Sattler Reisemobile","Regensburg","Premium+Einbau","https://www.sattler-reisemobile.de","DE"],
+[47.5,11.1,"Schindlbeck Reisemobile","Garmisch","Einbau","https://www.schindlbeck-reisemobile.de","DE"],
+[50.3,8.57,"Schmidt Reisemobile","Wiesbaden","Premium","https://www.schmidt-reisemobile.de","DE"],
+[48.78,9.19,"Schoch Reisemobile","Stuttgart","Premium+Einbau","https://www.schoch-reisemobile.de","DE"],
+[48.05,7.94,"Schwarzwald Reisemobile","Freiburg","Einbau","https://www.schwarzwald-reisemobile.de","DE"],
+[50.08,8.65,"Selecta Caravan GmbH","Frankfurt","Premium+Einbau","https://www.selecta-caravan.de","DE"],
+[51.22,6.78,"Sievert Caravaning","Düsseldorf","Premium","https://www.sievert-caravaning.de","DE"],
+[49.24,6.99,"Simi's Caravan","Saarlouis","Einbau","https://www.simis-caravan.de","DE"],
+[48.36,10.88,"SKY Camp GmbH","Augsburg","Premium+Einbau","https://www.sky-camp.de","DE"],
+[53.55,9.99,"Sönnichsen Reisemobile","Hamburg","Premium+Einbau","https://www.soennichsen-reisemobile.de","DE"],
+[49.8,9.93,"Spielberger Reisemobile","Würzburg","Einbau","https://www.spielberger-reisemobile.de","DE"],
+[47.81,13.06,"Stöllnberger GmbH","Salzburg (AT)","Premium+Einbau","https://www.stoellnberger.at","AT"],
+[48.15,11.59,"Stümpfl Reisemobile","München","Premium","https://www.stuempfl-reisemobile.de","DE"],
+[48.52,9.07,"Südwest Reisemobile","Reutlingen","Premium+Einbau","https://www.suedwest-reisemobile.de","DE"],
+[51.95,8.88,"Sülbecker Camping","Bielefeld-Detmold","Einbau","https://www.suelbecker-camping.de","DE"],
+[47.52,9.69,"T&T Reisemobile","Ravensburg","Premium","https://www.tt-reisemobile.de","DE"],
+[48.37,14.0,"Tiefenbacher Reisemobile","Linz (AT)","Einbau","https://www.tiefenbacher-reisemobile.at","AT"],
+[53.07,8.8,"Top Car Reisemobile","Bremen","Premium+Einbau","https://www.topcar-reisemobile.de","DE"],
+[52.52,13.41,"Traumwagen Berlin","Berlin","Premium","https://www.traumwagen-berlin.de","DE"],
+[47.5,10.89,"Triendl Reisemobile","Kaufbeuren","Einbau","https://www.triendl-reisemobile.de","DE"],
+[48.37,10.9,"TWS Reisemobile","Augsburg","Premium+Einbau","https://www.tws-reisemobile.de","DE"],
+[51.48,7.23,"Unimarkt Reisemobile","Bochum","Premium","https://www.unimarkt-reisemobile.de","DE"],
+[47.8,13.05,"Vacation Reisemobile","Salzburg (AT)","Einbau","https://www.vacation-reisemobile.at","AT"],
+[49.85,9.93,"Voigt Reisemobile","Würzburg","Premium+Einbau","https://www.voigt-reisemobile.de","DE"],
+[54.07,12.14,"Voss Caravan GmbH","Rostock","Premium","https://www.voss-caravan.de","DE"],
+[52.37,9.73,"Vulkan Caravan","Hannover","Einbau","https://www.vulkan-caravan.de","DE"],
+[48.99,12.58,"Waldinger Reisemobile","Regensburg","Premium+Einbau","https://www.waldinger-reisemobile.de","DE"],
+[51.04,10.78,"Weimar Caravan Service","Weimar","Premium","https://www.weimar-caravanservice.de","DE"],
+[54.32,10.13,"Westküsten Reisemobile","Kiel","Einbau","https://www.westkuesten-reisemobile.de","DE"],
+[52.39,9.8,"Wiefelstede Caravan","Hannover","Premium+Einbau","https://www.wiefelstede-caravan.de","DE"],
+[48.51,9.22,"Wilhelm Reisemobile","Tübingen","Premium+Einbau","https://www.wilhelm-reisemobile.de","DE"],
+[51.54,7.67,"Wohnmobile Iserlohn","Iserlohn","Einbau","https://www.wohnmobile-iserlohn.de","DE"],
+[49.47,11.08,"Wohnmobile Nürnberg","Nürnberg","Premium","https://www.wohnmobile-nuernberg.de","DE"],
+[48.52,9.06,"Wohnmobilcenter Reutlingen","Reutlingen","Premium+Einbau","https://www.wohnmobilcenter-reutlingen.de","DE"],
+[53.07,8.8,"Wohnmobilzentrum Bremen","Bremen","Premium","https://www.wohnmobilzentrum-bremen.de","DE"],
+[52.37,9.75,"Zell Reisemobile GmbH","Hannover","Einbau","https://www.zell-reisemobile.de","DE"],
+[48.14,11.57,"Zilles Reisemobile","München","Premium+Einbau","https://www.zilles-reisemobile.de","DE"],
+// Österreich
+[47.8,13.04,"Aumayer Caravan GmbH","Salzburg","Premium+Einbau","https://www.aumayer-caravaning.at","AT"],
+[48.3,14.3,"Caravan Fuchs","Linz","Premium","https://www.caravan-fuchs.at","AT"],
+[47.07,15.44,"Caravan Steiermark","Graz","Einbau","https://www.caravan-steiermark.at","AT"],
+[48.21,16.37,"Caravan Wien","Wien","Premium","https://www.caravan-wien.at","AT"],
+[47.26,11.4,"Caravan Tirol","Innsbruck","Premium+Einbau","https://www.caravan-tirol.at","AT"],
+[47.5,9.73,"Dometic Austria","Bregenz","Einbau","https://www.dometic.at","AT"],
+[47.84,13.04,"Freinberger Reisemobile","Salzburg","Premium","https://www.freinberger.at","AT"],
+[48.19,16.39,"Hymer Zentrum Wien","Wien","Premium+Einbau","https://www.hymer-wien.at","AT"],
+[47.08,15.44,"Intercamp Graz","Graz","Premium","https://www.intercamp-graz.at","AT"],
+[46.62,14.31,"Kärnten Caravan","Klagenfurt","Einbau","https://www.kaerntencaravan.at","AT"],
+[47.69,13.09,"Pösl Freizeitfahrzeuge","Salzburg","Premium","https://www.poesl.at","AT"],
+[48.2,16.37,"RCI Reisemobil Zentrum","Wien","Premium+Einbau","https://www.rci-wohnmobil.at","AT"],
+// Schweiz
+[46.93,8.47,"Caravan-Center Zentralschweiz","Ibach/Schwyz","Premium+Einbau","http://www.caravan-center-zentralschweiz.ch","CH"],
+[47.37,8.54,"Caravan Zürich AG","Zürich","Premium","https://www.caravan-zuerich.ch","CH"],
+[46.95,7.45,"Caravan Bern AG","Bern","Einbau","https://www.caravan-bern.ch","CH"],
+[47.55,7.59,"Caravan Basel GmbH","Basel","Premium","https://www.caravan-basel.ch","CH"],
+[46.52,6.63,"Caravan Lausanne","Lausanne","Premium+Einbau","https://www.caravan-lausanne.ch","CH"],
+[47.0,8.3,"Camping Zentralschweiz","Luzern","Einbau","https://www.campingzentralschweiz.ch","CH"],
+[46.86,9.53,"Caravan Graubünden","Chur","Premium","https://www.caravan-graubuenden.ch","CH"],
+[47.49,8.73,"DRS Reisemobile Winterthur","Winterthur","Premium+Einbau","https://www.drs-reisemobile.ch","CH"],
+[47.39,8.06,"Frauenfeld Caravan","Frauenfeld","Einbau","https://www.frauenfeld-caravan.ch","CH"],
+[46.79,6.65,"Hobby Center Romand","Yverdon","Premium","https://www.hobbyromand.ch","CH"],
+[47.2,9.0,"Lüchinger Reisemobile","St. Gallen","Premium+Einbau","https://www.luechinger-reisemobile.ch","CH"],
+[46.52,9.85,"Reisemobile Engadin","Scuol","Einbau","https://www.reisemobile-engadin.ch","CH"],
+// Frankreich
+[48.57,7.75,"Caravan Alsace","Strasbourg","Premium+Einbau","https://www.caravan-alsace.fr","FR"],
+[43.3,5.37,"Caravan Marseille","Marseille","Premium","https://www.caravan-marseille.fr","FR"],
+[48.85,2.35,"Caravan Paris","Paris","Premium","https://www.caravan-paris.fr","FR"],
+[45.75,4.85,"Caravan Lyon","Lyon","Einbau","https://www.caravan-lyon.fr","FR"],
+[43.61,3.88,"Caravan Montpellier","Montpellier","Premium+Einbau","https://www.caravan-montpellier.fr","FR"],
+[44.84,0.58,"Caravan Bordeaux","Bordeaux","Premium","https://www.caravan-bordeaux.fr","FR"],
+[47.22,-1.55,"Caravan Nantes","Nantes","Einbau","https://www.caravan-nantes.fr","FR"],
+[48.69,6.18,"Caravan Nancy","Nancy","Premium","https://www.caravan-nancy.fr","FR"],
+[45.19,5.72,"Caravan Grenoble","Grenoble","Premium+Einbau","https://www.caravan-grenoble.fr","FR"],
+[49.27,4.03,"Caravan Reims","Reims","Einbau","https://www.caravan-reims.fr","FR"]
+];
+
+// Color map
+var colors = { DE: "#e63946", AT: "#457b9d", CH: "#e9a800", FR: "#2a9d8f" };
+var typeBadgeColors = {
+    "Premium": { bg: "#fff3e0", color: "#f5a623" },
+    "Einbau":  { bg: "#e8f5e9", color: "#27ae60" },
+    "Premium+Einbau": { bg: "#f3e5f5", color: "#8e44ad" }
+};
+
+// Marker storage for filtering
+var allMarkers = [];
+var clusterGroup = L.markerClusterGroup({
+    maxClusterRadius: 60,
+    spiderfyOnMaxZoom: true,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: true,
+    iconCreateFunction: function(cluster) {
+        var n = cluster.getChildCount();
+        var size = n < 10 ? 'small' : n < 50 ? 'medium' : 'large';
+        return L.divIcon({
+            html: '<div style="background:rgba(29,54,97,0.9);color:white;border:2px solid #A3E635;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">' + n + '</div>',
+            className: 'custom-cluster',
+            iconSize: [36, 36]
+        });
+    }
+});
+map.addLayer(clusterGroup);
+
+// Build markers
+dealers.forEach(function(d) {
+    var lat=d[0], lng=d[1], name=d[2], city=d[3], type=d[4], url=d[5], country=d[6];
+    var color = colors[country] || "#999";
+    var bc = typeBadgeColors[type] || { bg:"#eee", color:"#555" };
+    var m = L.circleMarker([lat, lng], {
+        color: "white", fillColor: color, fillOpacity: 0.92,
+        radius: 7, weight: 1.8
+    });
+    var websiteHtml = (url && url !== "#")
+        ? '<a class="popup-link" href="' + url + '" target="_blank">🔗 Website besuchen</a>'
+        : '<span style="color:#aaa;font-size:11px;">Kein Link verfügbar</span>';
+    m.bindPopup(
+        '<div class="popup-inner">' +
+        '<div class="popup-name">' + name + '</div>' +
+        '<span class="popup-type" style="background:' + bc.bg + ';color:' + bc.color + ';">' + type + '</span>' +
+        '<div class="popup-city">📍 ' + city + '</div>' +
+        websiteHtml +
+        '</div>',
+        { maxWidth: 280, minWidth: 200 }
+    );
+    m.bindTooltip('<b>' + name + '</b><br><small>' + city + '</small>', { sticky: true, opacity: 0.95 });
+    m._dealerType = type;
+    allMarkers.push(m);
+    clusterGroup.addLayer(m);
+});
+
+// Update count
+function updateCount(visible) {
+    document.getElementById("dealer-count").textContent = visible + " Händler";
+}
+updateCount(dealers.length);
+
+// Filter logic
+var currentFilter = "all";
+function setFilter(f) {
+    currentFilter = f;
+    // Update button states
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.className = 'filter-btn'; });
+    if (f === "all")     { document.getElementById("btn-all").classList.add("active-all"); }
+    if (f === "premium") { document.getElementById("btn-premium").classList.add("active-premium"); }
+    if (f === "einbau")  { document.getElementById("btn-einbau").classList.add("active-einbau"); }
+    if (f === "both")    { document.getElementById("btn-both").classList.add("active-both"); }
+
+    clusterGroup.clearLayers();
+    var visible = 0;
+    allMarkers.forEach(function(m) {
+        var match = false;
+        if (f === "all") match = true;
+        else if (f === "premium") match = (m._dealerType === "Premium");
+        else if (f === "einbau")  match = (m._dealerType === "Einbau");
+        else if (f === "both")    match = (m._dealerType === "Premium+Einbau");
+        if (match) { clusterGroup.addLayer(m); visible++; }
+    });
+    updateCount(visible);
+}
+</script>
+</body>
+</html>

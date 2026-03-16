@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Puzzle, ArrowRight, Brain, ListOrdered, Search, MessageSquare, Presentation, BarChart2 } from "lucide-react";
+import { Puzzle, ArrowRight, Brain, ListOrdered, Search, MessageSquare, Presentation, BarChart2, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -53,6 +53,13 @@ export default function GamesPage() {
             description: "Stimmen Sie live über aktuelle Themen ab.",
             icon: <MessageSquare className="w-8 h-8 text-brand-lime" />,
             href: "/games/mentimeter",
+        },
+        {
+            id: "sales-simulator",
+            title: "Sales Simulator",
+            description: "Trainieren Sie Ihr Verkaufsgespräch in realistischen Kundensituationen.",
+            icon: <Briefcase className="w-8 h-8 text-brand-lime" />,
+            href: "/games/sales-simulator",
         }
     ];
 
@@ -77,7 +84,7 @@ export default function GamesPage() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 }}
                         >
-                            <Card className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all duration-300 group h-full flex flex-col">
+                            <Card className="bg-white/10 border-white/20 backdrop-blur-md hover:bg-white/15 transition-all duration-300 group hover-lift card-glow h-full flex flex-col">
                                 <CardHeader>
                                     <div className="mb-4 p-3 bg-white/5 rounded-xl w-fit group-hover:bg-brand-lime/10 transition-colors">
                                         {game.icon}

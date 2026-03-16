@@ -42,7 +42,7 @@ export default function DashboardPage() {
             <motion.div variants={fadeUp}>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button size="lg" className="w-full h-24 bg-brand-navy hover:bg-brand-navy/90 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02]">
+                  <Button size="lg" className="w-full h-24 bg-gradient-to-br from-brand-navy to-brand-navy/80 hover:from-brand-navy/95 hover:to-brand-navy/75 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02] accent-bar-left border border-white/10">
                     <QrCode className="w-8 h-8 text-brand-sky group-hover:scale-110 transition-transform" />
                     <span className="text-xl font-black tracking-tight">Event Check-in</span>
                   </Button>
@@ -61,9 +61,36 @@ export default function DashboardPage() {
 
             <motion.div variants={fadeUp}>
               <Link href="/community">
-                <Button size="lg" className="w-full h-24 bg-brand-navy hover:bg-brand-navy/90 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02]">
+                <Button size="lg" className="w-full h-24 bg-gradient-to-br from-brand-navy to-brand-navy/80 hover:from-brand-navy/95 hover:to-brand-navy/75 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02] accent-bar-left border border-white/10">
                   <span className="text-2xl group-hover:scale-110 transition-transform">💬</span>
                   <span className="text-xl font-black tracking-tight">Community Chat</span>
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <Link href="/ansprechpartner">
+                <Button size="lg" className="w-full h-24 bg-gradient-to-br from-brand-navy to-brand-navy/80 hover:from-brand-navy/95 hover:to-brand-navy/75 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02] accent-bar-left border border-white/10">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">👤</span>
+                  <span className="text-xl font-black tracking-tight">Ansprechpartner</span>
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <Link href="/haendler">
+                <Button size="lg" className="w-full h-24 bg-gradient-to-br from-brand-navy to-brand-navy/80 hover:from-brand-navy/95 hover:to-brand-navy/75 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02] accent-bar-left border border-white/10">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">🗺️</span>
+                  <span className="text-xl font-black tracking-tight">Unsere Händler</span>
+                </Button>
+              </Link>
+            </motion.div>
+
+            <motion.div variants={fadeUp}>
+              <Link href="/lageplan">
+                <Button size="lg" className="w-full h-24 bg-gradient-to-br from-brand-navy to-brand-navy/80 hover:from-brand-navy/95 hover:to-brand-navy/75 text-white shadow-xl flex flex-col items-center justify-center gap-2 group transition-all hover:scale-[1.02] accent-bar-left border border-white/10">
+                  <span className="text-2xl group-hover:scale-110 transition-transform">🏢</span>
+                  <span className="text-xl font-black tracking-tight">THITRONIK Lageplan</span>
                 </Button>
               </Link>
             </motion.div>

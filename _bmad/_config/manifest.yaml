@@ -1,0 +1,14 @@
+installation:
+  version: 6.2.0
+  installDate: 2026-03-16T08:31:45.336Z
+  lastUpdated: 2026-03-16T08:31:45.336Z
+modules:
+  - name: core
+    version: 6.2.0
+    installDate: 2026-03-16T08:31:45.336Z
+    lastUpdated: 2026-03-16T08:31:45.336Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+ides:
+  - antigravity
