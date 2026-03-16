@@ -1,0 +1,43 @@
+{
+    "Index": {
+        "welcome": "Welcome",
+        "title": "Ahoy, Partner!",
+        "subtitle": "Welcome back to the campus.",
+        "welcome_back": "Welcome back,",
+        "greeting": "Ahoy, {name}!",
+        "learning_progress": "Your personal learning progress on the THITRONIK Campus.",
+        "level": "Level: {name}",
+        "islands_completed": "Islands completed",
+        "learning_path": "Your Learning Path – The 7 Islands",
+        "quick_actions": "Quick Access",
+        "tools_title": "Interactive Games",
+        "tools_desc": "Whiteboard, Quiz & Polls",
+        "event_title": "Event Terminal",
+        "event_desc": "QR Code Scanner for On-Site Trainings"
+    },
+    "Navigation": {
+        "dashboard": "Dashboard",
+        "campus": "Campus",
+        "islands": "The 7 Islands",
+        "catalog": "Course Catalog",
+        "games": "Games",
+        "tools": "Tools",
+        "certificates": "Certificates",
+        "profile": "My Profile",
+        "logout": "Log out",
+        "workingCard": "Digital Work Card"
+    },
+    "Login": {
+        "subtitle": "Learning platform for certified partners",
+        "welcome_back": "Welcome back",
+        "enter_credentials": "Enter dealer credentials",
+        "email_label": "Email or Dealer ID",
+        "password_label": "Password",
+        "forgot_password": "Forgot password?",
+        "error_empty": "Please fill in all fields.",
+        "error_failed": "Login failed.",
+        "submit": "Log in",
+        "loading": "Checking…",
+        "demo_login": "Demo Quick Login"
+    }
+}

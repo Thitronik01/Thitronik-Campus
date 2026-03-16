@@ -1,0 +1,44 @@
+{
+    "Index": {
+        "welcome": "Willkommen",
+        "title": "Ahoi, Partner!",
+        "subtitle": "Willkommen zurück auf dem Campus.",
+        "welcome_back": "Willkommen zurück,",
+        "greeting": "Ahoi, {name}!",
+        "learning_progress": "Ihr persönlicher Lernfortschritt auf dem THITRONIK Campus.",
+        "level": "Level: {name}",
+        "islands_completed": "Inseln abgeschlossen",
+        "learning_path": "Dein Lernpfad – Die 7 Inseln",
+        "quick_actions": "Schnellzugriff",
+        "tools_title": "Interaktive Games",
+        "tools_desc": "Whiteboard, Quiz & Polls",
+        "event_title": "Event Terminal",
+        "event_desc": "QR-Code Scanner für Vor-Ort Trainings"
+    },
+    "Navigation": {
+        "dashboard": "Dashboard",
+        "campus": "Campus",
+        "islands": "Die 7 Inseln",
+        "catalog": "Kurs-Katalog",
+        "games": "Games",
+        "tools": "Tools",
+        "certificates": "Zertifikate",
+        "community": "Community",
+        "profile": "Mein Profil",
+        "logout": "Abmelden",
+        "workingCard": "Digitale Arbeitskarte"
+    },
+    "Login": {
+        "subtitle": "Lernplattform für zertifizierte Partner",
+        "welcome_back": "Willkommen zurück",
+        "enter_credentials": "Händler-Zugangsdaten eingeben",
+        "email_label": "E-Mail oder Händler-ID",
+        "password_label": "Passwort",
+        "forgot_password": "Passwort vergessen?",
+        "error_empty": "Bitte alle Felder ausfüllen.",
+        "error_failed": "Login fehlgeschlagen.",
+        "submit": "Anmelden",
+        "loading": "Wird geprüft…",
+        "demo_login": "Demo Schnellzugang"
+    }
+}

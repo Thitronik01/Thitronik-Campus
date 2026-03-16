@@ -1,0 +1,883 @@
+
+> campus-2.0@0.1.0 dev
+> next dev
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Rüpprich\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Rüpprich\.gemini\antigravity\playground\campus-2.0\package-lock.json
+
+▲ Next.js 16.1.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.2.224:3000
+- Environments: .env.local
+
+✓ Starting...
+⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+✓ Ready in 1302ms
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /de 200 in 3.4s (compile: 1805ms, proxy.ts: 17ms, render: 1588ms)
+ GET /favicon.ico 404 in 563ms (compile: 32ms, render: 531ms)
+ GET /icons/icon-192.png 404 in 401ms (compile: 218ms, render: 183ms)
+ GET /de 200 in 424ms (compile: 50ms, proxy.ts: 38ms, render: 336ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 310ms (compile: 33ms, render: 277ms)
+ GET /de/login 200 in 2.7s (compile: 2.3s, proxy.ts: 13ms, render: 363ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 113ms (compile: 14ms, render: 99ms)
+ GET /favicon.ico 404 in 305ms (compile: 42ms, render: 263ms)
+ GET /icons/icon-192.png 404 in 223ms (compile: 17ms, render: 206ms)
+ GET /de 200 in 398ms (compile: 53ms, proxy.ts: 28ms, render: 317ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 154ms (compile: 12ms, render: 142ms)
+ GET /de/login 200 in 385ms (compile: 85ms, proxy.ts: 21ms, render: 279ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 52ms (compile: 7ms, render: 45ms)
+○ Compiling /[locale]/register ...
+ GET /de/register 200 in 6.7s (compile: 6.1s, proxy.ts: 14ms, render: 587ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 90ms (compile: 11ms, render: 79ms)
+ GET /de/login 200 in 344ms (compile: 60ms, proxy.ts: 9ms, render: 275ms)
+⨯ The requested resource isn't a valid image for /logo.png received null
+ GET /icons/icon-192.png 404 in 106ms (compile: 9ms, render: 97ms)
+ GET /de/login 200 in 963ms (compile: 793ms, proxy.ts: 26ms, render: 144ms)
+ GET /de/login 200 in 1797ms (compile: 478ms, proxy.ts: 57ms, render: 1262ms)
+ GET /de/login 200 in 1733ms (compile: 783ms, proxy.ts: 22ms, render: 928ms)
+ GET /icons/icon-192.png 404 in 103ms (compile: 9ms, render: 94ms)
+ GET /de 200 in 534ms (compile: 195ms, proxy.ts: 7ms, render: 332ms)
+ GET /icons/icon-192.png 404 in 57ms (compile: 10ms, render: 48ms)
+ GET /de/login 200 in 388ms (compile: 57ms, proxy.ts: 6ms, render: 326ms)
+ GET /icons/icon-192.png 404 in 72ms (compile: 10ms, render: 62ms)
+ GET /de 200 in 73ms (compile: 24ms, proxy.ts: 6ms, render: 44ms)
+ GET /icons/icon-192.png 404 in 101ms (compile: 14ms, render: 86ms)
+ GET /de/modules 200 in 1419ms (compile: 1288ms, proxy.ts: 6ms, render: 124ms)
+ GET /icons/icon-192.png 404 in 79ms (compile: 7ms, render: 71ms)
+ GET /icons/icon-192.png 404 in 156ms (compile: 17ms, render: 139ms)
+ GET /icons/icon-192.png 404 in 126ms (compile: 13ms, render: 113ms)
+ GET /de 200 in 116ms (compile: 44ms, proxy.ts: 11ms, render: 61ms)
+ GET /icons/icon-192.png 404 in 92ms (compile: 9ms, render: 83ms)
+ GET /icons/icon-192.png 404 in 148ms (compile: 22ms, render: 126ms)
+ GET /de 200 in 107ms (compile: 37ms, proxy.ts: 18ms, render: 53ms)
+ GET /icons/icon-192.png 404 in 88ms (compile: 10ms, render: 78ms)
+ GET /de/admin 200 in 2.1s (compile: 2.1s, proxy.ts: 6ms, render: 68ms)
+ GET /icons/icon-192.png 404 in 106ms (compile: 8ms, render: 97ms)
+ GET /de/admin 200 in 98ms (compile: 31ms, proxy.ts: 7ms, render: 60ms)
+ GET /de/manager 200 in 1415ms (compile: 1336ms, proxy.ts: 10ms, render: 69ms)
+ GET /icons/icon-192.png 404 in 105ms (compile: 10ms, render: 95ms)
+ GET /de/profile 200 in 1481ms (compile: 1384ms, proxy.ts: 14ms, render: 83ms)
+ GET /icons/icon-192.png 404 in 126ms (compile: 12ms, render: 114ms)
+ GET /de/certificates 200 in 1144ms (compile: 1051ms, proxy.ts: 7ms, render: 86ms)
+ GET /icons/icon-192.png 404 in 107ms (compile: 10ms, render: 97ms)
+ GET /de/login 200 in 93ms (compile: 34ms, proxy.ts: 9ms, render: 50ms)
+ GET /icons/icon-192.png 404 in 113ms (compile: 13ms, render: 99ms)
+ GET /de 200 in 142ms (compile: 62ms, proxy.ts: 11ms, render: 69ms)
+ GET /icons/icon-192.png 404 in 97ms (compile: 9ms, render: 88ms)
+ GET /de 200 in 104ms (compile: 41ms, proxy.ts: 9ms, render: 54ms)
+ GET /de 200 in 125ms (compile: 45ms, proxy.ts: 13ms, render: 67ms)
+ GET /de 200 in 109ms (compile: 45ms, proxy.ts: 8ms, render: 56ms)
+ GET /de/qr-checkin 200 in 3.6s (compile: 3.5s, proxy.ts: 9ms, render: 96ms)
+ GET /icons/icon-192.png 404 in 128ms (compile: 15ms, render: 114ms)
+ GET /icons/icon-192.png 404 in 106ms (compile: 12ms, render: 94ms)
+ GET /de/certificates 200 in 82ms (compile: 23ms, proxy.ts: 7ms, render: 52ms)
+ GET /icons/icon-192.png 404 in 186ms (compile: 15ms, render: 171ms)
+ GET /de/admin 200 in 68ms (compile: 21ms, proxy.ts: 6ms, render: 41ms)
+ GET /icons/icon-192.png 404 in 142ms (compile: 14ms, render: 128ms)
+ GET /de/certificates 200 in 69ms (compile: 21ms, proxy.ts: 5ms, render: 43ms)
+ GET /icons/icon-192.png 404 in 141ms (compile: 18ms, render: 123ms)
+ GET /de 200 in 72ms (compile: 28ms, proxy.ts: 8ms, render: 36ms)
+ GET /icons/icon-192.png 404 in 113ms (compile: 15ms, render: 98ms)
+ GET /de/tools 200 in 1264ms (compile: 1161ms, proxy.ts: 9ms, render: 94ms)
+ GET /icons/icon-192.png 404 in 144ms (compile: 16ms, render: 128ms)
+ GET /icons/icon-192.png 404 in 128ms (compile: 10ms, render: 118ms)
+ GET /de/tools 200 in 82ms (compile: 29ms, proxy.ts: 7ms, render: 46ms)
+ GET /icons/icon-192.png 404 in 163ms (compile: 13ms, render: 150ms)
+ GET /de/modules 200 in 93ms (compile: 26ms, proxy.ts: 9ms, render: 58ms)
+ GET /icons/icon-192.png 404 in 176ms (compile: 18ms, render: 158ms)
+ GET /de/tools 200 in 79ms (compile: 26ms, proxy.ts: 8ms, render: 45ms)
+ GET /icons/icon-192.png 404 in 138ms (compile: 15ms, render: 123ms)
+ GET /de/modules 200 in 111ms (compile: 44ms, proxy.ts: 10ms, render: 57ms)
+ GET /icons/icon-192.png 404 in 141ms (compile: 21ms, render: 120ms)
+ GET /de/modules 200 in 79ms (compile: 23ms, proxy.ts: 6ms, render: 50ms)
+ GET /de/modules 200 in 81ms (compile: 22ms, proxy.ts: 6ms, render: 53ms)
+ GET /de 200 in 63ms (compile: 24ms, proxy.ts: 6ms, render: 33ms)
+ GET /icons/icon-192.png 404 in 98ms (compile: 11ms, render: 87ms)
+ GET /de 200 in 88ms (compile: 34ms, proxy.ts: 8ms, render: 45ms)
+ GET /de 200 in 94ms (compile: 39ms, proxy.ts: 8ms, render: 47ms)
+ GET /de/modules 200 in 116ms (compile: 36ms, proxy.ts: 9ms, render: 71ms)
+ GET /icons/icon-192.png 404 in 128ms (compile: 10ms, render: 118ms)
+ GET /de/settings 404 in 135ms (compile: 39ms, proxy.ts: 18ms, render: 77ms)
+ GET /de/settings 404 in 170ms (compile: 34ms, proxy.ts: 12ms, render: 124ms)
+ GET /de/modules 200 in 418ms (compile: 33ms, proxy.ts: 6ms, render: 379ms)
+ GET /icons/icon-192.png 404 in 102ms (compile: 18ms, render: 84ms)
+ GET /de/settings 404 in 95ms (compile: 19ms, proxy.ts: 8ms, render: 69ms)
+ GET /de/settings 404 in 149ms (compile: 29ms, proxy.ts: 18ms, render: 103ms)
+ GET /de/modules 200 in 234ms (compile: 25ms, proxy.ts: 7ms, render: 202ms)
+ GET /icons/icon-192.png 404 in 77ms (compile: 8ms, render: 69ms)
+ GET /de/profile 200 in 95ms (compile: 37ms, proxy.ts: 9ms, render: 48ms)
+ GET /icons/icon-192.png 404 in 113ms (compile: 11ms, render: 102ms)
+ GET /de 200 in 67ms (compile: 23ms, proxy.ts: 6ms, render: 38ms)
+ GET /icons/icon-192.png 404 in 81ms (compile: 8ms, render: 73ms)
+ GET /de/login 200 in 214ms (compile: 134ms, proxy.ts: 15ms, render: 64ms)
+ GET /icons/icon-192.png 404 in 117ms (compile: 20ms, render: 97ms)
+ GET /de 200 in 148ms (compile: 48ms, proxy.ts: 16ms, render: 84ms)
+ GET /icons/icon-192.png 404 in 112ms (compile: 12ms, render: 101ms)
+ GET /de/settings 404 in 75ms (compile: 18ms, proxy.ts: 7ms, render: 50ms)
+ GET /de/settings 404 in 118ms (compile: 24ms, proxy.ts: 9ms, render: 86ms)
+ GET /de 200 in 213ms (compile: 31ms, proxy.ts: 7ms, render: 175ms)
+ GET /icons/icon-192.png 404 in 85ms (compile: 10ms, render: 75ms)
+ GET /de/datenschutz 200 in 2.2s (compile: 2.1s, proxy.ts: 7ms, render: 84ms)
+ GET /icons/icon-192.png 404 in 128ms (compile: 12ms, render: 116ms)
+ GET /de/impressum 200 in 2.2s (compile: 2.2s, proxy.ts: 6ms, render: 71ms)
+ GET /icons/icon-192.png 404 in 121ms (compile: 12ms, render: 109ms)
+ GET /de/manager 200 in 94ms (compile: 31ms, proxy.ts: 5ms, render: 58ms)
+ GET /icons/icon-192.png 404 in 133ms (compile: 12ms, render: 121ms)
+ GET /de/modules 200 in 161ms (compile: 46ms, proxy.ts: 7ms, render: 107ms)
+ GET /icons/icon-192.png 404 in 129ms (compile: 8ms, render: 121ms)
+ GET /de/admin 200 in 75ms (compile: 21ms, proxy.ts: 7ms, render: 47ms)
+ GET /icons/icon-192.png 404 in 105ms (compile: 11ms, render: 93ms)
+ GET /de 200 in 81ms (compile: 32ms, proxy.ts: 8ms, render: 41ms)
+ GET /icons/icon-192.png 404 in 94ms (compile: 10ms, render: 84ms)
+ GET /de/admin 200 in 68ms (compile: 26ms, proxy.ts: 6ms, render: 35ms)
+ GET /icons/icon-192.png 404 in 125ms (compile: 10ms, render: 115ms)
+ GET /de 200 in 96ms (compile: 40ms, proxy.ts: 8ms, render: 48ms)
+ GET /icons/icon-192.png 404 in 114ms (compile: 8ms, render: 106ms)
+ GET /de 200 in 59ms (compile: 24ms, proxy.ts: 5ms, render: 30ms)
+ GET /de/tools 200 in 87ms (compile: 29ms, proxy.ts: 8ms, render: 50ms)
+ GET /icons/icon-192.png 404 in 151ms (compile: 21ms, render: 130ms)
+ GET /de/certificates 200 in 93ms (compile: 26ms, proxy.ts: 6ms, render: 61ms)
+ GET /icons/icon-192.png 404 in 241ms (compile: 35ms, render: 206ms)
+ GET /de 200 in 72ms (compile: 23ms, proxy.ts: 7ms, render: 42ms)
+ GET /icons/icon-192.png 404 in 131ms (compile: 12ms, render: 119ms)
+ GET /de/modules 200 in 89ms (compile: 27ms, proxy.ts: 6ms, render: 55ms)
+ GET /icons/icon-192.png 404 in 148ms (compile: 12ms, render: 135ms)
+ GET /de/certificates 200 in 80ms (compile: 33ms, proxy.ts: 9ms, render: 38ms)
+ GET /icons/icon-192.png 404 in 253ms (compile: 13ms, render: 241ms)
+ GET /de/certificates 200 in 120ms (compile: 26ms, proxy.ts: 26ms, render: 68ms)
+ GET /de/manager 200 in 88ms (compile: 32ms, proxy.ts: 6ms, render: 50ms)
+ GET /icons/icon-192.png 404 in 140ms (compile: 15ms, render: 125ms)
+ GET /de 200 in 117ms (compile: 50ms, proxy.ts: 13ms, render: 55ms)
+ GET /icons/icon-192.png 404 in 105ms (compile: 14ms, render: 91ms)
+ GET /de/admin 200 in 117ms (compile: 37ms, proxy.ts: 9ms, render: 71ms)
+ GET /icons/icon-192.png 404 in 130ms (compile: 11ms, render: 118ms)
+ GET /icons/icon-192.png 404 in 106ms (compile: 9ms, render: 96ms)
+ GET /de/qr-checkin 200 in 99ms (compile: 45ms, proxy.ts: 7ms, render: 46ms)
+ GET /icons/icon-192.png 404 in 112ms (compile: 14ms, render: 99ms)
+ GET /icons/icon-192.png 404 in 88ms (compile: 7ms, render: 81ms)
+ GET /de/modules 200 in 163ms (compile: 49ms, proxy.ts: 7ms, render: 107ms)
+ GET /icons/icon-192.png 404 in 132ms (compile: 13ms, render: 119ms)
+ GET /de 200 in 78ms (compile: 28ms, proxy.ts: 6ms, render: 44ms)
+ GET /icons/icon-192.png 404 in 110ms (compile: 13ms, render: 97ms)
+ GET /de/admin 200 in 67ms (compile: 24ms, proxy.ts: 6ms, render: 38ms)
+ GET /icons/icon-192.png 404 in 132ms (compile: 16ms, render: 116ms)
+ GET /de 200 in 110ms (compile: 36ms, proxy.ts: 12ms, render: 62ms)
+ GET /icons/icon-192.png 404 in 131ms (compile: 16ms, render: 115ms)
+ GET /de/modules 200 in 152ms (compile: 50ms, proxy.ts: 10ms, render: 92ms)
+ GET /icons/icon-192.png 404 in 176ms (compile: 36ms, render: 140ms)
+ GET /de 200 in 160ms (compile: 56ms, proxy.ts: 20ms, render: 85ms)
+ GET /icons/icon-192.png 404 in 100ms (compile: 11ms, render: 90ms)
+ GET /de 200 in 276ms (compile: 55ms, proxy.ts: 14ms, render: 207ms)
+ GET /de 200 in 357ms (compile: 88ms, proxy.ts: 15ms, render: 253ms)
+ GET /icons/icon-192.png 404 in 115ms (compile: 12ms, render: 103ms)
+✓ Compiled in 323ms
+✓ Compiled in 71ms
+✓ Compiled in 148ms
+ GET /de 200 in 864ms (compile: 278ms, proxy.ts: 150ms, render: 436ms)
+ GET /de 200 in 869ms (compile: 451ms, proxy.ts: 149ms, render: 269ms)
+ GET /de 200 in 366ms (compile: 29ms, proxy.ts: 18ms, render: 320ms)
+ GET /de 200 in 404ms (compile: 77ms, proxy.ts: 19ms, render: 308ms)
+ GET /de 200 in 375ms (compile: 43ms, proxy.ts: 19ms, render: 314ms)
+ GET /de 200 in 401ms (compile: 80ms, proxy.ts: 15ms, render: 307ms)
+ GET /de 200 in 346ms (compile: 60ms, proxy.ts: 16ms, render: 271ms)
+ GET /de 200 in 330ms (compile: 74ms, proxy.ts: 26ms, render: 231ms)
+ GET /de 200 in 294ms (compile: 41ms, proxy.ts: 14ms, render: 239ms)
+ GET /de 200 in 319ms (compile: 69ms, proxy.ts: 17ms, render: 233ms)
+ GET /de 200 in 264ms (compile: 33ms, proxy.ts: 10ms, render: 221ms)
+ GET /de 200 in 304ms (compile: 52ms, proxy.ts: 12ms, render: 241ms)
+ GET /de 200 in 309ms (compile: 46ms, proxy.ts: 13ms, render: 250ms)
+ GET /de 200 in 296ms (compile: 65ms, proxy.ts: 19ms, render: 213ms)
+ GET /de 200 in 335ms (compile: 48ms, proxy.ts: 11ms, render: 276ms)
+ GET /de 200 in 378ms (compile: 73ms, proxy.ts: 12ms, render: 293ms)
+ GET /de 200 in 370ms (compile: 43ms, proxy.ts: 12ms, render: 315ms)
+ GET /de 200 in 361ms (compile: 73ms, proxy.ts: 14ms, render: 273ms)
+ GET /de 200 in 255ms (compile: 57ms, proxy.ts: 17ms, render: 181ms)
+ GET /de 200 in 245ms (compile: 88ms, proxy.ts: 23ms, render: 134ms)
+✓ Compiled in 523ms
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /de 200 in 1729ms (compile: 725ms, proxy.ts: 24ms, render: 980ms)
+ GET /de 200 in 702ms (compile: 198ms, proxy.ts: 41ms, render: 463ms)
+ GET /de 200 in 1768ms (compile: 847ms, proxy.ts: 12ms, render: 910ms)
+ GET /de 200 in 795ms (compile: 242ms, proxy.ts: 42ms, render: 511ms)
+ GET /de 200 in 472ms (compile: 375ms, proxy.ts: 30ms, render: 67ms)
+ GET /de 200 in 904ms (compile: 245ms, proxy.ts: 32ms, render: 627ms)
+ GET /de 200 in 780ms (compile: 335ms, proxy.ts: 13ms, render: 432ms)
+ GET /icons/icon-192.png 404 in 42ms (compile: 6ms, render: 35ms)
+ GET /icons/icon-192.png 404 in 34ms (compile: 4ms, render: 30ms)
+✓ Compiled in 73ms
+ GET /de 200 in 477ms (compile: 281ms, proxy.ts: 8ms, render: 188ms)
+ GET /de 200 in 490ms (compile: 186ms, proxy.ts: 9ms, render: 294ms)
+ GET /de 200 in 306ms (compile: 24ms, proxy.ts: 15ms, render: 268ms)
+ GET /de 200 in 327ms (compile: 48ms, proxy.ts: 9ms, render: 271ms)
+ GET /de 200 in 334ms (compile: 47ms, proxy.ts: 13ms, render: 274ms)
+ GET /de 200 in 412ms (compile: 68ms, proxy.ts: 11ms, render: 333ms)
+ GET /de 200 in 352ms (compile: 40ms, proxy.ts: 18ms, render: 295ms)
+ GET /de 200 in 429ms (compile: 62ms, proxy.ts: 13ms, render: 354ms)
+ GET /de 200 in 356ms (compile: 40ms, proxy.ts: 11ms, render: 305ms)
+ GET /de 200 in 383ms (compile: 72ms, proxy.ts: 15ms, render: 296ms)
+ GET /de 200 in 347ms (compile: 36ms, proxy.ts: 39ms, render: 272ms)
+ GET /de 200 in 482ms (compile: 74ms, proxy.ts: 41ms, render: 366ms)
+ GET /de 200 in 360ms (compile: 41ms, proxy.ts: 12ms, render: 307ms)
+ GET /de 200 in 440ms (compile: 65ms, proxy.ts: 14ms, render: 361ms)
+ GET /de 200 in 350ms (compile: 50ms, proxy.ts: 12ms, render: 288ms)
+ GET /de 200 in 379ms (compile: 70ms, proxy.ts: 17ms, render: 293ms)
+ GET /de 200 in 332ms (compile: 44ms, proxy.ts: 68ms, render: 220ms)
+ GET /de 200 in 305ms (compile: 64ms, proxy.ts: 13ms, render: 228ms)
+ GET /de 200 in 270ms (compile: 30ms, proxy.ts: 15ms, render: 225ms)
+ GET /de 200 in 302ms (compile: 70ms, proxy.ts: 11ms, render: 221ms)
+ GET /de 200 in 306ms (compile: 73ms, proxy.ts: 9ms, render: 225ms)
+ GET /de 200 in 347ms (compile: 66ms, proxy.ts: 11ms, render: 270ms)
+ GET /de 200 in 344ms (compile: 78ms, proxy.ts: 8ms, render: 257ms)
+ GET /de 200 in 315ms (compile: 69ms, proxy.ts: 10ms, render: 236ms)
+ GET /de 200 in 362ms (compile: 67ms, proxy.ts: 11ms, render: 284ms)
+ GET /de 404 in 244ms (compile: 119ms, proxy.ts: 30ms, render: 95ms)
+✓ Compiled in 263ms
+ GET /de 200 in 798ms (compile: 67ms, proxy.ts: 21ms, render: 709ms)
+ GET /de 200 in 715ms (compile: 54ms, proxy.ts: 38ms, render: 623ms)
+ GET /de 200 in 1221ms (compile: 426ms, proxy.ts: 10ms, render: 785ms)
+ GET /de 200 in 511ms (compile: 225ms, proxy.ts: 205ms, render: 81ms)
+ GET /de 200 in 780ms (compile: 89ms, proxy.ts: 39ms, render: 652ms)
+ GET /de 200 in 620ms (compile: 178ms, proxy.ts: 200ms, render: 243ms)
+ GET /de 200 in 874ms (compile: 133ms, proxy.ts: 41ms, render: 701ms)
+ GET /de 200 in 168ms (compile: 30ms, proxy.ts: 23ms, render: 115ms)
+ GET /de 200 in 136ms (compile: 21ms, proxy.ts: 17ms, render: 98ms)
+ GET /de 200 in 148ms (compile: 13ms, proxy.ts: 7ms, render: 128ms)
+ GET /de 200 in 170ms (compile: 27ms, proxy.ts: 9ms, render: 134ms)
+ GET /de 200 in 179ms (compile: 33ms, proxy.ts: 12ms, render: 134ms)
+ GET /de 200 in 162ms (compile: 20ms, proxy.ts: 11ms, render: 131ms)
+ GET /de 200 in 156ms (compile: 26ms, proxy.ts: 11ms, render: 119ms)
+ GET /de 200 in 146ms (compile: 19ms, proxy.ts: 12ms, render: 115ms)
+ GET /de 200 in 155ms (compile: 19ms, proxy.ts: 8ms, render: 128ms)
+ GET /de 200 in 161ms (compile: 17ms, proxy.ts: 8ms, render: 136ms)
+ GET /de 200 in 176ms (compile: 22ms, proxy.ts: 8ms, render: 145ms)
+ GET /de 200 in 200ms (compile: 17ms, proxy.ts: 11ms, render: 171ms)
+ GET /de 200 in 266ms (compile: 26ms, proxy.ts: 18ms, render: 222ms)
+ GET /de 200 in 261ms (compile: 50ms, proxy.ts: 16ms, render: 195ms)
+ GET /de 200 in 216ms (compile: 37ms, proxy.ts: 16ms, render: 163ms)
+ GET /de 200 in 187ms (compile: 30ms, proxy.ts: 16ms, render: 141ms)
+ GET /de 200 in 149ms (compile: 22ms, proxy.ts: 9ms, render: 118ms)
+ GET /de 200 in 120ms (compile: 16ms, proxy.ts: 9ms, render: 96ms)
+ GET /de 200 in 123ms (compile: 11ms, proxy.ts: 11ms, render: 101ms)
+ GET /de 200 in 140ms (compile: 12ms, proxy.ts: 6ms, render: 122ms)
+ GET /de 200 in 155ms (compile: 17ms, proxy.ts: 9ms, render: 129ms)
+ GET /de 200 in 181ms (compile: 21ms, proxy.ts: 12ms, render: 148ms)
+ GET /de 200 in 165ms (compile: 20ms, proxy.ts: 11ms, render: 134ms)
+ GET /de 200 in 148ms (compile: 31ms, proxy.ts: 6ms, render: 111ms)
+ GET /de 200 in 154ms (compile: 23ms, proxy.ts: 6ms, render: 125ms)
+ GET /de 200 in 154ms (compile: 12ms, proxy.ts: 13ms, render: 129ms)
+ GET /de 200 in 210ms (compile: 21ms, proxy.ts: 9ms, render: 179ms)
+ GET /de 200 in 210ms (compile: 31ms, proxy.ts: 14ms, render: 165ms)
+ GET /de 200 in 195ms (compile: 70ms, proxy.ts: 11ms, render: 114ms)
+ GET /icons/icon-192.png 404 in 226ms (compile: 13ms, render: 213ms)
+ GET /de 200 in 144ms (compile: 16ms, proxy.ts: 13ms, render: 116ms)
+ GET /de 200 in 130ms (compile: 21ms, proxy.ts: 10ms, render: 99ms)
+ GET /de 200 in 126ms (compile: 11ms, proxy.ts: 10ms, render: 105ms)
+ GET /de 200 in 139ms (compile: 16ms, proxy.ts: 8ms, render: 114ms)
+ GET /de 200 in 141ms (compile: 27ms, proxy.ts: 10ms, render: 104ms)
+ GET /de 200 in 115ms (compile: 10ms, proxy.ts: 10ms, render: 95ms)
+ GET /de 200 in 133ms (compile: 12ms, proxy.ts: 10ms, render: 111ms)
+ GET /de 200 in 138ms (compile: 13ms, proxy.ts: 9ms, render: 115ms)
+ GET /de 200 in 130ms (compile: 18ms, proxy.ts: 11ms, render: 101ms)
+ GET /de 200 in 117ms (compile: 13ms, proxy.ts: 8ms, render: 96ms)
+ GET /de 200 in 113ms (compile: 17ms, proxy.ts: 10ms, render: 86ms)
+ GET /de 200 in 111ms (compile: 15ms, proxy.ts: 7ms, render: 89ms)
+ GET /de 200 in 130ms (compile: 9ms, proxy.ts: 8ms, render: 113ms)
+ GET /de 200 in 127ms (compile: 24ms, proxy.ts: 6ms, render: 96ms)
+ GET /de 200 in 107ms (compile: 11ms, proxy.ts: 6ms, render: 89ms)
+ GET /de 200 in 114ms (compile: 17ms, proxy.ts: 6ms, render: 91ms)
+ GET /de 200 in 116ms (compile: 13ms, proxy.ts: 8ms, render: 95ms)
+ GET /de 200 in 113ms (compile: 11ms, proxy.ts: 8ms, render: 94ms)
+ GET /de 200 in 120ms (compile: 14ms, proxy.ts: 6ms, render: 100ms)
+ GET /de 200 in 129ms (compile: 15ms, proxy.ts: 8ms, render: 106ms)
+ GET /de 200 in 118ms (compile: 13ms, proxy.ts: 10ms, render: 94ms)
+ GET /de 200 in 116ms (compile: 14ms, proxy.ts: 6ms, render: 96ms)
+ GET /de 200 in 123ms (compile: 14ms, proxy.ts: 8ms, render: 101ms)
+ GET /de 200 in 126ms (compile: 15ms, proxy.ts: 6ms, render: 105ms)
+ GET /de 200 in 126ms (compile: 13ms, proxy.ts: 8ms, render: 105ms)
+ GET /de 200 in 124ms (compile: 22ms, proxy.ts: 7ms, render: 95ms)
+ GET /de 200 in 101ms (compile: 14ms, proxy.ts: 6ms, render: 82ms)
+ GET /de 200 in 54ms (compile: 14ms, proxy.ts: 9ms, render: 32ms)
+ GET /icons/icon-192.png 404 in 57ms (compile: 4ms, render: 53ms)
+ GET /de 200 in 328ms (compile: 58ms, proxy.ts: 17ms, render: 253ms)
+ GET /de 200 in 323ms (compile: 100ms, proxy.ts: 19ms, render: 205ms)
+ GET /de 200 in 223ms (compile: 26ms, proxy.ts: 17ms, render: 180ms)
+ GET /de 200 in 251ms (compile: 72ms, proxy.ts: 18ms, render: 161ms)
+ GET /de 200 in 207ms (compile: 22ms, proxy.ts: 9ms, render: 176ms)
+ GET /de 200 in 286ms (compile: 39ms, proxy.ts: 9ms, render: 238ms)
+ GET /de 200 in 254ms (compile: 21ms, proxy.ts: 7ms, render: 226ms)
+ GET /de 200 in 341ms (compile: 44ms, proxy.ts: 7ms, render: 291ms)
+ GET /de 200 in 300ms (compile: 37ms, proxy.ts: 11ms, render: 252ms)
+ GET /de 200 in 365ms (compile: 57ms, proxy.ts: 10ms, render: 298ms)
+ GET /de 200 in 318ms (compile: 36ms, proxy.ts: 16ms, render: 266ms)
+ GET /de 200 in 338ms (compile: 62ms, proxy.ts: 8ms, render: 268ms)
+ GET /de 200 in 381ms (compile: 40ms, proxy.ts: 22ms, render: 319ms)
+ GET /de 200 in 366ms (compile: 63ms, proxy.ts: 10ms, render: 293ms)
+ GET /de 200 in 348ms (compile: 53ms, proxy.ts: 21ms, render: 274ms)
+ GET /de 200 in 373ms (compile: 63ms, proxy.ts: 22ms, render: 287ms)
+ GET /de 200 in 350ms (compile: 61ms, proxy.ts: 22ms, render: 267ms)
+ GET /de 200 in 377ms (compile: 91ms, proxy.ts: 20ms, render: 267ms)
+ GET /de 200 in 310ms (compile: 42ms, proxy.ts: 15ms, render: 254ms)
+ GET /de 200 in 335ms (compile: 68ms, proxy.ts: 12ms, render: 254ms)
+ GET /de 200 in 306ms (compile: 48ms, proxy.ts: 11ms, render: 247ms)
+ GET /de 200 in 338ms (compile: 90ms, proxy.ts: 15ms, render: 234ms)
+ GET /de 200 in 337ms (compile: 71ms, proxy.ts: 14ms, render: 252ms)
+ GET /de 200 in 328ms (compile: 78ms, proxy.ts: 10ms, render: 239ms)
+ GET /de 200 in 326ms (compile: 72ms, proxy.ts: 11ms, render: 244ms)
+ GET /de 200 in 335ms (compile: 75ms, proxy.ts: 11ms, render: 248ms)
+ GET /de 200 in 352ms (compile: 79ms, proxy.ts: 13ms, render: 260ms)
+ GET /de 200 in 359ms (compile: 70ms, proxy.ts: 14ms, render: 275ms)
+ GET /de 200 in 380ms (compile: 76ms, proxy.ts: 10ms, render: 295ms)
+ GET /de 200 in 361ms (compile: 90ms, proxy.ts: 9ms, render: 262ms)
+ GET /de 200 in 339ms (compile: 91ms, proxy.ts: 15ms, render: 232ms)
+ GET /de 200 in 285ms (compile: 116ms, proxy.ts: 15ms, render: 155ms)
+ GET /de 200 in 246ms (compile: 90ms, proxy.ts: 13ms, render: 143ms)
+ GET /de 200 in 213ms (compile: 47ms, proxy.ts: 7ms, render: 159ms)
+ GET /de 200 in 207ms (compile: 36ms, proxy.ts: 8ms, render: 162ms)
+ GET /de 200 in 203ms (compile: 41ms, proxy.ts: 5ms, render: 157ms)
+ GET /de 200 in 198ms (compile: 74ms, proxy.ts: 6ms, render: 118ms)
+ GET /de 200 in 195ms (compile: 61ms, proxy.ts: 5ms, render: 130ms)
+ GET /de 200 in 174ms (compile: 39ms, proxy.ts: 5ms, render: 131ms)
+ GET /de 200 in 170ms (compile: 35ms, proxy.ts: 5ms, render: 129ms)
+ GET /de 200 in 178ms (compile: 35ms, proxy.ts: 5ms, render: 138ms)
+ GET /de 200 in 180ms (compile: 49ms, proxy.ts: 5ms, render: 125ms)
+ GET /de 200 in 191ms (compile: 41ms, proxy.ts: 7ms, render: 143ms)
+ GET /de 200 in 222ms (compile: 38ms, proxy.ts: 6ms, render: 178ms)
+ GET /de 200 in 260ms (compile: 39ms, proxy.ts: 6ms, render: 215ms)
+ GET /de 200 in 275ms (compile: 37ms, proxy.ts: 5ms, render: 232ms)
+ GET /de 200 in 311ms (compile: 63ms, proxy.ts: 6ms, render: 243ms)
+ GET /de 200 in 328ms (compile: 90ms, proxy.ts: 14ms, render: 224ms)
+ GET /de 200 in 343ms (compile: 86ms, proxy.ts: 12ms, render: 245ms)
+ GET /de 200 in 300ms (compile: 67ms, proxy.ts: 11ms, render: 222ms)
+ GET /de 200 in 293ms (compile: 68ms, proxy.ts: 14ms, render: 211ms)
+ GET /de 200 in 283ms (compile: 71ms, proxy.ts: 8ms, render: 204ms)
+ GET /de 200 in 288ms (compile: 68ms, proxy.ts: 14ms, render: 206ms)
+ GET /de 200 in 282ms (compile: 69ms, proxy.ts: 9ms, render: 205ms)
+ GET /de 200 in 280ms (compile: 62ms, proxy.ts: 12ms, render: 206ms)
+ GET /de 200 in 313ms (compile: 56ms, proxy.ts: 10ms, render: 247ms)
+ GET /de 200 in 285ms (compile: 68ms, proxy.ts: 8ms, render: 209ms)
+ GET /de 200 in 270ms (compile: 66ms, proxy.ts: 10ms, render: 194ms)
+ GET /de 200 in 270ms (compile: 69ms, proxy.ts: 11ms, render: 189ms)
+ GET /de 200 in 260ms (compile: 69ms, proxy.ts: 9ms, render: 182ms)
+ GET /de 200 in 261ms (compile: 55ms, proxy.ts: 8ms, render: 198ms)
+ GET /de 200 in 275ms (compile: 55ms, proxy.ts: 11ms, render: 209ms)
+ GET /de 200 in 271ms (compile: 63ms, proxy.ts: 6ms, render: 202ms)
+ GET /de 200 in 277ms (compile: 67ms, proxy.ts: 7ms, render: 203ms)
+ GET /de 200 in 274ms (compile: 78ms, proxy.ts: 9ms, render: 187ms)
+ GET /de 200 in 239ms (compile: 65ms, proxy.ts: 10ms, render: 163ms)
+ GET /de 200 in 212ms (compile: 55ms, proxy.ts: 11ms, render: 146ms)
+ GET /de 200 in 195ms (compile: 70ms, proxy.ts: 6ms, render: 119ms)
+ GET /de 200 in 173ms (compile: 47ms, proxy.ts: 13ms, render: 114ms)
+ GET /de 200 in 174ms (compile: 36ms, proxy.ts: 6ms, render: 132ms)
+ GET /de 200 in 156ms (compile: 33ms, proxy.ts: 5ms, render: 118ms)
+ GET /de 200 in 158ms (compile: 38ms, proxy.ts: 5ms, render: 116ms)
+ GET /de 200 in 159ms (compile: 34ms, proxy.ts: 6ms, render: 119ms)
+ GET /de 200 in 158ms (compile: 32ms, proxy.ts: 5ms, render: 120ms)
+ GET /de 200 in 153ms (compile: 41ms, proxy.ts: 5ms, render: 107ms)
+ GET /de 200 in 122ms (compile: 35ms, proxy.ts: 6ms, render: 81ms)
+ GET /de 200 in 92ms (compile: 36ms, proxy.ts: 5ms, render: 50ms)
+ GET /de 200 in 64ms (compile: 35ms, proxy.ts: 5ms, render: 23ms)
+ GET /icons/icon-192.png 404 in 87ms (compile: 17ms, render: 71ms)
+ GET /icons/icon-192.png 404 in 51ms (compile: 8ms, render: 43ms)
+ GET /de/login 200 in 1074ms (compile: 358ms, proxy.ts: 9ms, render: 707ms)
+ GET /icons/icon-192.png 404 in 92ms (compile: 12ms, render: 81ms)
+ GET /de 200 in 85ms (compile: 34ms, proxy.ts: 9ms, render: 42ms)
+ GET /icons/icon-192.png 404 in 94ms (compile: 9ms, render: 85ms)
+ GET /icons/icon-192.png 404 in 117ms (compile: 10ms, render: 108ms)
+ GET /de 200 in 96ms (compile: 37ms, proxy.ts: 10ms, render: 50ms)
+ GET /icons/icon-192.png 404 in 127ms (compile: 12ms, render: 115ms)
+ GET /de/modules 200 in 536ms (compile: 353ms, proxy.ts: 7ms, render: 177ms)
+ GET /icons/icon-192.png 404 in 134ms (compile: 14ms, render: 120ms)
+ GET /de/tools 200 in 549ms (compile: 354ms, proxy.ts: 7ms, render: 188ms)
+ GET /icons/icon-192.png 404 in 218ms (compile: 12ms, render: 206ms)
+ GET /de/modules 200 in 82ms (compile: 24ms, proxy.ts: 6ms, render: 52ms)
+ GET /icons/icon-192.png 404 in 114ms (compile: 13ms, render: 101ms)
+ GET /de 200 in 73ms (compile: 25ms, proxy.ts: 6ms, render: 42ms)
+ GET /icons/icon-192.png 404 in 99ms (compile: 11ms, render: 88ms)
+ GET /de/qr-checkin 200 in 420ms (compile: 279ms, proxy.ts: 7ms, render: 134ms)
+ GET /icons/icon-192.png 404 in 112ms (compile: 13ms, render: 98ms)
+ GET /de/tools 200 in 71ms (compile: 24ms, proxy.ts: 6ms, render: 41ms)
+ GET /icons/icon-192.png 404 in 95ms (compile: 11ms, render: 84ms)
+ GET /de/admin 200 in 475ms (compile: 278ms, proxy.ts: 6ms, render: 191ms)
+ GET /icons/icon-192.png 404 in 138ms (compile: 24ms, render: 114ms)
+ GET /de/manager 200 in 458ms (compile: 288ms, proxy.ts: 14ms, render: 157ms)
+ GET /icons/icon-192.png 404 in 116ms (compile: 10ms, render: 106ms)
+ GET /de 200 in 62ms (compile: 23ms, proxy.ts: 5ms, render: 34ms)
+ GET /icons/icon-192.png 404 in 96ms (compile: 10ms, render: 86ms)
+ GET /de/admin 200 in 99ms (compile: 30ms, proxy.ts: 6ms, render: 63ms)
+ GET /icons/icon-192.png 404 in 117ms (compile: 11ms, render: 107ms)
+ GET /de/profile 200 in 619ms (compile: 364ms, proxy.ts: 6ms, render: 249ms)
+ GET /icons/icon-192.png 404 in 193ms (compile: 11ms, render: 182ms)
+ GET /de 200 in 63ms (compile: 21ms, proxy.ts: 6ms, render: 36ms)
+ GET /icons/icon-192.png 404 in 105ms (compile: 10ms, render: 96ms)
+ GET /de/modules 200 in 185ms (compile: 59ms, proxy.ts: 8ms, render: 118ms)
+ GET /icons/icon-192.png 404 in 118ms (compile: 13ms, render: 105ms)
+ GET /de/tools 200 in 93ms (compile: 33ms, proxy.ts: 9ms, render: 51ms)
+ GET /icons/icon-192.png 404 in 114ms (compile: 12ms, render: 102ms)
+ GET /de/admin 200 in 79ms (compile: 21ms, proxy.ts: 6ms, render: 53ms)
+ GET /icons/icon-192.png 404 in 148ms (compile: 13ms, render: 135ms)
+ GET /de 200 in 66ms (compile: 21ms, proxy.ts: 9ms, render: 36ms)
+ GET /icons/icon-192.png 404 in 95ms (compile: 10ms, render: 85ms)
+ GET /de/modules 200 in 91ms (compile: 28ms, proxy.ts: 6ms, render: 57ms)
+ GET /icons/icon-192.png 404 in 116ms (compile: 12ms, render: 104ms)
+ GET /de/tools 200 in 117ms (compile: 35ms, proxy.ts: 6ms, render: 77ms)
+ GET /icons/icon-192.png 404 in 123ms (compile: 11ms, render: 112ms)
+ GET /de/modules 200 in 88ms (compile: 25ms, proxy.ts: 6ms, render: 57ms)
+ GET /icons/icon-192.png 404 in 122ms (compile: 13ms, render: 109ms)
+ GET /de 200 in 70ms (compile: 24ms, proxy.ts: 6ms, render: 40ms)
+ GET /icons/icon-192.png 404 in 102ms (compile: 9ms, render: 93ms)
+ GET /en 200 in 128ms (compile: 21ms, proxy.ts: 6ms, render: 101ms)
+ GET /icons/icon-192.png 404 in 116ms (compile: 11ms, render: 105ms)
+ GET /en 200 in 70ms (compile: 20ms, proxy.ts: 6ms, render: 44ms)
+ GET /icons/icon-192.png 404 in 89ms (compile: 14ms, render: 75ms)
+⨯ Error: Cannot find module '../../messages/fr.json'
+    at <unknown> (C:\Users\Rüpprich\.gemini\antigravity\playground\campus-2.0\.next\dev\server\chunks\ssr\[root-of-the-server]__86011721._.js:222:18)
+    at async RootLayout (src\app\[locale]\layout.tsx:47:20)
+  45 |   // Providing all messages to the client
+  46 |   // side is the easiest way to get started
+> 47 |   const messages = await getMessages();
+     |                    ^
+  48 |
+  49 |   return (
+  50 |     <html lang={locale} suppressHydrationWarning> {
+  code: 'MODULE_NOT_FOUND',
+  digest: '2393695139'
+}
+ GET /fr 200 in 114ms (compile: 23ms, proxy.ts: 6ms, render: 85ms)
+✓ Compiled in 215ms
+✓ Compiled in 61ms
+⨯ Error: Module [project]/.gemini/antigravity/playground/campus-2.0/node_modules/next-intl/dist/esm/development/shared/NextIntlClientProvider.js [app-ssr] (ecmascript) was instantiated because it was required from module [project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/esm/build/templates/app-page.js?page=/[locale]/page { GLOBAL_ERROR_MODULE => "[project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/client/components/builtin/global-error.js [app-rsc] (ecmascript, Next.js Server Component)", MODULE_0 => "[project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/client/components/builtin/not-found.js [app-rsc] (ecmascript, Next.js Server Component)", MODULE_1 => "[project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/client/components/builtin/forbidden.js [app-rsc] (ecmascript, Next.js Server Component)", MODULE_2 => "[project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/client/components/builtin/unauthorized.js [app-rsc] (ecmascript, Next.js Server Component)", MODULE_3 => "[project]/.gemini/antigravity/playground/campus-2.0/node_modules/next/dist/client/components/builtin/global-error.js [app-rsc] (ecmascript, Next.js Server Component)", MODULE_4 => "[project]/.gemini/antigravity/playground/campus-2.0/src/app/[locale]/layout.tsx [app-rsc] (ecmascript, Next.js Server Component)", MODULE_5 => "[project]/.gemini/antigravity/playground/campus-2.0/src/app/[locale]/page.tsx [app-rsc] (ecmascript, Next.js Server Component)" } [app-rsc] (ecmascript) <locals>, but the module factory is not available.
+    at ignore-listed frames {
+  digest: '1114581002'
+}
+ GET /de 200 in 1372ms (compile: 556ms, proxy.ts: 8ms, render: 808ms)
+ GET /de 200 in 1371ms (compile: 650ms, proxy.ts: 8ms, render: 713ms)
+ GET /de/tools 500 in 1671ms (compile: 165ms, proxy.ts: 137ms, render: 1368ms)
+ GET /de 200 in 341ms (compile: 29ms, proxy.ts: 14ms, render: 297ms)
+ GET /de 200 in 386ms (compile: 57ms, proxy.ts: 16ms, render: 312ms)
+ GET /de 200 in 339ms (compile: 46ms, proxy.ts: 32ms, render: 262ms)
+ GET /de 200 in 335ms (compile: 78ms, proxy.ts: 31ms, render: 227ms)
+ GET /de 200 in 236ms (compile: 45ms, proxy.ts: 16ms, render: 175ms)
+ GET /de 200 in 305ms (compile: 81ms, proxy.ts: 7ms, render: 216ms)
+ GET /de 200 in 258ms (compile: 57ms, proxy.ts: 8ms, render: 193ms)
+ GET /de 200 in 277ms (compile: 57ms, proxy.ts: 18ms, render: 202ms)
+ GET /de 200 in 284ms (compile: 29ms, proxy.ts: 17ms, render: 237ms)
+ GET /de 200 in 281ms (compile: 33ms, proxy.ts: 11ms, render: 237ms)
+ GET /de 200 in 310ms (compile: 82ms, proxy.ts: 10ms, render: 219ms)
+ GET /de 200 in 302ms (compile: 68ms, proxy.ts: 11ms, render: 222ms)
+ GET /de 200 in 316ms (compile: 67ms, proxy.ts: 9ms, render: 241ms)
+ GET /de 200 in 277ms (compile: 74ms, proxy.ts: 11ms, render: 192ms)
+ GET /de 200 in 303ms (compile: 64ms, proxy.ts: 10ms, render: 229ms)
+ GET /de 200 in 317ms (compile: 63ms, proxy.ts: 14ms, render: 239ms)
+ GET /de 200 in 280ms (compile: 35ms, proxy.ts: 12ms, render: 233ms)
+ GET /de 200 in 271ms (compile: 68ms, proxy.ts: 11ms, render: 192ms)
+ GET /de 200 in 260ms (compile: 74ms, proxy.ts: 7ms, render: 179ms)
+ GET /de 200 in 217ms (compile: 86ms, proxy.ts: 11ms, render: 120ms)
+ GET /de 200 in 128ms (compile: 17ms, proxy.ts: 11ms, render: 100ms)
+ GET /de 200 in 64ms (compile: 21ms, proxy.ts: 5ms, render: 39ms)
+ GET /icons/icon-192.png 404 in 56ms (compile: 7ms, render: 49ms)
+ GET /icons/icon-192.png 404 in 62ms (compile: 6ms, render: 56ms)
+ GET /icons/icon-192.png 404 in 59ms (compile: 10ms, render: 49ms)
+ GET /icons/icon-192.png 404 in 32ms (compile: 4ms, render: 27ms)
+ GET /fr/tools 200 in 146ms (compile: 43ms, proxy.ts: 8ms, render: 94ms)
+ GET /icons/icon-192.png 404 in 112ms (compile: 13ms, render: 99ms)
+ GET /en/tools 200 in 126ms (compile: 25ms, proxy.ts: 11ms, render: 90ms)
+ GET /icons/icon-192.png 404 in 106ms (compile: 11ms, render: 95ms)
+ GET /de/tools 200 in 99ms (compile: 23ms, proxy.ts: 6ms, render: 70ms)
+ GET /icons/icon-192.png 404 in 97ms (compile: 10ms, render: 86ms)
+ GET /de/tools 200 in 382ms (compile: 46ms, proxy.ts: 11ms, render: 325ms)
+ GET /icons/icon-192.png 404 in 97ms (compile: 9ms, render: 88ms)
+ GET /fr/tools 200 in 105ms (compile: 24ms, proxy.ts: 6ms, render: 75ms)
+ GET /icons/icon-192.png 404 in 110ms (compile: 12ms, render: 98ms)
+ GET /en/tools 200 in 122ms (compile: 24ms, proxy.ts: 7ms, render: 90ms)
+ GET /icons/icon-192.png 404 in 121ms (compile: 14ms, render: 107ms)
+✓ Compiled in 190ms
+✓ Compiled in 71ms
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at AppShell (src\components\layout\app-shell.tsx:224:94)
+  222 |
+  223 |                                 {!isAdmin(authUser) && !isManager(authUser) && (
+> 224 |                                     <DropdownMenuItem asChild><Link href="/certificates">🪪 {t("certificates")}</Link></DropdownMenuItem>
+      |                                                                                              ^
+  225 |                                 )}
+  226 |
+  227 |                                 <DropdownMenuItem asChild><Link href="/settings">⚙️ Einstellungen</Link></DropdownMenuItem> {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at AppShell (src\components\layout\app-shell.tsx:224:94)
+  222 |
+  223 |                                 {!isAdmin(authUser) && !isManager(authUser) && (
+> 224 |                                     <DropdownMenuItem asChild><Link href="/certificates">🪪 {t("certificates")}</Link></DropdownMenuItem>
+      |                                                                                              ^
+  225 |                                 )}
+  226 |
+  227 |                                 <DropdownMenuItem asChild><Link href="/settings">⚙️ Einstellungen</Link></DropdownMenuItem> {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `de`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `de`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:98:38)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:84:36)
+   96 |                                 >
+   97 |                                     <span className="mr-1.5">{item.icon}</span>
+>  98 |                                     {t(item.labelKey)}
+      |                                      ^
+   99 |                                 </Link>
+  100 |                             );
+  101 |                         })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `en`.
+    at AppShell (src\components\layout\app-shell.tsx:224:94)
+  222 |
+  223 |                                 {!isAdmin(authUser) && !isManager(authUser) && (
+> 224 |                                     <DropdownMenuItem asChild><Link href="/certificates">🪪 {t("certificates")}</Link></DropdownMenuItem>
+      |                                                                                              ^
+  225 |                                 )}
+  226 |
+  227 |                                 <DropdownMenuItem asChild><Link href="/settings">⚙️ Einstellungen</Link></DropdownMenuItem> {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.campus` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.campus` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.islands` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.islands` in messages for locale `en`.'
+}
+Error: MISSING_MESSAGE: Could not resolve `Navigation.certificates` in messages for locale `en`.
+    at <unknown> (src\components\layout\app-shell.tsx:256:50)
+    at Array.map (<anonymous>)
+    at AppShell (src\components\layout\app-shell.tsx:245:48)
+  254 |                                             >
+  255 |                                                 <span className="mr-2">{item.icon}</span>
+> 256 |                                                 {t(item.labelKey)}
+      |                                                  ^
+  257 |                                             </Link>
+  258 |                                         );
+  259 |                                     })} {
+  code: 'MISSING_MESSAGE',
+  originalMessage: 'Could not resolve `Navigation.certificates` in messages for locale `en`.'
+}
+ GET /de 200 in 1724ms (compile: 175ms, proxy.ts: 15ms, render: 1534ms)
+ GET /de 200 in 961ms (compile: 439ms, proxy.ts: 62ms, render: 461ms)
+ GET /de 200 in 1781ms (compile: 301ms, proxy.ts: 13ms, render: 1467ms)
+ GET /en/tools 200 in 1798ms (compile: 652ms, proxy.ts: 19ms, render: 1127ms)
+ GET /de 200 in 1053ms (compile: 97ms, proxy.ts: 84ms, render: 872ms)
+ GET /de 200 in 1018ms (compile: 395ms, proxy.ts: 52ms, render: 571ms)
+ GET /en/tools 200 in 1021ms (compile: 428ms, proxy.ts: 52ms, render: 541ms)
+✓ Compiled in 92ms
+ GET /icons/icon-192.png 404 in 56ms (compile: 6ms, render: 51ms)
+ GET /icons/icon-192.png 404 in 69ms (compile: 8ms, render: 61ms)
+✓ Compiled in 68ms
+ GET /en/tools 200 in 707ms (compile: 170ms, proxy.ts: 29ms, render: 508ms)
+ GET /de 200 in 678ms (compile: 409ms, proxy.ts: 5ms, render: 264ms)
+ GET /en/tools 200 in 290ms (compile: 36ms, proxy.ts: 22ms, render: 232ms)
+ GET /de 200 in 346ms (compile: 61ms, proxy.ts: 15ms, render: 270ms)
+ GET /en/tools 200 in 271ms (compile: 34ms, proxy.ts: 12ms, render: 225ms)
+ GET /de 200 in 291ms (compile: 60ms, proxy.ts: 11ms, render: 220ms)
+ GET /en/tools 200 in 258ms (compile: 37ms, proxy.ts: 12ms, render: 209ms)
+ GET /de 200 in 290ms (compile: 54ms, proxy.ts: 11ms, render: 226ms)
+ GET /en/tools 200 in 270ms (compile: 40ms, proxy.ts: 12ms, render: 218ms)
+ GET /de 200 in 295ms (compile: 59ms, proxy.ts: 10ms, render: 226ms)
+ GET /en/tools 200 in 348ms (compile: 73ms, proxy.ts: 9ms, render: 266ms)
+ GET /de 200 in 311ms (compile: 75ms, proxy.ts: 11ms, render: 225ms)
+ GET /en/tools 200 in 301ms (compile: 63ms, proxy.ts: 9ms, render: 229ms)
+ GET /de 200 in 306ms (compile: 76ms, proxy.ts: 8ms, render: 221ms)
+ GET /en/tools 200 in 313ms (compile: 79ms, proxy.ts: 11ms, render: 223ms)
+ GET /de 200 in 303ms (compile: 69ms, proxy.ts: 11ms, render: 223ms)
+ GET /en/tools 200 in 339ms (compile: 64ms, proxy.ts: 8ms, render: 266ms)
+ GET /de 200 in 310ms (compile: 68ms, proxy.ts: 9ms, render: 233ms)
+ GET /en/tools 200 in 313ms (compile: 76ms, proxy.ts: 8ms, render: 229ms)
+ GET /de 200 in 308ms (compile: 71ms, proxy.ts: 13ms, render: 224ms)
+ GET /en/tools 200 in 292ms (compile: 71ms, proxy.ts: 13ms, render: 208ms)
+ GET /de 200 in 236ms (compile: 71ms, proxy.ts: 10ms, render: 154ms)
+ GET /en/tools 200 in 171ms (compile: 69ms, proxy.ts: 8ms, render: 94ms)
+ GET /de 200 in 124ms (compile: 65ms, proxy.ts: 10ms, render: 48ms)
+✓ Compiled in 56ms
+ GET /en/tools 200 in 995ms (compile: 367ms, proxy.ts: 5ms, render: 622ms)
+ GET /de 200 in 1032ms (compile: 166ms, proxy.ts: 34ms, render: 833ms)
+ GET /de 200 in 585ms (compile: 149ms, proxy.ts: 17ms, render: 419ms)
+ GET /de 200 in 568ms (compile: 152ms, proxy.ts: 52ms, render: 365ms)
+ GET /en/tools 200 in 551ms (compile: 179ms, proxy.ts: 39ms, render: 332ms)
+ GET /icons/icon-192.png 404 in 591ms (compile: 18ms, render: 573ms)
+ GET /de 200 in 350ms (compile: 37ms, proxy.ts: 18ms, render: 296ms)
+ GET /de 200 in 333ms (compile: 53ms, proxy.ts: 14ms, render: 266ms)
+ GET /en/tools 200 in 389ms (compile: 84ms, proxy.ts: 14ms, render: 291ms)
+ GET /de 200 in 350ms (compile: 58ms, proxy.ts: 15ms, render: 277ms)
+ GET /de 200 in 342ms (compile: 74ms, proxy.ts: 17ms, render: 250ms)
+ GET /en/tools 200 in 397ms (compile: 96ms, proxy.ts: 15ms, render: 286ms)
+ GET /de 200 in 346ms (compile: 35ms, proxy.ts: 22ms, render: 289ms)
+ GET /de 200 in 405ms (compile: 59ms, proxy.ts: 23ms, render: 323ms)
+ GET /en/tools 200 in 424ms (compile: 86ms, proxy.ts: 11ms, render: 326ms)
+ GET /de 200 in 337ms (compile: 35ms, proxy.ts: 14ms, render: 288ms)
+ GET /de 200 in 337ms (compile: 57ms, proxy.ts: 14ms, render: 265ms)
+ GET /en/tools 200 in 387ms (compile: 84ms, proxy.ts: 8ms, render: 294ms)
+ GET /de 200 in 372ms (compile: 42ms, proxy.ts: 16ms, render: 313ms)
+ GET /de 200 in 418ms (compile: 72ms, proxy.ts: 14ms, render: 332ms)
+ GET /en/tools 200 in 463ms (compile: 98ms, proxy.ts: 9ms, render: 356ms)
+ GET /de 200 in 445ms (compile: 62ms, proxy.ts: 22ms, render: 361ms)
+ GET /de 200 in 479ms (compile: 45ms, proxy.ts: 40ms, render: 393ms)
+ GET /en/tools 200 in 475ms (compile: 107ms, proxy.ts: 10ms, render: 358ms)
+ GET /de 200 in 496ms (compile: 96ms, proxy.ts: 20ms, render: 380ms)
+ GET /de 200 in 525ms (compile: 89ms, proxy.ts: 54ms, render: 382ms)
+ GET /en/tools 200 in 516ms (compile: 150ms, proxy.ts: 13ms, render: 353ms)
+ GET /de 200 in 446ms (compile: 88ms, proxy.ts: 18ms, render: 340ms)
+ GET /de 200 in 437ms (compile: 104ms, proxy.ts: 12ms, render: 321ms)
+ GET /en/tools 200 in 422ms (compile: 127ms, proxy.ts: 10ms, render: 285ms)
+ GET /de 200 in 408ms (compile: 96ms, proxy.ts: 12ms, render: 300ms)
+ GET /de 200 in 398ms (compile: 114ms, proxy.ts: 15ms, render: 269ms)
+ GET /en/tools 200 in 330ms (compile: 102ms, proxy.ts: 10ms, render: 218ms)
+ GET /de 200 in 248ms (compile: 71ms, proxy.ts: 11ms, render: 166ms)
+ GET /de 200 in 232ms (compile: 107ms, proxy.ts: 6ms, render: 118ms)
+ GET /en/tools 200 in 187ms (compile: 98ms, proxy.ts: 9ms, render: 81ms)
+ GET /de 200 in 134ms (compile: 86ms, proxy.ts: 11ms, render: 38ms)
+ GET /icons/icon-192.png 404 in 172ms (compile: 5ms, render: 167ms)
+ GET /icons/icon-192.png 404 in 54ms (compile: 9ms, render: 45ms)
+ GET /icons/icon-192.png 404 in 120ms (compile: 10ms, render: 110ms)
+ GET /en/tools 200 in 651ms (compile: 41ms, proxy.ts: 18ms, render: 592ms)
+ GET /icons/icon-192.png 404 in 103ms (compile: 10ms, render: 94ms)
+ GET /fr/tools 200 in 103ms (compile: 26ms, proxy.ts: 7ms, render: 70ms)
+ GET /icons/icon-192.png 404 in 102ms (compile: 12ms, render: 90ms)
+ GET /de/tools 200 in 104ms (compile: 25ms, proxy.ts: 7ms, render: 72ms)
+ GET /icons/icon-192.png 404 in 109ms (compile: 10ms, render: 99ms)
+ GET /en/tools 200 in 102ms (compile: 29ms, proxy.ts: 7ms, render: 66ms)
+ GET /icons/icon-192.png 404 in 114ms (compile: 11ms, render: 103ms)
+ GET /fr/tools 200 in 87ms (compile: 23ms, proxy.ts: 7ms, render: 57ms)
+ GET /icons/icon-192.png 404 in 104ms (compile: 10ms, render: 94ms)
+ GET /de/tools 200 in 86ms (compile: 24ms, proxy.ts: 7ms, render: 54ms)
+ GET /icons/icon-192.png 404 in 114ms (compile: 13ms, render: 101ms)

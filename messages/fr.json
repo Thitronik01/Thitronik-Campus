@@ -1,0 +1,43 @@
+{
+    "Index": {
+        "welcome": "Bienvenue",
+        "title": "Ahoy, partenaire!",
+        "subtitle": "Bienvenue sur le campus.",
+        "welcome_back": "Bon retour,",
+        "greeting": "Ahoy, {name} !",
+        "learning_progress": "Votre progression d'apprentissage personnelle sur le Campus THITRONIK.",
+        "level": "Niveau: {name}",
+        "islands_completed": "Îles terminées",
+        "learning_path": "Votre parcours d'apprentissage – Les 7 Îles",
+        "quick_actions": "Accès rapide",
+        "tools_title": "Outils interactifs",
+        "tools_desc": "Tableau blanc, Quiz et Sondages",
+        "event_title": "Terminal d'événement",
+        "event_desc": "Scanner de code QR pour formations sur site"
+    },
+    "Navigation": {
+        "dashboard": "Tableau de bord",
+        "campus": "Campus",
+        "islands": "Les 7 Îles",
+        "catalog": "Catalogue de cours",
+        "games": "Jeux",
+        "tools": "Outils",
+        "certificates": "Certificats",
+        "profile": "Mon profil",
+        "logout": "Se déconnecter",
+        "workingCard": "Carte de travail numérique"
+    },
+    "Login": {
+        "subtitle": "Plateforme d'apprentissage pour les partenaires certifiés",
+        "welcome_back": "Bon retour",
+        "enter_credentials": "Entrez les identifiants du concessionnaire",
+        "email_label": "E-mail ou ID du concessionnaire",
+        "password_label": "Mot de passe",
+        "forgot_password": "Mot de passe oublié?",
+        "error_empty": "Veuillez remplir tous les champs.",
+        "error_failed": "Échec de la connexion.",
+        "submit": "Se connecter",
+        "loading": "Vérification en cours…",
+        "demo_login": "Accès rapide démo"
+    }
+}
