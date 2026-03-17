@@ -39,5 +39,28 @@
         "submit": "Log in",
         "loading": "Checking…",
         "demo_login": "Demo Quick Login"
+    },
+    "games": {
+        "wasBinIch": {
+            "title": "What Am I?",
+            "subtitle": "Guess THITRONIK products based on step-by-step first-person clues.",
+            "round": "Round",
+            "whoAmI": "What am I?",
+            "readHints": "Read the clues and guess the product.",
+            "loading": "Loading...",
+            "hintsRevealed": "{count} of {total} clues",
+            "inputPlaceholder": "Enter product name…",
+            "guess": "Guess",
+            "skip": "Skip",
+            "funFact": "Fun Fact",
+            "skipped": "Skipped",
+            "earned": "earned",
+            "nextRound": "Next Round",
+            "showResults": "Show Results",
+            "resultSubtitle": "Here's how you did:",
+            "totalXP": "Total XP",
+            "hitRatio": "Hit Ratio",
+            "restart": "Play Again"
+        }
     }
 }

@@ -51,3 +51,12 @@
 - [x] Implementierung der "Passwort vergessen"-Funktion (UI Feedback).
 - [x] Styling-Fix für "User" Badge (Neon-Grün).
 - [x] Verifizierung der Änderungen.
+
+## AM. Was bin ich? – Produkt-Quiz Game
+- [x] Produktdaten (`products.ts`) mit 8 Thitronik-Produkten, je 5 Hinweisen, Fun Facts.
+- [x] Zustand-Store (`wasBinIchStore.ts`) mit Runden-/XP-/Versuchs-Logik.
+- [x] 6 Client-Komponenten: HinweisCard, GuessInput, XPBurst, ProductReveal, ResultScreen, WasBinIchGame.
+- [x] Neue Route `app/[locale]/games/was-bin-ich/page.tsx`.
+- [x] Game-Card in Games-Übersicht eingefügt.
+- [x] i18n-Strings für DE/EN/FR hinzugefügt (`games.wasBinIch.*`).
+- [x] Build-Kompilierung erfolgreich, Browser-Test bestanden.

@@ -39,5 +39,28 @@
         "submit": "Se connecter",
         "loading": "Vérification en cours…",
         "demo_login": "Accès rapide démo"
+    },
+    "games": {
+        "wasBinIch": {
+            "title": "Qui suis-je ?",
+            "subtitle": "Devinez les produits THITRONIK à partir d'indices progressifs à la première personne.",
+            "round": "Manche",
+            "whoAmI": "Qui suis-je ?",
+            "readHints": "Lisez les indices et devinez le produit.",
+            "loading": "Chargement...",
+            "hintsRevealed": "{count} sur {total} indices",
+            "inputPlaceholder": "Entrez le nom du produit…",
+            "guess": "Deviner",
+            "skip": "Passer",
+            "funFact": "Le saviez-vous ?",
+            "skipped": "Passé",
+            "earned": "gagné",
+            "nextRound": "Manche suivante",
+            "showResults": "Voir les résultats",
+            "resultSubtitle": "Voici vos résultats :",
+            "totalXP": "XP total",
+            "hitRatio": "Taux de réussite",
+            "restart": "Rejouer"
+        }
     }
 }

@@ -2,31 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-/* ═══════════════════ CI THITRONIK ═══════════════════
-   Navy:   #003470  (primary dark)
-   Blue:   #4AADCE  (accent sky-blue)
-   Red:    #C8202E  (logo accent)
-   White:  #FFFFFF
-   Light:  #EBF4F9  (soft background)
-   ═══════════════════════════════════════════════════ */
-
-const CI = {
-    navy: '#003470',
-    navyD: '#002358',
-    navyL: '#0A4080',
-    blue: '#4AADCE',
-    blueL: '#6EC3DE',
-    blueD: '#3092B2',
-    red: '#C8202E',
-    redL: '#E03040',
-    white: '#FFFFFF',
-    light: '#EBF4F9',
-    light2: '#D6ECF5',
-    text: '#001830',
-    textM: '#2a4060',
-    textL: '#5a7090',
-};
-
 /* ═════════════════════════ DATA ═════════════════════════ */
 
 const ISLANDS = [
@@ -71,6 +46,7 @@ const SCHEDULE = [
 
 const fmt = (m: number) => `${String(~~(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
 const getIsland = (si: number, gi: number) => ISLANDS[(si + gi) % 7];
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const resolveSlot = (slot: any, gi: number) => slot.type !== 'island' ? slot : { ...slot, isl: getIsland(slot.si, gi) };
 
 /* ═════════════════════════ APP ═══════════════════════════ */
@@ -104,63 +80,41 @@ export function EventSchedule() {
     const clockStr = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
     return (
-        <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: '24px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)', color: CI.text, fontFamily: "'Segoe UI', Arial, sans-serif", backdropFilter: 'blur(10px)' }}>
-            <style>{`
-        .hov{transition:all .18s ease}
-        .hov:hover{filter:brightness(1.07);transform:translateY(-1px)}
-        .fade{animation:fd .3s ease both}
-        @keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-        .pulse{animation:pl 1.8s ease-in-out infinite}
-        @keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.35)}}
-        .glow{animation:gw 3s ease-in-out infinite}
-        @keyframes gw{0%,100%{opacity:1}50%{opacity:.8}}
-        ::-webkit-scrollbar{width:5px;height:5px}
-        ::-webkit-scrollbar-track{background:${CI.light}}
-        ::-webkit-scrollbar-thumb{background:${CI.blue};border-radius:3px}
-        .cell-hover:hover{background:rgba(0,52,112,0.06)!important;transition:background .15s}
-      `}</style>
+        <div className="bg-white/5 rounded-3xl overflow-hidden border border-white/10 text-brand-ink font-sans backdrop-blur-md">
 
             {/* ── HEADER ── */}
-            <div style={{
-                background: `linear-gradient(135deg, ${CI.navyD} 0%, ${CI.navy} 60%, ${CI.navyL} 100%)`,
-                position: 'relative', overflow: 'hidden', padding: '0 20px',
-            }}>
+            <div className="bg-gradient-to-br from-brand-navy-dark via-brand-navy to-brand-navy-light relative overflow-hidden px-5">
                 {/* Diagonal sail shape decoration */}
-                <div style={{
-                    position: 'absolute', right: 0, top: 0, bottom: 0, width: '35%',
-                    background: `linear-gradient(135deg, transparent 40%, ${CI.navyL}55 100%)`,
-                    clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)',
-                }} />
-                <div style={{
-                    position: 'absolute', right: '8%', top: '50%', transform: 'translateY(-50%)',
-                    opacity: 0.07, fontSize: '8rem', lineHeight: 1, userSelect: 'none', color: 'white',
-                    fontWeight: 900, letterSpacing: -5
-                }}>⛵</div>
+                <div
+                    className="absolute right-0 top-0 bottom-0 w-[35%] bg-gradient-to-br from-transparent to-brand-navy-light/35"
+                    style={{ clipPath: 'polygon(30% 0, 100% 0, 100% 100%, 0% 100%)' }}
+                    aria-hidden="true"
+                />
+                <div className="absolute right-[8%] top-1/2 -translate-y-1/2 opacity-[0.07] text-[8rem] leading-none select-none text-white font-black tracking-tighter" aria-hidden="true">
+                    ⛵
+                </div>
 
-                <div style={{ maxWidth: 1360, margin: '0 auto', padding: '22px 0 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, position: 'relative' }}>
+                <div className="max-w-[1360px] mx-auto py-[22px] pb-5 flex items-center justify-between flex-wrap gap-4 relative">
                     {/* Logo area */}
                     <div>
-                        <div style={{ fontSize: '1.55rem', fontWeight: 800, color: 'white', letterSpacing: 1.5, lineHeight: 1 }}>THITRONIK</div>
-                        <div style={{ fontSize: '0.58rem', color: CI.blueL, letterSpacing: 3.5, textTransform: 'uppercase', marginTop: 2, fontWeight: 500 }}>Campus · Eckernförde</div>
+                        <div className="text-[1.55rem] font-extrabold text-white tracking-[1.5px] leading-none">THITRONIK</div>
+                        <div className="text-[0.58rem] text-brand-sky-light tracking-[3.5px] uppercase mt-0.5 font-medium">Campus · Eckernförde</div>
                     </div>
 
                     {/* Clock */}
-                    <div style={{
-                        background: 'rgba(255,255,255,0.09)', border: `1px solid rgba(74,173,206,0.45)`,
-                        borderRadius: 8, padding: '10px 26px', textAlign: 'center', backdropFilter: 'blur(4px)',
-                    }}>
-                        <div className="glow" style={{ fontFamily: 'monospace', fontSize: 'clamp(1.2rem,2.5vw,1.8rem)', color: 'white', letterSpacing: 4, fontWeight: 300, lineHeight: 1 }}>
+                    <div className="bg-white/[0.09] border border-brand-sky/45 rounded-lg px-[26px] py-2.5 text-center backdrop-blur-sm">
+                        <div className="schedule-glow font-mono text-[clamp(1.2rem,2.5vw,1.8rem)] text-white tracking-[4px] font-light leading-none">
                             {clockStr}
                         </div>
-                        <div style={{ fontSize: '0.6rem', color: CI.blueL, letterSpacing: 3.5, textTransform: 'uppercase', marginTop: 4 }}>Aktuelle Uhrzeit</div>
+                        <div className="text-[0.6rem] text-brand-sky-light tracking-[3.5px] uppercase mt-1">Aktuelle Uhrzeit</div>
                     </div>
 
                     {/* Meta */}
-                    <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+                    <div className="flex gap-5 flex-wrap">
                         {[['50', 'Händler'], ['7', 'Gruppen'], ['7', 'Inseln']].map(([val, lbl]) => (
-                            <div key={lbl} style={{ textAlign: 'center' }}>
-                                <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', lineHeight: 1 }}>{val}</div>
-                                <div style={{ fontSize: '0.55rem', color: CI.blueL, letterSpacing: 2, textTransform: 'uppercase' }}>{lbl}</div>
+                            <div key={lbl} className="text-center">
+                                <div className="text-2xl font-extrabold text-white leading-none">{val}</div>
+                                <div className="text-[0.55rem] text-brand-sky-light tracking-[2px] uppercase">{lbl}</div>
                             </div>
                         ))}
                     </div>
@@ -168,48 +122,57 @@ export function EventSchedule() {
             </div>
 
             {/* ── BLUE DIVIDER ── */}
-            <div style={{ background: CI.blue, height: 4, boxShadow: `0 2px 12px ${CI.blue}60` }} />
+            <div className="bg-brand-sky h-1 shadow-[0_2px_12px_rgba(59,169,211,0.38)]" />
 
             {/* ── CONTENT ── */}
-            <div style={{ maxWidth: 1360, margin: '0 auto', padding: '24px 14px 60px' }}>
+            <div className="max-w-[1360px] mx-auto px-3.5 pt-6 pb-[60px]">
 
                 {/* ── TABS ── */}
-                <div style={{ display: 'flex', gap: 4, marginBottom: 24, background: 'rgba(255,255,255,0.1)', borderRadius: 8, padding: 4, border: `1px solid rgba(255,255,255,0.1)`, width: 'fit-content' }}>
+                <div className="flex gap-1 mb-6 bg-white/10 rounded-lg p-1 border border-white/10 w-fit">
                     {[
                         { id: 'guide', label: '🧭 Mein Standort' },
                         { id: 'table', label: '📋 Gesamtplan' },
                         { id: 'legend', label: '🏝 Inseln & Räume' },
                     ].map(t => (
-                        <button key={t.id} className="hov" onClick={() => setTab(t.id)} style={{
-                            padding: '10px 22px', borderRadius: 6, fontSize: '.88rem', fontWeight: 600,
-                            background: tab === t.id ? CI.navy : 'transparent',
-                            color: tab === t.id ? 'white' : 'rgba(255,255,255,0.7)',
-                            transition: 'all .18s',
-                        }}>{t.label}</button>
+                        <button
+                            key={t.id}
+                            className={`schedule-hover px-[22px] py-2.5 rounded-md text-[0.88rem] font-semibold transition-all ${
+                                tab === t.id
+                                    ? 'bg-brand-navy text-white'
+                                    : 'bg-transparent text-white/70'
+                            }`}
+                            onClick={() => setTab(t.id)}
+                        >
+                            {t.label}
+                        </button>
                     ))}
                 </div>
 
                 {/* ── GUIDE ── */}
                 {tab === 'guide' && (
-                    <div className="fade">
+                    <div className="animate-fade-in">
                         {/* Group Selector */}
-                        <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 10, border: `1px solid rgba(255,255,255,0.1)`, padding: '20px 24px', marginBottom: 20 }}>
-                            <div style={{ fontSize: '.7rem', letterSpacing: 3, color: CI.blue, textTransform: 'uppercase', fontWeight: 600, marginBottom: 14 }}>
+                        <div className="bg-white/5 rounded-[10px] border border-white/10 px-6 py-5 mb-5">
+                            <div className="text-[0.7rem] tracking-[3px] text-brand-sky uppercase font-semibold mb-3.5">
                                 ◆ Wähle deine Gruppe
                             </div>
-                            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                            <div className="flex gap-2 flex-wrap">
                                 {GROUPS.map(g => {
                                     const sel = group === g.id;
                                     return (
-                                        <button key={g.id} className="hov" onClick={() => setGroup(g.id)} style={{
-                                            padding: '12px 16px', borderRadius: 8, minWidth: 90, textAlign: 'center',
-                                            background: sel ? CI.navy : 'rgba(255,255,255,0.03)',
-                                            border: sel ? `2px solid ${CI.navy}` : `2px solid rgba(255,255,255,0.1)`,
-                                            color: sel ? 'white' : 'white',
-                                            transition: 'all .18s',
-                                        }}>
-                                            <div style={{ fontSize: '1.9rem', fontWeight: 800, lineHeight: 1, color: sel ? 'white' : 'white' }}>{g.id}</div>
-                                            <div style={{ fontSize: '.62rem', color: sel ? CI.blueL : 'rgba(255,255,255,0.5)', marginTop: 3, letterSpacing: .5 }}>Händler {g.range}</div>
+                                        <button
+                                            key={g.id}
+                                            className={`schedule-hover px-4 py-3 rounded-lg min-w-[90px] text-center transition-all border-2 ${
+                                                sel
+                                                    ? 'bg-brand-navy border-brand-navy text-white'
+                                                    : 'bg-white/[0.03] border-white/10 text-white'
+                                            }`}
+                                            onClick={() => setGroup(g.id)}
+                                        >
+                                            <div className="text-[1.9rem] font-extrabold leading-none text-white">{g.id}</div>
+                                            <div className={`text-[0.62rem] mt-[3px] tracking-[0.5px] ${sel ? 'text-brand-sky-light' : 'text-white/50'}`}>
+                                                Händler {g.range}
+                                            </div>
                                         </button>
                                     );
                                 })}
@@ -217,17 +180,17 @@ export function EventSchedule() {
                         </div>
 
                         {!group && (
-                            <div style={{ textAlign: 'center', padding: '60px 20px', background: 'rgba(255,255,255,0.03)', borderRadius: 10, border: `1px solid rgba(255,255,255,0.1)` }}>
-                                <div style={{ fontSize: '3rem', marginBottom: 14 }}>🧭</div>
-                                <div style={{ fontSize: '1.1rem', color: 'white', fontWeight: 600 }}>Wähle deine Gruppe</div>
-                                <div style={{ fontSize: '.85rem', color: 'rgba(255,255,255,0.6)', marginTop: 6 }}>Dann siehst du sofort, wo du jetzt sein musst.</div>
+                            <div className="text-center px-5 py-[60px] bg-white/[0.03] rounded-[10px] border border-white/10">
+                                <div className="text-5xl mb-3.5">🧭</div>
+                                <div className="text-[1.1rem] text-white font-semibold">Wähle deine Gruppe</div>
+                                <div className="text-[0.85rem] text-white/60 mt-1.5">Dann siehst du sofort, wo du jetzt sein musst.</div>
                             </div>
                         )}
 
                         {group && (
-                            <div className="fade">
+                            <div className="animate-fade-in">
                                 <CurrentCard current={current} next={next} progress={progress} remainingMins={remainingMins} group={group} />
-                                <div style={{ marginTop: 24 }}>
+                                <div className="mt-6">
                                     <SectionTitle>Tagesablauf · Gruppe {group}</SectionTitle>
                                     <DayTimeline gi={gi} nowMins={nowMins} />
                                 </div>
@@ -238,7 +201,7 @@ export function EventSchedule() {
 
                 {/* ── TABLE ── */}
                 {tab === 'table' && (
-                    <div className="fade">
+                    <div className="animate-fade-in">
                         <BuildingLegend />
                         <FullTable nowMins={nowMins} />
                     </div>
@@ -246,14 +209,14 @@ export function EventSchedule() {
 
                 {/* ── LEGEND ── */}
                 {tab === 'legend' && (
-                    <div className="fade">
+                    <div className="animate-fade-in">
                         <IslandLegend />
                     </div>
                 )}
             </div>
 
             {/* ── FOOTER ── */}
-            <div style={{ background: 'rgba(0,0,0,0.2)', color: CI.blueL, textAlign: 'center', padding: '14px 20px', fontSize: '.7rem', letterSpacing: 2, textTransform: 'uppercase' }}>
+            <div className="bg-black/20 text-brand-sky-light text-center px-5 py-3.5 text-[0.7rem] tracking-[2px] uppercase">
                 THITRONIK® Campus · Eckernförde · Island Hopping Schulungstag
             </div>
         </div>
@@ -262,60 +225,97 @@ export function EventSchedule() {
 
 /* ═══════════════ CURRENT CARD ═══════════════ */
 
-function CurrentCard({ current, next, progress, remainingMins, group }: any) {
+interface CurrentCardProps {
+    current: ReturnType<typeof resolveSlot> | null;
+    next: ReturnType<typeof resolveSlot> | null;
+    progress: number;
+    remainingMins: number;
+    group: string;
+}
+
+function CurrentCard({ current, next, progress, remainingMins, group }: CurrentCardProps) {
     if (!current) return (
-        <Card style={{ textAlign: 'center', padding: 52 }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: 10 }}>🌅</div>
-            <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'white' }}>Außerhalb der Schulungszeiten</div>
-            <div style={{ fontSize: '.85rem', color: 'rgba(255,255,255,0.6)', marginTop: 6 }}>Schulung: 08:30 – 17:00 Uhr</div>
+        <Card className="text-center p-[52px]">
+            <div className="text-[2.5rem] mb-2.5">🌅</div>
+            <div className="text-[1.15rem] font-bold text-white">Außerhalb der Schulungszeiten</div>
+            <div className="text-[0.85rem] text-white/60 mt-1.5">Schulung: 08:30 – 17:00 Uhr</div>
         </Card>
     );
 
     const isIsland = current.type === 'island';
     const isl = current.isl;
-    const accent = isIsland ? isl.color : current.type === 'lunch' || current.type === 'break' ? CI.blue : CI.navy;
-    const accentL = isIsland ? isl.colorL : current.type === 'lunch' || current.type === 'break' ? CI.blueL : CI.navyL;
+    const accent = isIsland ? isl.color : current.type === 'lunch' || current.type === 'break' ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)';
+    const accentL = isIsland ? isl.colorL : current.type === 'lunch' || current.type === 'break' ? 'var(--color-brand-sky-light)' : 'var(--color-brand-navy-light)';
 
     return (
-        <Card style={{ background: 'rgba(255,255,255,0.03)', borderTop: `4px solid ${accent}`, padding: 0, overflow: 'hidden' }}>
+        <Card
+            className="bg-white/[0.03] p-0 overflow-hidden"
+            style={{ borderTop: `4px solid ${accent}` }}
+        >
             {/* Status bar */}
-            <div style={{ background: `${accent}12`, borderBottom: `1px solid ${accent}30`, padding: '10px 22px', display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                <span className="pulse" style={{ width: 9, height: 9, borderRadius: '50%', background: accent, display: 'inline-block', flexShrink: 0 }} />
-                <span style={{ fontSize: '.7rem', letterSpacing: 3, color: accent, textTransform: 'uppercase', fontWeight: 700 }}>
+            <div
+                className="border-b px-[22px] py-2.5 flex items-center gap-2.5 flex-wrap"
+                style={{ background: `${accent}12`, borderBottomColor: `${accent}30` }}
+            >
+                <span
+                    className="schedule-pulse w-[9px] h-[9px] rounded-full inline-block shrink-0"
+                    style={{ background: accent }}
+                />
+                <span
+                    className="text-[0.7rem] tracking-[3px] uppercase font-bold"
+                    style={{ color: accent }}
+                >
                     Jetzt aktiv · Gruppe {group} · {fmt(current.s)} – {fmt(current.e)}
                 </span>
             </div>
 
-            <div style={{ padding: '22px 24px', display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <div className="px-6 py-[22px] flex gap-6 flex-wrap items-start">
                 {/* Left */}
-                <div style={{ flex: '1 1 280px' }}>
+                <div className="flex-[1_1_280px]">
                     {isIsland ? (
                         <>
-                            <div style={{ display: 'inline-block', background: accent, color: 'white', borderRadius: 4, padding: '2px 10px', fontSize: '.7rem', letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700, marginBottom: 10 }}>
+                            <div
+                                className="inline-block text-white rounded px-2.5 py-0.5 text-[0.7rem] tracking-[2px] uppercase font-bold mb-2.5"
+                                style={{ background: accent }}
+                            >
                                 Schulungsinsel
                             </div>
-                            <div style={{ fontSize: 'clamp(1.8rem,3.5vw,2.5rem)', fontWeight: 800, color: accent, lineHeight: 1, marginBottom: 12 }}>
+                            <div
+                                className="text-[clamp(1.8rem,3.5vw,2.5rem)] font-extrabold leading-none mb-3"
+                                style={{ color: accent }}
+                            >
                                 {isl.name}
                             </div>
-                            <div style={{ fontSize: '.83rem', color: 'rgba(255,255,255,0.8)', marginBottom: 18, lineHeight: 1.7, maxWidth: 420 }}>
+                            <div className="text-[0.83rem] text-white/80 mb-[18px] leading-[1.7] max-w-[420px]">
                                 {isl.topic}
                             </div>
-                            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                            <div className="flex gap-2.5 flex-wrap">
                                 {[{ lbl: 'Raum', val: isl.room, mono: true }, { lbl: 'Gebäude', val: isl.building }, { lbl: 'Etage', val: isl.floor }].map(b => (
-                                    <div key={b.lbl} style={{ background: `${accent}12`, border: `2px solid ${accent}30`, borderRadius: 8, padding: '8px 16px', minWidth: 85 }}>
-                                        <div style={{ fontSize: '.6rem', letterSpacing: 2, color: accent, textTransform: 'uppercase', fontWeight: 700, marginBottom: 3 }}>{b.lbl}</div>
-                                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: 'white', fontFamily: b.mono ? 'monospace' : 'inherit' }}>{b.val}</div>
+                                    <div
+                                        key={b.lbl}
+                                        className="rounded-lg px-4 py-2 min-w-[85px]"
+                                        style={{ background: `${accent}12`, border: `2px solid ${accent}30` }}
+                                    >
+                                        <div
+                                            className="text-[0.6rem] tracking-[2px] uppercase font-bold mb-[3px]"
+                                            style={{ color: accent }}
+                                        >
+                                            {b.lbl}
+                                        </div>
+                                        <div className={`text-[1.05rem] font-extrabold text-white ${b.mono ? 'font-mono' : ''}`}>
+                                            {b.val}
+                                        </div>
                                     </div>
                                 ))}
                             </div>
                         </>
                     ) : (
                         <>
-                            <div style={{ fontSize: 'clamp(1.5rem,3vw,2.2rem)', fontWeight: 800, color: 'white', lineHeight: 1.2, marginBottom: 12 }}>
+                            <div className="text-[clamp(1.5rem,3vw,2.2rem)] font-extrabold text-white leading-[1.2] mb-3">
                                 {current.icon} {current.title}
                             </div>
                             {current.loc && current.loc !== '–' && (
-                                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                                <div className="flex gap-2.5 flex-wrap">
                                     <InfoBadge label="Ort" val={current.loc} accent={accent} />
                                     <InfoBadge label="Bereich" val={current.bldg} accent={accent} />
                                 </div>
@@ -325,31 +325,40 @@ function CurrentCard({ current, next, progress, remainingMins, group }: any) {
                 </div>
 
                 {/* Timer */}
-                <div style={{ background: 'rgba(0,0,0,0.2)', border: `2px solid ${accent}30`, borderRadius: 10, padding: '18px 22px', minWidth: 180, flexShrink: 0, textAlign: 'center' }}>
-                    <div style={{ fontSize: '.65rem', letterSpacing: 2.5, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', marginBottom: 8 }}>Verbleibend</div>
-                    <div style={{ fontSize: '3.2rem', fontWeight: 800, color: accent, fontFamily: 'monospace', lineHeight: 1 }}>
-                        {remainingMins}<span style={{ fontSize: '1.1rem', marginLeft: 3, fontFamily: 'inherit' }}>min</span>
+                <div
+                    className="bg-black/20 rounded-[10px] px-[22px] py-[18px] min-w-[180px] shrink-0 text-center"
+                    style={{ border: `2px solid ${accent}30` }}
+                >
+                    <div className="text-[0.65rem] tracking-[2.5px] text-white/50 uppercase mb-2">Verbleibend</div>
+                    <div className="text-[3.2rem] font-extrabold font-mono leading-none" style={{ color: accent }}>
+                        {remainingMins}<span className="text-[1.1rem] ml-[3px] font-sans">min</span>
                     </div>
-                    <div style={{ fontSize: '.72rem', color: 'rgba(255,255,255,0.5)', marginTop: 4, marginBottom: 14 }}>bis {fmt(current.e)} Uhr</div>
-                    <div style={{ background: `${accent}20`, borderRadius: 4, height: 6, overflow: 'hidden' }}>
-                        <div style={{ height: '100%', width: `${Math.min(progress, 100)}%`, background: `linear-gradient(90deg,${accent},${accentL})`, borderRadius: 4, transition: 'width 1s linear' }} />
+                    <div className="text-[0.72rem] text-white/50 mt-1 mb-3.5">bis {fmt(current.e)} Uhr</div>
+                    <div className="rounded h-1.5 overflow-hidden" style={{ background: `${accent}20` }}>
+                        <div
+                            className="h-full rounded transition-[width] duration-1000 ease-linear"
+                            style={{
+                                width: `${Math.min(progress, 100)}%`,
+                                background: `linear-gradient(90deg,${accent},${accentL})`,
+                            }}
+                        />
                     </div>
                 </div>
             </div>
 
             {/* Next up */}
             {next && (
-                <div style={{ borderTop: `1px solid rgba(255,255,255,0.1)`, background: 'rgba(0,0,0,0.1)', padding: '12px 24px', display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
-                    <div style={{ fontSize: '.62rem', letterSpacing: 2.5, color: 'rgba(255,255,255,0.5)', textTransform: 'uppercase', fontWeight: 700, flexShrink: 0 }}>DANACH</div>
-                    <div style={{ fontSize: '.88rem', color: 'white' }}>
+                <div className="border-t border-white/10 bg-black/10 px-6 py-3 flex items-center gap-3.5 flex-wrap">
+                    <div className="text-[0.62rem] tracking-[2.5px] text-white/50 uppercase font-bold shrink-0">DANACH</div>
+                    <div className="text-[0.88rem] text-white">
                         {next.type === 'island' && next.isl
-                            ? <><span style={{ fontWeight: 700, color: next.isl.color }}>{next.isl.name}</span>
-                                {' · '}<span style={{ fontFamily: 'monospace', background: `${next.isl.color}15`, padding: '1px 7px', borderRadius: 3, fontSize: '.78rem', color: 'white' }}>{next.isl.room}</span>
+                            ? <><span className="font-bold" style={{ color: next.isl.color }}>{next.isl.name}</span>
+                                {' · '}<span className="font-mono text-[0.78rem] rounded-[3px] px-[7px] py-px text-white" style={{ background: `${next.isl.color}15` }}>{next.isl.room}</span>
                                 {' · '}{next.isl.building} {next.isl.floor}
-                                {' · ab '}<span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{fmt(next.s)}</span></>
-                            : <><span style={{ color: CI.blue, fontWeight: 700 }}>{next.icon} {next.title}</span>
+                                {' · ab '}<span className="font-mono font-bold">{fmt(next.s)}</span></>
+                            : <><span className="text-brand-sky font-bold">{next.icon} {next.title}</span>
                                 {next.loc && next.loc !== '–' && ` · ${next.loc}, ${next.bldg}`}
-                                {' · ab '}<span style={{ fontFamily: 'monospace', fontWeight: 700 }}>{fmt(next.s)}</span></>
+                                {' · ab '}<span className="font-mono font-bold">{fmt(next.s)}</span></>
                         }
                     </div>
                 </div>
@@ -360,49 +369,77 @@ function CurrentCard({ current, next, progress, remainingMins, group }: any) {
 
 /* ═══════════════ DAY TIMELINE ═══════════════ */
 
-function DayTimeline({ gi, nowMins }: any) {
+interface DayTimelineProps {
+    gi: number;
+    nowMins: number;
+}
+
+function DayTimeline({ gi, nowMins }: DayTimelineProps) {
     return (
-        <Card style={{ padding: 0, overflow: 'hidden', background: 'transparent', border: 'none', boxShadow: 'none' }}>
+        <Card className="p-0 overflow-hidden bg-transparent border-none shadow-none">
             {SCHEDULE.map((slot, i) => {
                 const isl = slot.type === 'island' ? getIsland(slot.si!, gi) : null;
                 const isActive = nowMins >= slot.s && nowMins < slot.e;
                 const isPast = nowMins >= slot.e;
                 const isTransfer = slot.type === 'transfer';
-                const col = isl ? isl.color : slot.type === 'lunch' || slot.type === 'break' ? CI.blue : CI.navy;
+                const col = isl ? isl.color : slot.type === 'lunch' || slot.type === 'break' ? 'var(--color-brand-sky)' : 'var(--color-brand-navy)';
 
                 if (isTransfer) return (
-                    <div key={i} style={{ display: 'flex', gap: 12, alignItems: 'center', padding: '4px 20px', opacity: isPast ? .25 : .45, borderBottom: `1px solid rgba(255,255,255,0.05)` }}>
-                        <div style={{ fontFamily: 'monospace', fontSize: '.7rem', color: 'rgba(255,255,255,0.5)', minWidth: 46 }}>{fmt(slot.s)}</div>
-                        <div style={{ fontSize: '.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: .5 }}>↔ Transfer · 10 Min</div>
+                    <div
+                        key={i}
+                        className={`flex gap-3 items-center px-5 py-1 border-b border-white/5 ${isPast ? 'opacity-25' : 'opacity-45'}`}
+                    >
+                        <div className="font-mono text-[0.7rem] text-white/50 min-w-[46px]">{fmt(slot.s)}</div>
+                        <div className="text-[0.7rem] text-white/50 tracking-[0.5px]">↔ Transfer · 10 Min</div>
                     </div>
                 );
 
                 return (
-                    <div key={i} style={{
-                        display: 'flex', gap: 14, alignItems: 'center',
-                        padding: '12px 20px',
-                        background: isActive ? `${col}12` : i % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'transparent',
-                        borderLeft: isActive ? `4px solid ${col}` : '4px solid transparent',
-                        borderBottom: `1px solid rgba(255,255,255,0.05)`,
-                        opacity: isPast ? .45 : 1, transition: 'all .3s',
-                    }}>
-                        <span className={isActive ? 'pulse' : ''} style={{ width: 8, height: 8, borderRadius: '50%', background: isActive ? col : isPast ? 'rgba(255,255,255,0.2)' : `${col}55`, flexShrink: 0 }} />
-                        <div style={{ fontFamily: 'monospace', fontSize: '.8rem', color: isActive ? col : 'rgba(255,255,255,0.5)', fontWeight: isActive ? 700 : 400, minWidth: 46 }}>{fmt(slot.s)}</div>
+                    <div
+                        key={i}
+                        className={`flex gap-3.5 items-center px-5 py-3 border-b border-white/5 transition-all duration-300 ${isPast ? 'opacity-45' : ''}`}
+                        style={{
+                            background: isActive ? `${col}12` : i % 2 === 0 ? 'rgba(255,255,255,0.03)' : 'transparent',
+                            borderLeft: isActive ? `4px solid ${col}` : '4px solid transparent',
+                        }}
+                    >
+                        <span
+                            className={`w-2 h-2 rounded-full shrink-0 ${isActive ? 'schedule-pulse' : ''}`}
+                            style={{ background: isActive ? col : isPast ? 'rgba(255,255,255,0.2)' : `${col}55` }}
+                        />
+                        <div
+                            className={`font-mono text-[0.8rem] min-w-[46px] ${isActive ? 'font-bold' : 'font-normal'}`}
+                            style={{ color: isActive ? col : 'rgba(255,255,255,0.5)' }}
+                        >
+                            {fmt(slot.s)}
+                        </div>
 
                         {isl ? (
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flex: 1, flexWrap: 'wrap' }}>
-                                <span style={{ fontWeight: 700, color: isActive ? isl.color : 'white', fontSize: '.95rem' }}>{isl.name}</span>
-                                <span style={{ fontFamily: 'monospace', fontSize: '.7rem', background: `${isl.color}15`, border: `1px solid ${isl.color}40`, padding: '2px 8px', borderRadius: 4, color: 'white' }}>{isl.room}</span>
-                                <span style={{ fontSize: '.72rem', color: 'rgba(255,255,255,0.5)' }}>{isl.building} · {isl.floor}</span>
+                            <div className="flex items-center gap-2.5 flex-1 flex-wrap">
+                                <span className={`font-bold text-[0.95rem] ${isActive ? '' : 'text-white'}`} style={isActive ? { color: isl.color } : undefined}>
+                                    {isl.name}
+                                </span>
+                                <span
+                                    className="font-mono text-[0.7rem] px-2 py-px rounded text-white"
+                                    style={{ background: `${isl.color}15`, border: `1px solid ${isl.color}40` }}
+                                >
+                                    {isl.room}
+                                </span>
+                                <span className="text-[0.72rem] text-white/50">{isl.building} · {isl.floor}</span>
                             </div>
                         ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-                                <span style={{ color: isActive ? col : 'white', fontWeight: isActive ? 700 : 500, fontSize: '.92rem' }}>{slot.icon} {slot.title}</span>
-                                {slot.loc && slot.loc !== '–' && <span style={{ fontSize: '.72rem', color: 'rgba(255,255,255,0.5)' }}>{slot.loc} · {slot.bldg}</span>}
+                            <div className="flex-1 flex gap-2.5 flex-wrap items-center">
+                                <span
+                                    className={`text-[0.92rem] ${isActive ? 'font-bold' : 'font-medium'}`}
+                                    style={{ color: isActive ? col : 'white' }}
+                                >
+                                    {slot.icon} {slot.title}
+                                </span>
+                                {slot.loc && slot.loc !== '–' && <span className="text-[0.72rem] text-white/50">{slot.loc} · {slot.bldg}</span>}
                             </div>
                         )}
 
-                        <div style={{ fontFamily: 'monospace', fontSize: '.65rem', color: 'rgba(255,255,255,0.5)', marginLeft: 'auto', whiteSpace: 'nowrap' }}>–{fmt(slot.e)}</div>
+                        <div className="font-mono text-[0.65rem] text-white/50 ml-auto whitespace-nowrap">–{fmt(slot.e)}</div>
                     </div>
                 );
             })}
@@ -414,17 +451,21 @@ function DayTimeline({ gi, nowMins }: any) {
 
 function BuildingLegend() {
     return (
-        <div style={{ display: 'flex', gap: 10, marginBottom: 16, flexWrap: 'wrap' }}>
+        <div className="flex gap-2.5 mb-4 flex-wrap">
             {[
-                { lbl: 'Neubau EG', rooms: 'N-EG-101 · N-EG-102', col: CI.blue },
+                { lbl: 'Neubau EG', rooms: 'N-EG-101 · N-EG-102', col: 'var(--color-brand-sky)' },
                 { lbl: 'Neubau OG', rooms: 'N-OG-101', col: '#2A9D8F' },
                 { lbl: 'Altbau EG', rooms: 'A-EG-101 · A-EG-102', col: '#E07B30' },
-                { lbl: 'Altbau OG', rooms: 'A-OG-101 · A-OG-102', col: CI.red },
+                { lbl: 'Altbau OG', rooms: 'A-OG-101 · A-OG-102', col: 'var(--color-brand-red)' },
             ].map(b => (
-                <div key={b.lbl} style={{ background: 'rgba(255,255,255,0.05)', border: `1px solid ${b.col}40`, borderLeft: `4px solid ${b.col}`, borderRadius: 7, padding: '7px 14px', display: 'flex', gap: 10, alignItems: 'center' }}>
+                <div
+                    key={b.lbl}
+                    className="bg-white/5 rounded-[7px] px-3.5 py-[7px] flex gap-2.5 items-center"
+                    style={{ border: `1px solid ${b.col}40`, borderLeft: `4px solid ${b.col}` }}
+                >
                     <div>
-                        <div style={{ fontSize: '.78rem', fontWeight: 700, color: 'white' }}>{b.lbl}</div>
-                        <div style={{ fontSize: '.62rem', color: 'rgba(255,255,255,0.5)', fontFamily: 'monospace' }}>{b.rooms}</div>
+                        <div className="text-[0.78rem] font-bold text-white">{b.lbl}</div>
+                        <div className="text-[0.62rem] text-white/50 font-mono">{b.rooms}</div>
                     </div>
                 </div>
             ))}
@@ -432,16 +473,20 @@ function BuildingLegend() {
     );
 }
 
-function FullTable({ nowMins }: any) {
+interface FullTableProps {
+    nowMins: number;
+}
+
+function FullTable({ nowMins }: FullTableProps) {
     return (
-        <div style={{ overflowX: 'auto', borderRadius: 10, border: `1px solid rgba(255,255,255,0.1)` }}>
-            <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: 920, fontSize: '.8rem', background: 'transparent' }}>
+        <div className="overflow-x-auto rounded-[10px] border border-white/10 thin-scrollbar">
+            <table className="border-collapse w-full min-w-[920px] text-[0.8rem] bg-transparent">
                 <thead>
-                    <tr style={{ background: 'rgba(0,0,0,0.3)' }}>
-                        <th style={{ padding: '12px 16px', textAlign: 'left', fontFamily: 'monospace', fontSize: '.68rem', letterSpacing: 2, color: CI.blueL, textTransform: 'uppercase', minWidth: 92 }}>Uhrzeit</th>
+                    <tr className="bg-black/30">
+                        <th className="px-4 py-3 text-left font-mono text-[0.68rem] tracking-[2px] text-brand-sky-light uppercase min-w-[92px]">Uhrzeit</th>
                         {GROUPS.map(g => (
-                            <th key={g.id} style={{ padding: '10px 8px', textAlign: 'center', fontSize: '.68rem', letterSpacing: 1, color: 'white', textTransform: 'uppercase', fontWeight: 700 }}>
-                                {g.id}<br /><span style={{ fontSize: '.58rem', color: CI.blueL, fontWeight: 400 }}>{g.range}</span>
+                            <th key={g.id} className="px-2 py-2.5 text-center text-[0.68rem] tracking-[1px] text-white uppercase font-bold">
+                                {g.id}<br /><span className="text-[0.58rem] text-brand-sky-light font-normal">{g.range}</span>
                             </th>
                         ))}
                     </tr>
@@ -451,24 +496,21 @@ function FullTable({ nowMins }: any) {
                         const isActive = nowMins >= slot.s && nowMins < slot.e;
                         const isPast = nowMins >= slot.e;
 
-                        const rowStyle = {
-                            background: isActive ? `${CI.blue}12` : 'transparent',
-                            opacity: isPast ? .5 : 1,
-                        };
-
                         const timeCell = (
-                            <td style={{ padding: '10px 14px', verticalAlign: 'middle', borderRight: `1px solid rgba(255,255,255,0.05)`, whiteSpace: 'nowrap', background: isActive ? `${CI.blue}18` : 'transparent' }}>
-                                <div style={{ fontFamily: 'monospace', fontSize: '.85rem', color: isActive ? CI.blueL : 'white', fontWeight: isActive ? 700 : 500 }}>{fmt(slot.s)}</div>
-                                <div style={{ fontFamily: 'monospace', fontSize: '.62rem', color: 'rgba(255,255,255,0.5)' }}>–{fmt(slot.e)}</div>
+                            <td
+                                className={`px-3.5 py-2.5 align-middle border-r border-white/5 whitespace-nowrap ${isActive ? 'bg-brand-sky/[0.09]' : ''}`}
+                            >
+                                <div className={`font-mono text-[0.85rem] ${isActive ? 'text-brand-sky-light font-bold' : 'text-white font-medium'}`}>{fmt(slot.s)}</div>
+                                <div className="font-mono text-[0.62rem] text-white/50">–{fmt(slot.e)}</div>
                             </td>
                         );
 
                         if (slot.type !== 'island') {
                             return (
-                                <tr key={i} style={rowStyle}>
+                                <tr key={i} className={isActive ? 'bg-brand-sky/[0.07]' : ''} style={{ opacity: isPast ? 0.5 : 1 }}>
                                     {timeCell}
-                                    <td colSpan={7} style={{ padding: '11px 20px', textAlign: 'center', background: 'rgba(255,255,255,0.02)', borderBottom: `1px solid rgba(255,255,255,0.05)` }}>
-                                        <span style={{ fontSize: '.88rem', color: slot.type === 'transfer' ? 'rgba(255,255,255,0.4)' : 'white', fontWeight: slot.type === 'transfer' ? 400 : 600 }}>
+                                    <td colSpan={7} className="px-5 py-[11px] text-center bg-white/[0.02] border-b border-white/5">
+                                        <span className={`text-[0.88rem] ${slot.type === 'transfer' ? 'text-white/40 font-normal' : 'text-white font-semibold'}`}>
                                             {slot.icon} {slot.title}
                                         </span>
                                     </td>
@@ -477,14 +519,18 @@ function FullTable({ nowMins }: any) {
                         }
 
                         return (
-                            <tr key={i} style={rowStyle}>
+                            <tr key={i} className={isActive ? 'bg-brand-sky/[0.07]' : ''} style={{ opacity: isPast ? 0.5 : 1 }}>
                                 {timeCell}
                                 {GROUPS.map((g, gi) => {
                                     const isl = getIsland(slot.si!, gi);
                                     return (
-                                        <td key={g.id} className="cell-hover" style={{ padding: '7px 8px', textAlign: 'center', verticalAlign: 'middle', background: `${isl.color}12`, borderBottom: `1px solid rgba(255,255,255,0.05)`, borderRight: `1px solid ${isl.color}25` }}>
-                                            <div style={{ fontWeight: 700, color: isl.color, fontSize: '.82rem', lineHeight: 1.3 }}>{isl.name}</div>
-                                            <div style={{ fontFamily: 'monospace', fontSize: '.62rem', color: 'rgba(255,255,255,0.6)', marginTop: 2 }}>{isl.room}</div>
+                                        <td
+                                            key={g.id}
+                                            className="cell-hover px-2 py-[7px] text-center align-middle border-b border-white/5"
+                                            style={{ background: `${isl.color}12`, borderRight: `1px solid ${isl.color}25` }}
+                                        >
+                                            <div className="font-bold text-[0.82rem] leading-[1.3]" style={{ color: isl.color }}>{isl.name}</div>
+                                            <div className="font-mono text-[0.62rem] text-white/60 mt-0.5">{isl.room}</div>
                                         </td>
                                     );
                                 })}
@@ -501,33 +547,46 @@ function FullTable({ nowMins }: any) {
 
 function IslandLegend() {
     const sections = [
-        { building: 'Neubau', floor: 'EG', col: CI.blue },
+        { building: 'Neubau', floor: 'EG', col: 'var(--color-brand-sky)' },
         { building: 'Neubau', floor: 'OG', col: '#2A9D8F' },
         { building: 'Altbau', floor: 'EG', col: '#E07B30' },
-        { building: 'Altbau', floor: 'OG', col: CI.red },
+        { building: 'Altbau', floor: 'OG', col: 'var(--color-brand-red)' },
     ];
 
     return (
         <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(290px,1fr))', gap: 14, marginBottom: 24 }}>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(290px,1fr))] gap-3.5 mb-6">
                 {sections.map(sec => {
                     const isls = ISLANDS.filter(isl => isl.building === sec.building && isl.floor === sec.floor);
                     return (
-                        <Card key={`${sec.building}${sec.floor}`} style={{ padding: 0, overflow: 'hidden', border: `1px solid ${sec.col}30`, background: 'rgba(255,255,255,0.03)' }}>
-                            <div style={{ background: sec.col, padding: '10px 18px', display: 'flex', gap: 8, alignItems: 'center' }}>
-                                <span style={{ color: 'white', fontWeight: 800, fontSize: '.85rem', letterSpacing: .5 }}>{sec.building}</span>
-                                <span style={{ background: 'rgba(255,255,255,0.25)', color: 'white', fontSize: '.68rem', padding: '1px 8px', borderRadius: 12, fontWeight: 700 }}>{sec.floor}</span>
+                        <Card
+                            key={`${sec.building}${sec.floor}`}
+                            className="p-0 overflow-hidden bg-white/[0.03]"
+                            style={{ border: `1px solid ${sec.col}30` }}
+                        >
+                            <div className="px-[18px] py-2.5 flex gap-2 items-center" style={{ background: sec.col }}>
+                                <span className="text-white font-extrabold text-[0.85rem] tracking-[0.5px]">{sec.building}</span>
+                                <span className="bg-white/25 text-white text-[0.68rem] px-2 py-px rounded-xl font-bold">{sec.floor}</span>
                             </div>
-                            <div style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 10 }}>
+                            <div className="p-3.5 flex flex-col gap-2.5">
                                 {isls.map(isl => (
-                                    <div key={isl.id} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', padding: '12px 14px', borderRadius: 8, background: `${isl.color}0d`, border: `1px solid ${isl.color}35` }}>
-                                        <span style={{ width: 9, height: 9, borderRadius: '50%', background: isl.color, flexShrink: 0, marginTop: 4 }} />
-                                        <div style={{ flex: 1 }}>
-                                            <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 5, flexWrap: 'wrap' }}>
-                                                <span style={{ fontWeight: 800, color: isl.color, fontSize: '1rem' }}>{isl.name}</span>
-                                                <span style={{ fontFamily: 'monospace', fontSize: '.7rem', background: `${isl.color}18`, border: `1px solid ${isl.color}45`, padding: '2px 8px', borderRadius: 4, color: 'white', fontWeight: 600 }}>{isl.room}</span>
+                                    <div
+                                        key={isl.id}
+                                        className="flex gap-3 items-start px-3.5 py-3 rounded-lg"
+                                        style={{ background: `${isl.color}0d`, border: `1px solid ${isl.color}35` }}
+                                    >
+                                        <span className="w-[9px] h-[9px] rounded-full shrink-0 mt-1" style={{ background: isl.color }} />
+                                        <div className="flex-1">
+                                            <div className="flex gap-2 items-center mb-[5px] flex-wrap">
+                                                <span className="font-extrabold text-base" style={{ color: isl.color }}>{isl.name}</span>
+                                                <span
+                                                    className="font-mono text-[0.7rem] px-2 py-px rounded text-white font-semibold"
+                                                    style={{ background: `${isl.color}18`, border: `1px solid ${isl.color}45` }}
+                                                >
+                                                    {isl.room}
+                                                </span>
                                             </div>
-                                            <div style={{ fontSize: '.75rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.6 }}>{isl.topic}</div>
+                                            <div className="text-[0.75rem] text-white/70 leading-[1.6]">{isl.topic}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -542,29 +601,45 @@ function IslandLegend() {
 
 /* ═══════════════ UTILS ═══════════════ */
 
-function Card({ children, style = {} }: any) {
+interface CardProps {
+    children: React.ReactNode;
+    className?: string;
+    style?: React.CSSProperties;
+}
+
+function Card({ children, className = '', style }: CardProps) {
     return (
-        <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 10, border: `1px solid rgba(255,255,255,0.1)`, ...style }}>
+        <div className={`bg-white/5 rounded-[10px] border border-white/10 ${className}`} style={style}>
             {children}
         </div>
     );
 }
 
-function SectionTitle({ children }: any) {
+interface SectionTitleProps {
+    children: React.ReactNode;
+}
+
+function SectionTitle({ children }: SectionTitleProps) {
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 14 }}>
-            <div style={{ width: 4, height: 20, background: CI.blue, borderRadius: 2, flexShrink: 0 }} />
-            <span style={{ fontSize: '.72rem', letterSpacing: 3, color: 'white', textTransform: 'uppercase', fontWeight: 700 }}>{children}</span>
-            <div style={{ flex: 1, height: 1, background: `linear-gradient(90deg,rgba(255,255,255,0.1),transparent)` }} />
+        <div className="flex items-center gap-3 mb-3.5">
+            <div className="w-1 h-5 bg-brand-sky rounded-sm shrink-0" />
+            <span className="text-[0.72rem] tracking-[3px] text-white uppercase font-bold">{children}</span>
+            <div className="flex-1 h-px bg-gradient-to-r from-white/10 to-transparent" />
         </div>
     );
 }
 
-function InfoBadge({ label, val, accent }: any) {
+interface InfoBadgeProps {
+    label: string;
+    val: string;
+    accent: string;
+}
+
+function InfoBadge({ label, val, accent }: InfoBadgeProps) {
     return (
-        <div style={{ background: 'rgba(255,255,255,0.05)', border: `2px solid ${accent}30`, borderRadius: 8, padding: '8px 16px' }}>
-            <div style={{ fontSize: '.6rem', letterSpacing: 2, color: accent, textTransform: 'uppercase', fontWeight: 700, marginBottom: 3 }}>{label}</div>
-            <div style={{ fontSize: '1rem', fontWeight: 800, color: 'white' }}>{val}</div>
+        <div className="bg-white/5 rounded-lg px-4 py-2" style={{ border: `2px solid ${accent}30` }}>
+            <div className="text-[0.6rem] tracking-[2px] uppercase font-bold mb-[3px]" style={{ color: accent }}>{label}</div>
+            <div className="text-base font-extrabold text-white">{val}</div>
         </div>
     );
 }

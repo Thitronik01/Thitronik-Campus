@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Puzzle, ArrowRight, Brain, ListOrdered, Search, MessageSquare, Presentation, BarChart2, Briefcase } from "lucide-react";
+import { Puzzle, ArrowRight, Brain, ListOrdered, Search, MessageSquare, Presentation, BarChart2, Briefcase, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -32,6 +32,13 @@ export default function GamesPage() {
             description: "Finden Sie die Fehler in der Installation.",
             icon: <Search className="w-8 h-8 text-brand-lime" />,
             href: "/games/find-error",
+        },
+        {
+            id: "was-bin-ich",
+            title: "Was bin ich?",
+            description: "Erraten Sie THITRONIK-Produkte anhand schrittweiser Hinweise.",
+            icon: <HelpCircle className="w-8 h-8 text-brand-lime" />,
+            href: "/games/was-bin-ich",
         },
         {
             id: "kahoot",

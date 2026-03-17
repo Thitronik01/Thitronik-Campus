@@ -19,6 +19,13 @@
   --color-brand-gray: #F0F0F0;
   --color-brand-ink: #1E293B;
 
+  /* Brand Extensions (gradients, schedule, hover states) */
+  --color-brand-navy-dark: #142849;
+  --color-brand-navy-light: #294a7a;
+  --color-brand-sky-light: #6EC3DE;
+  --color-brand-sky-dark: #3092B2;
+  --color-brand-neon: #D4FF00;
+
   /* shadcn mapped */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -91,6 +98,36 @@
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: #294a7a;
   --sidebar-ring: #3BA9D3;
+
+  /* ── Brand Color Extensions (gradients, schedule, etc.) ── */
+  --color-brand-navy-dark: #142849;
+  --color-brand-navy-light: #294a7a;
+  --color-brand-sky-light: #6EC3DE;
+  --color-brand-sky-dark: #3092B2;
+  --color-brand-neon: #D4FF00;
+
+  /* ── Spacing Tokens ─────────────────────────── */
+  --spacing-xs:  0.25rem;  /* 4px  */
+  --spacing-sm:  0.5rem;   /* 8px  */
+  --spacing-md:  1rem;     /* 16px */
+  --spacing-lg:  1.5rem;   /* 24px */
+  --spacing-xl:  2rem;     /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+
+  /* ── Shadow Tokens ──────────────────────────── */
+  --shadow-card:     0 4px 24px rgba(0,0,0,0.08);
+  --shadow-dropdown: 0 8px 32px rgba(0,0,0,0.16);
+  --shadow-modal:    0 16px 48px rgba(0,0,0,0.24);
+
+  /* ── Motion Tokens ──────────────────────────── */
+  --duration-instant: 100ms;
+  --duration-fast:    150ms;
+  --duration-normal:  200ms;
+  --duration-slow:    300ms;
+  --duration-slower:  500ms;
+  --ease-out-expo:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:      cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .dark {
@@ -271,4 +308,54 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
   top: 16px !important;
   right: 16px !important;
   z-index: 9999 !important;
+}
+
+/* ── Schedule Component Animations ───────── */
+/* Migrated from inline <style> in event-schedule.tsx (F-01) */
+
+@keyframes schedule-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.35); }
+}
+
+@keyframes schedule-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.schedule-pulse {
+  animation: schedule-pulse 1.8s ease-in-out infinite;
+}
+
+.schedule-glow {
+  animation: schedule-glow 3s ease-in-out infinite;
+}
+
+.schedule-hover {
+  transition: all 0.18s ease;
+}
+
+.schedule-hover:hover {
+  filter: brightness(1.07);
+  transform: translateY(-1px);
+}
+
+.cell-hover:hover {
+  background: rgba(29, 54, 97, 0.06) !important;
+  transition: background 0.15s;
+}
+
+/* ── Thin Scrollbar (schedule, tables) ───── */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: var(--color-brand-gray);
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-brand-sky);
+  border-radius: 3px;
 }

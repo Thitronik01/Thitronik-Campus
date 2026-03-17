@@ -40,5 +40,28 @@
         "submit": "Anmelden",
         "loading": "Wird geprüft…",
         "demo_login": "Demo Schnellzugang"
+    },
+    "games": {
+        "wasBinIch": {
+            "title": "Was bin ich?",
+            "subtitle": "Erraten Sie THITRONIK-Produkte anhand schrittweiser Hinweise in Ich-Perspektive.",
+            "round": "Runde",
+            "whoAmI": "Was bin ich?",
+            "readHints": "Lies die Hinweise und errate das Produkt.",
+            "loading": "Wird geladen...",
+            "hintsRevealed": "{count} von {total} Hinweisen",
+            "inputPlaceholder": "Produktname eingeben…",
+            "guess": "Raten",
+            "skip": "Überspringen",
+            "funFact": "Fun Fact",
+            "skipped": "Übersprungen",
+            "earned": "verdient",
+            "nextRound": "Nächste Runde",
+            "showResults": "Ergebnis anzeigen",
+            "resultSubtitle": "So haben Sie abgeschnitten:",
+            "totalXP": "Gesamt-XP",
+            "hitRatio": "Trefferquote",
+            "restart": "Nochmal spielen"
+        }
     }
 }

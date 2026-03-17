@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, ArrowRight, Users, ClipboardCheck, Wrench } from "lucide-react";
+import { FileText, ArrowRight, Users, ClipboardCheck, Wrench, StickyNote } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -32,7 +32,14 @@ export default function ToolsPage() {
             description: "Digitaler Feedbackbogen zur Bewertung der Campus-Schulung.",
             icon: <ClipboardCheck className="w-8 h-8 text-brand-lime" />,
             href: "/tools/feedback",
-        }
+        },
+        {
+            id: "notizen",
+            title: "Meine Notizen",
+            description: "Notizen tippen oder handschriftlich erfassen – mit Texterkennung und PDF-Export.",
+            icon: <StickyNote className="w-8 h-8 text-brand-lime" />,
+            href: "/tools/notizen",
+        },
     ];
 
     return (

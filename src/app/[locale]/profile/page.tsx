@@ -15,6 +15,7 @@ import { Camera, Linkedin, Instagram, Edit2, CheckCircle2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import { PremiumBackground } from "@/components/layout/premium-background";
+import Link from "next/link";
 
 export default function ProfilePage() {
     const { user, logout } = useAuthStore();
@@ -58,6 +59,25 @@ export default function ProfilePage() {
                         {user?.role === "admin" && (
                             <Badge className="bg-brand-red text-white py-1 px-3">ADMINISTRATOR</Badge>
                         )}
+                    </div>
+
+                    {/* Profile Tab Navigation */}
+                    <div className="flex items-center gap-1 bg-white/5 backdrop-blur-md rounded-xl p-1 border border-white/10 mb-6">
+                        <div className="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/10">
+                            👤 Mein Profil
+                        </div>
+                        <Link
+                            href="/profile/kalender"
+                            className="px-4 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                            📅 Mein Kalender
+                        </Link>
+                        <Link
+                            href="/certificates"
+                            className="px-4 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                            🎓 Zertifikate
+                        </Link>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

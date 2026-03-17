@@ -242,6 +242,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                                 </DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem asChild><Link href="/profile">👤 {t("profile")}</Link></DropdownMenuItem>
+                                <DropdownMenuItem asChild><Link href="/profile/kalender">📅 Mein Kalender</Link></DropdownMenuItem>
 
                                 {!isAdmin(authUser) && !isManager(authUser) && (
                                     <DropdownMenuItem asChild><Link href="/certificates">🪪 {t("certificates")}</Link></DropdownMenuItem>
