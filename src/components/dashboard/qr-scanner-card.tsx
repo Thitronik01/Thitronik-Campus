@@ -14,11 +14,13 @@ export function QRScannerCard() {
     const [checkedIn, setCheckedIn] = useState(false);
     const [scanResult, setScanResult] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [scanError, setScanError] = useState<string | null>(null);
     const html5QrRef = useRef<any>(null);
 
     const startScanner = async () => {
         setIsLoading(true);
         setScannerActive(true);
+        setScanError(null);
         try {
             const { Html5Qrcode } = await import("html5-qrcode");
             const scanner = new Html5Qrcode("qr-reader-dashboard");
@@ -33,9 +35,16 @@ export function QRScannerCard() {
                 },
                 () => { }
             );
-        } catch (err) {
+        } catch (err: any) {
             console.error("Scanner error:", err);
             setScannerActive(false);
+            if (err?.name === "NotFoundError" || err?.message?.includes("NotFoundError") || err?.message?.includes("Requested device not found")) {
+                setScanError("Keine Kamera gefunden. Bitte verwenden Sie ein Gerät mit Kamera oder geben Sie den Code manuell ein.");
+            } else if (err?.name === "NotAllowedError" || err?.message?.includes("NotAllowedError")) {
+                setScanError("Kamerazugriff verweigert. Bitte erlauben Sie den Zugriff in den Browser-Einstellungen.");
+            } else {
+                setScanError("Kamera konnte nicht gestartet werden. Bitte geben Sie den Code manuell ein.");
+            }
         } finally {
             setIsLoading(false);
         }
@@ -102,13 +111,29 @@ export function QRScannerCard() {
                             >
                                 {!scannerActive && !isLoading && (
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6">
-                                        <Smartphone className="w-12 h-12 text-slate-300 mb-4" />
-                                        <p className="text-sm text-slate-500 mb-4 font-medium">
-                                            Nutzen Sie die Kamera für den schnellen Check-in vor Ort.
-                                        </p>
-                                        <Button onClick={startScanner} className="bg-brand-sky hover:bg-brand-sky/90 text-white font-bold px-8">
-                                            Kamera starten
-                                        </Button>
+                                        {scanError ? (
+                                            <>
+                                                <div className="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center mb-4">
+                                                    <QrCode className="w-6 h-6 text-amber-600" />
+                                                </div>
+                                                <p className="text-sm text-amber-700 mb-4 font-medium">
+                                                    {scanError}
+                                                </p>
+                                                <Button onClick={startScanner} variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-50 font-bold px-6">
+                                                    Erneut versuchen
+                                                </Button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Smartphone className="w-12 h-12 text-slate-300 mb-4" />
+                                                <p className="text-sm text-slate-500 mb-4 font-medium">
+                                                    Nutzen Sie die Kamera für den schnellen Check-in vor Ort.
+                                                </p>
+                                                <Button onClick={startScanner} className="bg-brand-sky hover:bg-brand-sky/90 text-white font-bold px-8">
+                                                    Kamera starten
+                                                </Button>
+                                            </>
+                                        )}
                                     </div>
                                 )}
                                 {isLoading && (

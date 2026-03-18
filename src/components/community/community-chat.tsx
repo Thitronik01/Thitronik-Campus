@@ -68,16 +68,16 @@ const currentUser: Participant = {
 
 const participants: Participant[] = [
   currentUser,
-  { id: "u-1", name: "Caravan Becker", role: "dealer", region: "West", online: true },
-  { id: "u-2", name: "Camping Nord GmbH", role: "dealer", region: "Nord", online: true },
-  { id: "u-3", name: "Reisemobile Hansa", role: "dealer", region: "Nord", online: false },
-  { id: "u-4", name: "THITRONIK Vertrieb", role: "manager", region: "West", online: true },
-  { id: "u-5", name: "Campus Administration", role: "admin", region: "Süd", online: true },
-  { id: "u-6", name: "VanTec Leipzig", role: "dealer", region: "Ost", online: true },
-  { id: "u-7", name: "Wohnmobil Zentrum Süd", role: "dealer", region: "Süd", online: false },
-  { id: "u-8", name: "Servicepartner Köln", role: "dealer", region: "West", online: true },
-  { id: "u-9", name: "THITRONIK Support", role: "manager", region: "Nord", online: true },
-  { id: "u-10", name: "Caravan Profi Dresden", role: "dealer", region: "Ost", online: true },
+  { id: "u-1", name: "Caravan Becker", role: "dealer" as Role, region: "West" as Region, online: true },
+  { id: "u-2", name: "Camping Nord GmbH", role: "dealer" as Role, region: "Nord" as Region, online: true },
+  { id: "u-3", name: "Reisemobile Hansa", role: "dealer" as Role, region: "Nord" as Region, online: false },
+  { id: "u-4", name: "THITRONIK Vertrieb", role: "manager" as Role, region: "West" as Region, online: true },
+  { id: "u-5", name: "Campus Administration", role: "admin" as Role, region: "Süd" as Region, online: true },
+  { id: "u-6", name: "VanTec Leipzig", role: "dealer" as Role, region: "Ost" as Region, online: true },
+  { id: "u-7", name: "Wohnmobil Zentrum Süd", role: "dealer" as Role, region: "Süd" as Region, online: false },
+  { id: "u-8", name: "Servicepartner Köln", role: "dealer" as Role, region: "West" as Region, online: true },
+  { id: "u-9", name: "THITRONIK Support", role: "manager" as Role, region: "Nord" as Region, online: true },
+  { id: "u-10", name: "Caravan Profi Dresden", role: "dealer" as Role, region: "Ost" as Region, online: true },
 ].concat(
   Array.from({ length: 40 }, (_, i) => ({
     id: `u-extra-${i + 11}`,

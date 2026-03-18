@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-nunito), 'Nunito', 'Inter', system-ui, 'Segoe UI', Arial, sans-serif;
   --font-mono: var(--font-geist-mono);
 
   /* THITRONIK Brand Palette */
@@ -17,7 +17,7 @@
   --color-brand-red: #CE132D;
   --color-brand-lime: #AFCA05;
   --color-brand-gray: #F0F0F0;
-  --color-brand-ink: #1E293B;
+  --color-brand-ink: #111111;
 
   /* Brand Extensions (gradients, schedule, hover states) */
   --color-brand-navy-dark: #142849;
@@ -66,13 +66,13 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1.5rem;
   --background: #ffffff;
-  --foreground: #1E293B;
+  --foreground: #111111;
   --card: #ffffff;
-  --card-foreground: #1E293B;
+  --card-foreground: #111111;
   --popover: #ffffff;
-  --popover-foreground: #1E293B;
+  --popover-foreground: #111111;
   --primary: #1D3661;
   --primary-foreground: #ffffff;
   --secondary: #3BA9D3;

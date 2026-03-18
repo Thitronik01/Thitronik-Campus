@@ -313,8 +313,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </header>
 
             {/* ── Main Content ───────────────────────── */}
-            <main className="flex-1 bg-brand-gray/30 flex flex-col">
-                <div style={{ marginLeft: 'auto', marginRight: 'auto' }} className="max-w-[1400px] w-full px-4 md:px-8 py-8 flex-1 flex flex-col">
+            <main className="flex-1 relative flex flex-col">
+                {/* Global Premium Background */}
+                <div className="absolute inset-0 z-0">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                        style={{ backgroundImage: "url('/background.png.png')" }}
+                    />
+                    <div className="absolute inset-0 bg-brand-navy/60 backdrop-blur-[2px]" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-navy/40 via-transparent to-brand-navy/40" />
+                </div>
+
+                <div style={{ marginLeft: 'auto', marginRight: 'auto' }} className="relative z-10 max-w-[1400px] w-full px-4 md:px-8 py-8 flex-1 flex flex-col">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={pathname}

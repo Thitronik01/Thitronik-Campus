@@ -9,6 +9,7 @@ import { Progress } from "@/components/ui/progress";
 import { useUserStore } from "@/store/user-store";
 import { EventSchedule } from "@/components/dashboard/event-schedule";
 import { QRScannerCard } from "@/components/dashboard/qr-scanner-card";
+import { CustomerFeedbackCard } from "@/components/dashboard/customer-feedback-card";
 import { Dialog, DialogContent, DialogTrigger, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 import { QrCode } from "lucide-react";
@@ -103,6 +104,11 @@ export default function DashboardPage() {
             </motion.div>
           </div>
         </div>
+
+        {/* Full-width Customer Feedback Section */}
+        <motion.div variants={fadeUp}>
+          <CustomerFeedbackCard />
+        </motion.div>
       </motion.div>
     </PremiumBackground>
   );

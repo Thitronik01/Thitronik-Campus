@@ -161,9 +161,9 @@ export default function SettingsPage() {
                                                             <Label className="text-white/50 font-medium sm:w-1/3 italic">{item.label}</Label>
                                                             <div className="flex-1 flex items-center justify-between gap-4 p-2 bg-white/5 rounded-lg border border-white/5">
                                                                 <span className="text-white font-medium">{item.value}</span>
-                                                                {item.button && (
+                                                                {(item as any).button && (
                                                                     <Button size="sm" variant="ghost" className="text-brand-sky hover:text-white hover:bg-brand-sky/20">
-                                                                        {item.button}
+                                                                        {(item as any).button}
                                                                     </Button>
                                                                 )}
                                                             </div>

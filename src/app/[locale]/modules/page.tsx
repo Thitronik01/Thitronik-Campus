@@ -578,7 +578,7 @@ function ErrorTable({ data }: { data: any }) {
 }
 
 function renderSection(sec: any, idx: number) {
-    const map: Record<string, JSX.Element> = {
+    const map: Record<string, React.JSX.Element> = {
         compare: <CompareTable key={idx} data={sec} />,
         cards: <CardGrid key={idx} data={sec} />,
         appfeatures: <AppFeatures key={idx} data={sec} />,

@@ -970,11 +970,11 @@ function ParticipantView({ identity, room, onLeave }: { identity: any, room: any
         const normalized = normalizeWord(wordInput);
         if (!activeQuestion || activeQuestion.type !== "word_cloud" || !activeQuestion.isOpen) return;
         if (!normalized || myResponses.length >= 3) return;
-        if (myResponses.some((response) => normalizeWord(response.value) === normalized)) return;
+        if (myResponses.some((response: any) => normalizeWord(response.value) === normalized)) return;
         mutateRoom(room.code, (draft) => {
             const existing = participantResponses(draft, activeQuestion.id, identity.clientId);
             if (existing.length >= 3) return;
-            if (existing.some((response) => normalizeWord(response.value) === normalized)) return;
+            if (existing.some((response: any) => normalizeWord(response.value) === normalized)) return;
             draft.responses.push({
                 id: uid(),
                 roomCode: room.code,
@@ -1040,7 +1040,7 @@ function ParticipantView({ identity, room, onLeave }: { identity: any, room: any
                                         <button onClick={addWord} disabled={!wordInput.trim() || myResponses.length >= 3} style={{ ...primaryButton(!wordInput.trim() || myResponses.length >= 3, { width: 60 }) }}>+</button>
                                     </div>
                                     <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 8 }}>
-                                        {myResponses.map((response) => (
+                                        {myResponses.map((response: any) => (
                                             <span key={response.id} style={{ padding: "6px 10px", borderRadius: 999, background: "rgba(78,205,196,0.14)", border: "1px solid #4ECDC4", color: "#5eead4", fontWeight: 700, fontSize: 12 }}>{response.value}</span>
                                         ))}
                                     </div>
