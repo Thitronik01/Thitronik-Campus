@@ -41,6 +41,13 @@
         "demo_login": "Accès rapide démo"
     },
     "games": {
+        "singleplayer": "Solo",
+        "multiplayer": "Multijoueur",
+        "join": {
+            "title": "Rejoindre une partie",
+            "enterCode": "Entrez le code de la salle",
+            "join": "Rejoindre"
+        },
         "wasBinIch": {
             "title": "Qui suis-je ?",
             "subtitle": "Devinez les produits THITRONIK à partir d'indices progressifs à la première personne.",
@@ -61,6 +68,22 @@
             "totalXP": "XP total",
             "hitRatio": "Taux de réussite",
             "restart": "Rejouer"
+        }
+    },
+    "multiplayer": {
+        "lobby": {
+            "title": "Salle de jeu",
+            "waitingForPlayers": "En attente de joueurs...",
+            "players": "Joueurs",
+            "startGame": "Lancer la partie",
+            "yourName": "Votre nom",
+            "joinCode": "Code de salle",
+            "scanToJoin": "Scannez le QR code pour rejoindre"
+        },
+        "scoreboard": {
+            "title": "Résultats",
+            "playAgain": "Rejouer",
+            "winner": "Gagnant"
         }
     }
 }

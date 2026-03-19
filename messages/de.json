@@ -42,6 +42,13 @@
         "demo_login": "Demo Schnellzugang"
     },
     "games": {
+        "singleplayer": "Einzelspieler",
+        "multiplayer": "Mehrspieler",
+        "join": {
+            "title": "Spiel beitreten",
+            "enterCode": "Raum-Code eingeben",
+            "join": "Beitreten"
+        },
         "wasBinIch": {
             "title": "Was bin ich?",
             "subtitle": "Erraten Sie THITRONIK-Produkte anhand schrittweiser Hinweise in Ich-Perspektive.",
@@ -62,6 +69,22 @@
             "totalXP": "Gesamt-XP",
             "hitRatio": "Trefferquote",
             "restart": "Nochmal spielen"
+        }
+    },
+    "multiplayer": {
+        "lobby": {
+            "title": "Spielraum",
+            "waitingForPlayers": "Warte auf Spieler...",
+            "players": "Spieler",
+            "startGame": "Spiel starten",
+            "yourName": "Dein Name",
+            "joinCode": "Raum-Code",
+            "scanToJoin": "QR-Code scannen zum Beitreten"
+        },
+        "scoreboard": {
+            "title": "Ergebnis",
+            "playAgain": "Nochmal spielen",
+            "winner": "Gewinner"
         }
     }
 }

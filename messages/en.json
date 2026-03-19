@@ -41,6 +41,13 @@
         "demo_login": "Demo Quick Login"
     },
     "games": {
+        "singleplayer": "Singleplayer",
+        "multiplayer": "Multiplayer",
+        "join": {
+            "title": "Join Game",
+            "enterCode": "Enter room code",
+            "join": "Join"
+        },
         "wasBinIch": {
             "title": "What Am I?",
             "subtitle": "Guess THITRONIK products based on step-by-step first-person clues.",
@@ -61,6 +68,22 @@
             "totalXP": "Total XP",
             "hitRatio": "Hit Ratio",
             "restart": "Play Again"
+        }
+    },
+    "multiplayer": {
+        "lobby": {
+            "title": "Game Room",
+            "waitingForPlayers": "Waiting for players...",
+            "players": "Players",
+            "startGame": "Start Game",
+            "yourName": "Your Name",
+            "joinCode": "Room Code",
+            "scanToJoin": "Scan QR code to join"
+        },
+        "scoreboard": {
+            "title": "Results",
+            "playAgain": "Play Again",
+            "winner": "Winner"
         }
     }
 }
