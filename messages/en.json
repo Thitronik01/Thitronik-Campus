@@ -25,7 +25,8 @@
         "certificates": "Certificates",
         "profile": "My Profile",
         "logout": "Log out",
-        "workingCard": "Digital Work Card"
+        "workingCard": "Digital Work Card",
+        "chronik": "Campus Chronik"
     },
     "Login": {
         "subtitle": "Learning platform for certified partners",
@@ -85,5 +86,58 @@
             "playAgain": "Play Again",
             "winner": "Winner"
         }
+    },
+    "admin": {
+        "title": "Admin Dashboard",
+        "description": "Management of events, QR codes, and user roles for the THITRONIK Academy.",
+        "tabs": {
+            "events": "Live Events",
+            "users": "Users",
+            "audit": "Audit Log"
+        },
+        "audit": {
+            "title": "System Protocol",
+            "description": "All administrative actions are logged here.",
+            "filterAll": "All Actions",
+            "clearLog": "Clear Log",
+            "clearConfirm": "Really delete?",
+            "emptyState": "No entries in the log yet.",
+            "columns": {
+                "timestamp": "Timestamp",
+                "actor": "Actor",
+                "action": "Action",
+                "target": "Target",
+                "details": "Details"
+            },
+            "actions": {
+                "user": {
+                    "role_changed": "Role changed",
+                    "deleted": "User deleted",
+                    "created": "User created",
+                    "login": "Login",
+                    "logout": "Logout"
+                },
+                "event": {
+                    "code_generated": "Event code generated"
+                },
+                "settings": {
+                    "changed": "Settings changed"
+                }
+            }
+        }
+    },
+    "Chronik": {
+        "title": "Campus Chronik",
+        "subtitle": "{count} past campuses · Discover now",
+        "timeline": "Timeline",
+        "comments": "Comments",
+        "add_comment": "Add comment",
+        "placeholder": "Write a comment...",
+        "delete": "Delete",
+        "no_comments": "No comments yet.",
+        "years": "Years",
+        "image_alt": "History Image",
+        "loading": "Loading...",
+        "nav_label": "Campus Chronik"
     }
 }

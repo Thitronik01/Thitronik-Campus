@@ -59,4 +59,13 @@
 - [x] Neue Route `app/[locale]/games/was-bin-ich/page.tsx`.
 - [x] Game-Card in Games-Übersicht eingefügt.
 - [x] i18n-Strings für DE/EN/FR hinzugefügt (`games.wasBinIch.*`).
-- [x] Build-Kompilierung erfolgreich, Browser-Test bestanden.
+
+## AN. Admin Audit Log System
+- [x] AuditLogEntry & AuditAction Typen definieren (`src/types/audit-log.ts`)
+- [x] Audit-Log Utility mit localStorage-Persistenz (`src/lib/audit-log.ts`)
+- [x] 3. Tab "Audit Log" im Admin Dashboard einbauen
+- [x] Automatisches Logging bei Rollenänderung, User-Löschung und QR-Generierung
+- [x] Filter nach Aktionstyp
+- [x] Aufklappbare Detail-Ansicht pro Log-Eintrag
+- [x] i18n-Strings für DE/EN/FR
+- [x] Dark Mode Kompatibilität verifiziert

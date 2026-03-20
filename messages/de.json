@@ -26,7 +26,8 @@
         "community": "Community",
         "profile": "Mein Profil",
         "logout": "Abmelden",
-        "workingCard": "Digitale Arbeitskarte"
+        "workingCard": "Digitale Arbeitskarte",
+        "chronik": "Campus Chronik"
     },
     "Login": {
         "subtitle": "Lernplattform für zertifizierte Partner",
@@ -86,5 +87,115 @@
             "playAgain": "Nochmal spielen",
             "winner": "Gewinner"
         }
+    },
+    "admin": {
+        "title": "Admin Dashboard",
+        "description": "Verwaltung von Events, QR-Codes und User-Rollen für die THITRONIK Akademie.",
+        "tabs": {
+            "events": "Live-Events",
+            "users": "Benutzer",
+            "audit": "Audit Log"
+        },
+        "audit": {
+            "title": "Systemprotokoll",
+            "description": "Alle administrativen Aktionen werden hier protokolliert.",
+            "filterAll": "Alle Aktionen",
+            "clearLog": "Protokoll löschen",
+            "clearConfirm": "Wirklich löschen?",
+            "emptyState": "Noch keine Einträge im Protokoll.",
+            "columns": {
+                "timestamp": "Zeitstempel",
+                "actor": "Akteur",
+                "action": "Aktion",
+                "target": "Ziel",
+                "details": "Details"
+            },
+            "actions": {
+                "user": {
+                    "role_changed": "Rolle geändert",
+                    "deleted": "Benutzer gelöscht",
+                    "created": "Benutzer erstellt",
+                    "login": "Anmeldung",
+                    "logout": "Abmeldung"
+                },
+                "event": {
+                    "code_generated": "Event-Code generiert"
+                },
+                "settings": {
+                    "changed": "Einstellung geändert"
+                }
+            }
+        }
+    },
+    "cms": {
+        "editorTitle": "CMS Content Editor",
+        "autosave": "Autosave: vor {minutes} Min.",
+        "saving": "Wird gespeichert...",
+        "status": {
+            "draft": "Entwurf",
+            "published": "Veröffentlicht",
+            "version": "Version",
+            "liveVersion": "Live-Version",
+            "blockCount": "Blöcke",
+            "lastEdited": "Zuletzt bearbeitet",
+            "editor": "Bearbeiter"
+        },
+        "sidebar": {
+            "title": "Inseln",
+            "newIsland": "Neue Insel anlegen",
+            "search": "Insel suchen..."
+        },
+        "publish": {
+            "btn": "Veröffentlichen",
+            "draft": "Entwurf speichern",
+            "preview": "Vorschau"
+        },
+        "blocks": {
+            "add": "Block hinzufügen",
+            "heading": "Überschrift",
+            "text": "Fließtext",
+            "video": "Video",
+            "image": "Bild",
+            "presentation": "Präsentation",
+            "game": "Game",
+            "tool": "Tool",
+            "quiz": "Quiz",
+            "checklist": "Checkliste",
+            "faq": "FAQ",
+            "comparison": "Vergleich",
+            "steps": "Schritte",
+            "cards": "Karten",
+            "divider": "Trenner"
+        },
+        "media": {
+            "title": "Mediathek",
+            "upload": "Upload",
+            "noMedia": "Keine Medien gefunden"
+        },
+        "history": {
+            "title": "Versionshistorie",
+            "live": "Live",
+            "draft": "Entwurf"
+        },
+        "islandSettings": {
+            "title": "Insel-Settings",
+            "xp": "XP Belohnung",
+            "badge": "Badge Typ",
+            "active": "Insel aktiv"
+        }
+    },
+    "Chronik": {
+        "title": "Campus Chronik",
+        "subtitle": "{count} vergangene Campuse · Jetzt entdecken",
+        "timeline": "Timeline",
+        "comments": "Kommentare",
+        "add_comment": "Kommentar hinzufügen",
+        "placeholder": "Schreibe einen Kommentar...",
+        "delete": "Löschen",
+        "no_comments": "Noch keine Kommentare.",
+        "years": "Jahre",
+        "image_alt": "Chronik Bild",
+        "loading": "Wird geladen...",
+        "nav_label": "Campus Chronik"
     }
 }

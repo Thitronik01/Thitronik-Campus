@@ -106,17 +106,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                             );
                         })}
                         {/* Admin or THI Bot */}
-                        {isAdmin(authUser) ? (
-                            <Link
-                                href="/admin"
-                                className={`px-3 py-2 rounded-lg text-base font-bold transition-colors ${pathname === "/admin"
-                                    ? "bg-brand-lime text-brand-navy shadow-sm"
-                                    : "text-brand-sky/70 hover:text-brand-sky hover:bg-white/5"
-                                    }`}
-                            >
-                                Admin
-                            </Link>
-                        ) : (
+                        {!isAdmin(authUser) && (
                             <Link
                                 href="/thi"
                                 className={`px-3 py-2 rounded-lg text-base font-bold transition-colors flex items-center gap-2 ${pathname === "/thi"

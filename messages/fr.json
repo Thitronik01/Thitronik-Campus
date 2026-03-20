@@ -50,7 +50,7 @@
         },
         "wasBinIch": {
             "title": "Qui suis-je ?",
-            "subtitle": "Devinez les produits THITRONIK à partir d'indices progressifs à la première personne.",
+            "subtitle": "Devinez les produits THITRONIK à partir d'indices progressifs à la première person.",
             "round": "Manche",
             "whoAmI": "Qui suis-je ?",
             "readHints": "Lisez les indices et devinez le produit.",
@@ -84,6 +84,45 @@
             "title": "Résultats",
             "playAgain": "Rejouer",
             "winner": "Gagnant"
+        }
+    },
+    "admin": {
+        "title": "Tableau de bord Admin",
+        "description": "Gestion des événements, des codes QR et des rôles d'utilisateurs pour l'Académie THITRONIK.",
+        "tabs": {
+            "events": "Événements en direct",
+            "users": "Utilisateurs",
+            "audit": "Journal d'audit"
+        },
+        "audit": {
+            "title": "Protocole système",
+            "description": "Toutes les actions administratives sind consignées ici.",
+            "filterAll": "Toutes les actions",
+            "clearLog": "Effacer le journal",
+            "clearConfirm": "Vraiment supprimer ?",
+            "emptyState": "Aucune entrée dans le journal pour le moment.",
+            "columns": {
+                "timestamp": "Horodatage",
+                "actor": "Acteur",
+                "action": "Action",
+                "target": "Cible",
+                "details": "Détails"
+            },
+            "actions": {
+                "user": {
+                    "role_changed": "Rôle modifié",
+                    "deleted": "Utilisateur supprimé",
+                    "created": "Utilisateur créé",
+                    "login": "Connexion",
+                    "logout": "Déconnexion"
+                },
+                "event": {
+                    "code_generated": "Code d'événement généré"
+                },
+                "settings": {
+                    "changed": "Paramètre modifié"
+                }
+            }
         }
     }
 }

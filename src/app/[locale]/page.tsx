@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { QrCode } from "lucide-react";
 
 import { PremiumBackground } from "@/components/layout/premium-background";
+import { ChronikPreviewCard } from "@/components/chronik/chronik-preview-card";
 
 const ISLANDS = [
   { id: "poel", name: "Poel", icon: "🏝️", xp: 50, status: "completed", desc: "Onboarding & Plattform-Tour" },
@@ -95,6 +96,8 @@ export default function DashboardPage() {
                 </Button>
               </Link>
             </motion.div>
+
+            <ChronikPreviewCard count={5} />
           </div>
 
           {/* Right Column (Focus: Event Schedule) */}
