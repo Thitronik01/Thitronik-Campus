@@ -29,6 +29,15 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+
+# local work notes
+task.md
+walkthrough.md
+
+# bmad temp files
+.bmad-temp/
+_bmad-output/
 
 # env files (can opt-in for committing if needed)
 .env*

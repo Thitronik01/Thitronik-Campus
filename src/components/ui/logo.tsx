@@ -2,14 +2,16 @@ import { cn } from "@/lib/utils";
 
 interface LogoProps extends React.SVGProps<SVGSVGElement> {
     variant?: "default" | "dark";
+    showCampusSubtitle?: boolean;
 }
 
-export function Logo({ className, variant = "default", ...props }: LogoProps) {
+export function Logo({ className, variant = "default", showCampusSubtitle = false, ...props }: LogoProps) {
     const textColor = variant === "default" ? "#FFFFFF" : "#1D3661";
+    const viewBox = showCampusSubtitle ? "0 0 450 100" : "0 0 450 80";
 
     return (
         <svg
-            viewBox="0 0 450 80"
+            viewBox={viewBox}
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={cn("h-8 w-auto", className)}
@@ -25,7 +27,7 @@ export function Logo({ className, variant = "default", ...props }: LogoProps) {
                 fill="#D30024"
             />
 
-            {/* THITRONIK Text - ViewBox expanded to 450 to fit the "K" */}
+            {/* THITRONIK Text */}
             <text
                 x="105"
                 y="60"
@@ -37,6 +39,22 @@ export function Logo({ className, variant = "default", ...props }: LogoProps) {
             >
                 THITRONIK
             </text>
+
+            {/* CAMPUS Subtitle */}
+            {showCampusSubtitle && (
+                <text
+                    x="340"
+                    y="90"
+                    fontFamily="Arial, system-ui, sans-serif"
+                    fontWeight="600"
+                    fontSize="22"
+                    fill={textColor}
+                    letterSpacing="6"
+                    opacity="0.8"
+                >
+                    CAMPUS
+                </text>
+            )}
         </svg>
     );
 }
