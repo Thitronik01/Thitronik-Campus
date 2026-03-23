@@ -6,27 +6,15 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTranslations } from "next-intl";
+import { useTranslations, useFormatter } from "next-intl";
+import { useNotificationStore } from "@/store/notification-store";
 
 export function NotificationDropdown() {
     const t = useTranslations("Notifications");
+    const format = useFormatter();
+    const { notifications, markAsRead, markAllAsRead } = useNotificationStore();
 
-    const NOTIFICATIONS = [
-        {
-            id: "1",
-            title: t("title_new_seminar"),
-            body: t("body_new_seminar"),
-            time: t("time_2h_ago"),
-        },
-        {
-            id: "2",
-            title: t("title_cert_unlocked"),
-            body: t("body_cert_unlocked"),
-            time: t("time_yesterday"),
-        },
-    ];
-
-    const unreadCount = NOTIFICATIONS.length;
+    const unreadCount = notifications.filter(n => !n.read).length;
 
     return (
         <DropdownMenu>
@@ -45,22 +33,36 @@ export function NotificationDropdown() {
                     {t("header")}
                 </div>
                 <div className="max-h-[300px] overflow-auto">
-                    {NOTIFICATIONS.map((n) => (
-                        <div
-                            key={n.id}
-                            className="p-3 border-b hover:bg-muted/50 cursor-pointer transition-colors relative"
-                        >
-                            <div className="w-2 h-2 rounded-full bg-brand-red absolute top-4 left-2" />
-                            <div className="pl-3">
-                                <p className="text-sm font-medium">{n.title}</p>
-                                <p className="text-xs text-muted-foreground mt-0.5">{n.body}</p>
-                                <p className="text-[10px] text-muted-foreground mt-1">{n.time}</p>
-                            </div>
+                    {notifications.length === 0 ? (
+                        <div className="p-4 text-center text-sm text-muted-foreground">
+                            Keine Benachrichtigungen
                         </div>
-                    ))}
+                    ) : (
+                        notifications.map((n) => (
+                            <div
+                                key={n.id}
+                                onClick={() => markAsRead(n.id)}
+                                className={`p-3 border-b hover:bg-muted/50 cursor-pointer transition-colors relative ${!n.read ? 'bg-white/5' : ''}`}
+                            >
+                                {!n.read && <div className="w-2 h-2 rounded-full bg-brand-red absolute top-4 left-2" />}
+                                <div className="pl-3">
+                                    <p className="text-sm font-medium">{t(n.titleKey)}</p>
+                                    <p className="text-xs text-muted-foreground mt-0.5">{t(n.descriptionKey)}</p>
+                                    <p className="text-[10px] text-muted-foreground mt-1">
+                                        {format.relativeTime(new Date(n.timestamp))}
+                                    </p>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
                 <div className="p-2 text-center border-t">
-                    <Button variant="ghost" className="w-full text-xs h-8 text-brand-sky">
+                    <Button 
+                        variant="ghost" 
+                        onClick={() => markAllAsRead()}
+                        disabled={unreadCount === 0}
+                        className="w-full text-xs h-8 text-brand-sky"
+                    >
                         {t("mark_all_read")}
                     </Button>
                 </div>
