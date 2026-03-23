@@ -58,20 +58,20 @@ export default function LoginPage() {
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                     className="login-inner"
                 >
-                    {/* ── Logo Section ── */}
-                    <div className="login-logo-section">
-                        <Logo className="h-10" showCampusSubtitle />
-                    </div>
-
                     {/* ── System Login Title ── */}
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.15, duration: 0.4 }}
-                        className="login-subtitle"
+                        className="login-subtitle mb-4 text-center"
                     >
                         {t("system_login")}
                     </motion.p>
+
+                    {/* ── Logo Section ── */}
+                    <div className="login-logo-section flex justify-center w-full mb-8">
+                        <Logo className="h-10 mx-auto" showCampusSubtitle />
+                    </div>
 
                     {/* ── Glassmorphic Login Card ── */}
                     <motion.div

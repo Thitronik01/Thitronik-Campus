@@ -41,7 +41,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     <Link href="/" className="flex flex-col shrink-0 group pt-1">
                         <Logo className="h-6 md:h-7 transition-transform group-hover:scale-105" />
                         <span className="text-brand-sky text-[9px] md:text-[10px] font-bold tracking-widest uppercase mt-1 pl-[105px]">
-                            Campus 2.0
+                            Thitronik UNI
                         </span>
                     </Link>
 

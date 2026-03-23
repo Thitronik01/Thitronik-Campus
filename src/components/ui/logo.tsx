@@ -7,7 +7,7 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
 
 export function Logo({ className, variant = "default", showCampusSubtitle = false, ...props }: LogoProps) {
     const textColor = variant === "default" ? "#FFFFFF" : "#1D3661";
-    const viewBox = showCampusSubtitle ? "0 0 450 100" : "0 0 450 80";
+    const viewBox = showCampusSubtitle ? "0 0 500 100" : "0 0 450 80";
 
     return (
         <svg
