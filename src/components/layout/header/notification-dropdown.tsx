@@ -6,23 +6,26 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
-const NOTIFICATIONS = [
-    {
-        id: "1",
-        title: "Neues Seminar verfügbar",
-        body: 'Das Seminar "Smarte Alarmanlagen" ist nun buchbar.',
-        time: "Vor 2 Stunden",
-    },
-    {
-        id: "2",
-        title: "Zertifikat freigeschaltet",
-        body: 'Du hast die "Poel" Insel erfolgreich gemeistert!',
-        time: "Gestern",
-    },
-];
+import { useTranslations } from "next-intl";
 
 export function NotificationDropdown() {
+    const t = useTranslations("Notifications");
+
+    const NOTIFICATIONS = [
+        {
+            id: "1",
+            title: t("title_new_seminar"),
+            body: t("body_new_seminar"),
+            time: t("time_2h_ago"),
+        },
+        {
+            id: "2",
+            title: t("title_cert_unlocked"),
+            body: t("body_cert_unlocked"),
+            time: t("time_yesterday"),
+        },
+    ];
+
     const unreadCount = NOTIFICATIONS.length;
 
     return (
@@ -39,7 +42,7 @@ export function NotificationDropdown() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-72 mt-2 p-0">
                 <div className="p-3 border-b text-sm font-bold bg-muted/50">
-                    Benachrichtigungen
+                    {t("header")}
                 </div>
                 <div className="max-h-[300px] overflow-auto">
                     {NOTIFICATIONS.map((n) => (
@@ -58,7 +61,7 @@ export function NotificationDropdown() {
                 </div>
                 <div className="p-2 text-center border-t">
                     <Button variant="ghost" className="w-full text-xs h-8 text-brand-sky">
-                        Alle als gelesen markieren
+                        {t("mark_all_read")}
                     </Button>
                 </div>
             </DropdownMenuContent>

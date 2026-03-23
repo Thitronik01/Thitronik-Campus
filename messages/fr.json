@@ -24,8 +24,18 @@
         "tools": "Outils",
         "certificates": "Certificats",
         "profile": "Mon profil",
-        "logout": "Se déconnecter",
-        "workingCard": "Carte de travail numérique"
+        "workingCard": "Carte de travail numérique",
+        "chronik": "Chronique du Campus",
+        "cms": "CMS / Contenu",
+        "settings": "Paramètres du système",
+        "admin_dashboard": "Tableau de bord de l'administrateur",
+        "legal_and_contact": "Légal & Contact",
+        "contact": "Contact",
+        "imprint": "Mentions légales",
+        "privacy": "Politique de confidentialité",
+        "my_calendar": "Mon calendrier",
+        "user_settings": "Paramètres",
+        "footer_copyright": "© 2026 THITRONIK GmbH · Académie des concessionnaires"
     },
     "Login": {
         "subtitle": "Plateforme d'apprentissage pour les partenaires certifiés",
@@ -57,6 +67,16 @@
         "forgot_sent": "📩 Vérifiez votre boîte mail! Un lien de réinitialisation a été envoyé.",
         "no_account": "Pas encore de compte?",
         "register_link": "Demander une inscription partenaire"
+    },
+    "Notifications": {
+        "title_new_seminar": "Nouveau séminaire disponible",
+        "body_new_seminar": "Le séminaire \"Systèmes d'alarme intelligents\" est désormais ouvert à la réservation.",
+        "time_2h_ago": "Il y a 2 heures",
+        "title_cert_unlocked": "Certificat débloqué",
+        "body_cert_unlocked": "Vous avez réussi à maîtriser l'île \"Poel\" !",
+        "time_yesterday": "Hier",
+        "header": "Notifications",
+        "mark_all_read": "Tout marquer comme lu"
     },
     "games": {
         "singleplayer": "Solo",

@@ -76,7 +76,7 @@ export function ProfileDropdown() {
                     <Link href="/profile">👤 {t("profile")}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <Link href="/profile/kalender">📅 Mein Kalender</Link>
+                    <Link href="/profile/kalender">📅 {t("my_calendar")}</Link>
                 </DropdownMenuItem>
                 {!isAdmin(authUser) && !isManager(authUser) && (
                     <DropdownMenuItem asChild>
@@ -84,7 +84,7 @@ export function ProfileDropdown() {
                     </DropdownMenuItem>
                 )}
                 <DropdownMenuItem asChild>
-                    <Link href="/settings">⚙️ Einstellungen</Link>
+                    <Link href="/settings">⚙️ {t("user_settings")}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="text-destructive" onClick={handleLogout}>

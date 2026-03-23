@@ -26,7 +26,17 @@
         "profile": "My Profile",
         "logout": "Log out",
         "workingCard": "Digital Work Card",
-        "chronik": "Campus Chronik"
+        "chronik": "Campus Chronik",
+        "cms": "CMS / Content",
+        "settings": "System Settings",
+        "admin_dashboard": "Admin Dashboard",
+        "legal_and_contact": "Legal & Contact",
+        "contact": "Contact",
+        "imprint": "Imprint",
+        "privacy": "Privacy Policy",
+        "my_calendar": "My Calendar",
+        "user_settings": "Settings",
+        "footer_copyright": "© 2026 THITRONIK GmbH · Dealer Academy"
     },
     "Login": {
         "subtitle": "Learning platform for certified partners",
@@ -58,6 +68,16 @@
         "forgot_sent": "📩 Check your inbox! A reset link has been sent.",
         "no_account": "No account yet?",
         "register_link": "Request partner registration"
+    },
+    "Notifications": {
+        "title_new_seminar": "New seminar available",
+        "body_new_seminar": "The seminar \"Smart Alarm Systems\" is now available for booking.",
+        "time_2h_ago": "2 hours ago",
+        "title_cert_unlocked": "Certificate unlocked",
+        "body_cert_unlocked": "You have successfully mastered the \"Poel\" island!",
+        "time_yesterday": "Yesterday",
+        "header": "Notifications",
+        "mark_all_read": "Mark all as read"
     },
     "games": {
         "singleplayer": "Singleplayer",

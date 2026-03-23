@@ -12,7 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { RoleGuard } from "@/components/auth/role-guard";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Camera, Linkedin, Instagram, Edit2, Building2, MapPin, Phone, Users, Calendar, UserCheck, Briefcase, FileText } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Camera, Linkedin, Instagram, Edit2, Building2, MapPin, Phone, Users, Calendar, UserCheck, Briefcase, FileText, Mail, MessageSquare, Globe, Fingerprint, Receipt, Truck } from "lucide-react";
 import { useState, useRef } from "react";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import Link from "next/link";
@@ -34,14 +35,24 @@ export default function ProfilePage() {
         firstName: displayName.split(' ')[0],
         lastName: displayName.split(' ').slice(1).join(' ') || '',
         company: user?.company || "THITRONIK Partner",
+        customerId: "",
         street: "",
         city: "",
+        deliveryStreet: "",
+        deliveryCity: "",
         phone: "",
+        communicationChannel: "",
+        language: "Deutsch",
         employees: "",
         dealerSince: "",
         contactPerson: "",
         role: "",
         bio: "",
+    });
+
+    const [optIns, setOptIns] = useState({
+        newsletter: true,
+        marketing: false,
     });
 
     const handleAvatarClick = () => fileInputRef.current?.click();
@@ -190,24 +201,61 @@ export default function ProfilePage() {
                                                         <Input id="lastName" value={editData.lastName} onChange={e => setEditData({ ...editData, lastName: e.target.value })} />
                                                     </div>
                                                 </div>
-                                                {/* Firma */}
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="company">Firma / Autohaus</Label>
-                                                    <Input id="company" value={editData.company} onChange={e => setEditData({ ...editData, company: e.target.value })} />
+                                                {/* Firma & ID */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="company">Firma / Autohaus</Label>
+                                                        <Input id="company" value={editData.company} onChange={e => setEditData({ ...editData, company: e.target.value })} />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="customerId">Kundennummer / ID</Label>
+                                                        <Input id="customerId" placeholder="Ihre Thitronik ID" value={editData.customerId} onChange={e => setEditData({ ...editData, customerId: e.target.value })} />
+                                                    </div>
                                                 </div>
                                                 {/* Adresse */}
                                                 <div className="space-y-2">
-                                                    <Label htmlFor="street">Straße &amp; Hausnummer</Label>
-                                                    <Input id="street" placeholder="Musterstraße 42" value={editData.street} onChange={e => setEditData({ ...editData, street: e.target.value })} />
+                                                    <Label>Hauptadresse / Rechnungsadresse</Label>
+                                                    <div className="grid grid-cols-2 gap-4 mt-1">
+                                                        <Input placeholder="Straße & Hausnummer" value={editData.street} onChange={e => setEditData({ ...editData, street: e.target.value })} />
+                                                        <Input placeholder="PLZ & Ort" value={editData.city} onChange={e => setEditData({ ...editData, city: e.target.value })} />
+                                                    </div>
                                                 </div>
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="city">PLZ &amp; Ort</Label>
-                                                    <Input id="city" placeholder="12345 Musterstadt" value={editData.city} onChange={e => setEditData({ ...editData, city: e.target.value })} />
+                                                {/* Abweichende Lieferadresse */}
+                                                <div className="space-y-2 border-l-2 pl-3 border-brand-sky/30">
+                                                    <Label>Abweichende Lieferadresse</Label>
+                                                    <div className="grid grid-cols-2 gap-4 mt-1">
+                                                        <Input placeholder="Straße & Hausnummer" value={editData.deliveryStreet} onChange={e => setEditData({ ...editData, deliveryStreet: e.target.value })} />
+                                                        <Input placeholder="PLZ & Ort" value={editData.deliveryCity} onChange={e => setEditData({ ...editData, deliveryCity: e.target.value })} />
+                                                    </div>
                                                 </div>
                                                 {/* Kontakt */}
-                                                <div className="space-y-2">
-                                                    <Label htmlFor="phone">Handynummer / Telefon</Label>
-                                                    <Input id="phone" placeholder="+49 151 00000000" value={editData.phone} onChange={e => setEditData({ ...editData, phone: e.target.value })} />
+                                                <div className="grid grid-cols-3 gap-4">
+                                                    <div className="space-y-2">
+                                                        <Label htmlFor="phone">Telefon / Mobil</Label>
+                                                        <Input id="phone" placeholder="+49 151..." value={editData.phone} onChange={e => setEditData({ ...editData, phone: e.target.value })} />
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label>Bevorzugter Weg</Label>
+                                                        <Select value={editData.communicationChannel} onValueChange={v => setEditData({ ...editData, communicationChannel: v })}>
+                                                            <SelectTrigger><SelectValue placeholder="Wählen" /></SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="E-Mail">E-Mail</SelectItem>
+                                                                <SelectItem value="Telefon">Telefon</SelectItem>
+                                                                <SelectItem value="Post">Post</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label>Sprache</Label>
+                                                        <Select value={editData.language} onValueChange={v => setEditData({ ...editData, language: v })}>
+                                                            <SelectTrigger><SelectValue placeholder="Sprache" /></SelectTrigger>
+                                                            <SelectContent>
+                                                                <SelectItem value="Deutsch">Deutsch</SelectItem>
+                                                                <SelectItem value="English">English</SelectItem>
+                                                                <SelectItem value="Français">Français</SelectItem>
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
                                                 </div>
                                                 {/* Händler-Infos */}
                                                 <div className="grid grid-cols-2 gap-4">
@@ -270,7 +318,9 @@ export default function ProfilePage() {
                                         </div>
                                         {/* Email */}
                                         <div>
-                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">E-Mail Adresse</p>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Mail className="w-3 h-3" /> E-Mail Adresse
+                                            </p>
                                             <p className="font-medium text-white text-sm break-all">{user?.email}</p>
                                         </div>
                                         {/* Firma */}
@@ -280,6 +330,13 @@ export default function ProfilePage() {
                                             </p>
                                             <p className="font-medium text-white">{editData.company || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
                                         </div>
+                                        {/* Kundennummer */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Fingerprint className="w-3 h-3" /> Kundennummer / ID
+                                            </p>
+                                            <p className="font-medium text-white">{editData.customerId || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
                                         {/* Funktion */}
                                         <div>
                                             <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
@@ -287,15 +344,33 @@ export default function ProfilePage() {
                                             </p>
                                             <p className="font-medium text-white">{editData.role || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
                                         </div>
-                                        {/* Adresse */}
-                                        <div className="sm:col-span-2">
+                                        {/* Mitarbeiterzahl */}
+                                        <div>
                                             <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
-                                                <MapPin className="w-3 h-3" /> Adresse
+                                                <Users className="w-3 h-3" /> Mitarbeiterzahl
+                                            </p>
+                                            <p className="font-medium text-white">{editData.employees || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Hauptadresse */}
+                                        <div className="sm:col-span-1">
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Receipt className="w-3 h-3" /> Haupt-/Rechnungsadresse
                                             </p>
                                             {editData.street || editData.city ? (
                                                 <p className="font-medium text-white">{editData.street}{editData.street && editData.city ? ", " : ""}{editData.city}</p>
                                             ) : (
                                                 <p className="text-white/30 italic font-medium">Nicht angegeben</p>
+                                            )}
+                                        </div>
+                                        {/* Lieferadresse */}
+                                        <div className="sm:col-span-1">
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Truck className="w-3 h-3" /> Abweichende Lieferadresse
+                                            </p>
+                                            {editData.deliveryStreet || editData.deliveryCity ? (
+                                                <p className="font-medium text-white">{editData.deliveryStreet}{editData.deliveryStreet && editData.deliveryCity ? ", " : ""}{editData.deliveryCity}</p>
+                                            ) : (
+                                                <p className="text-white/30 italic font-medium text-xs mt-1">Identisch zur Hauptadresse</p>
                                             )}
                                         </div>
                                         {/* Telefon */}
@@ -305,12 +380,14 @@ export default function ProfilePage() {
                                             </p>
                                             <p className="font-medium text-white">{editData.phone || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
                                         </div>
-                                        {/* Mitarbeiterzahl */}
+                                        {/* Kommunikation & Sprache */}
                                         <div>
                                             <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
-                                                <Users className="w-3 h-3" /> Mitarbeiterzahl
+                                                <MessageSquare className="w-3 h-3" /> Kommunikation & Sprache
                                             </p>
-                                            <p className="font-medium text-white">{editData.employees || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                            <p className="font-medium text-white">
+                                                {editData.communicationChannel || <span className="text-white/30 italic text-sm">Offen</span>} · <span className="text-white/70 text-sm">{editData.language || "Deutsch"}</span>
+                                            </p>
                                         </div>
                                         {/* Händler seit */}
                                         <div>
@@ -327,19 +404,21 @@ export default function ProfilePage() {
                                             <p className="font-medium text-white">{editData.contactPerson || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
                                         </div>
                                         {/* Social Media */}
-                                        <div>
-                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">Social Media</p>
+                                        <div className="sm:col-span-2">
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Globe className="w-3 h-3" /> Social Media
+                                            </p>
                                             <div className="flex gap-3 mt-1.5">
                                                 {socials.linkedin ? (
-                                                    <a href={socials.linkedin.startsWith('http') ? socials.linkedin : `https://${socials.linkedin}`} target="_blank" rel="noreferrer" className="text-brand-sky hover:text-white transition-colors">
+                                                    <a href={socials.linkedin.startsWith('http') ? socials.linkedin : `https://${socials.linkedin}`} target="_blank" rel="noreferrer" className="text-brand-sky hover:text-white transition-colors flex items-center justify-center p-2 bg-white/5 rounded-lg border border-white/10 shrink-0">
                                                         <Linkedin className="w-5 h-5" />
                                                     </a>
-                                                ) : <Linkedin className="w-5 h-5 text-white/20" />}
+                                                ) : <div className="p-2 bg-white/5 rounded-lg border border-white/5 shrink-0"><Linkedin className="w-5 h-5 text-white/20" /></div>}
                                                 {socials.instagram ? (
-                                                    <a href={`https://instagram.com/${socials.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-pink-400 hover:text-white transition-colors">
+                                                    <a href={`https://instagram.com/${socials.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-pink-400 hover:text-white transition-colors flex items-center justify-center p-2 bg-white/5 rounded-lg border border-white/10 shrink-0">
                                                         <Instagram className="w-5 h-5" />
                                                     </a>
-                                                ) : <Instagram className="w-5 h-5 text-white/20" />}
+                                                ) : <div className="p-2 bg-white/5 rounded-lg border border-white/5 shrink-0"><Instagram className="w-5 h-5 text-white/20" /></div>}
                                             </div>
                                         </div>
                                         {/* Bio */}
@@ -348,9 +427,44 @@ export default function ProfilePage() {
                                                 <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
                                                     <FileText className="w-3 h-3" /> Über mich
                                                 </p>
-                                                <p className="font-medium text-white/80 text-sm leading-relaxed">{editData.bio}</p>
+                                                <p className="font-medium text-white/80 text-sm leading-relaxed p-3 bg-white/5 border border-white/10 rounded-xl">{editData.bio}</p>
                                             </div>
                                         )}
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            {/* ── Opt-ins / Datenschutz ── */}
+                            <Card className="bg-white/10 border-white/20 backdrop-blur-md shadow-sm">
+                                <CardHeader>
+                                    <div className="flex items-center gap-2 mb-1 text-white">
+                                        <Mail className="w-5 h-5 text-brand-lime" />
+                                        <CardTitle className="text-lg">Datenschutz & Mitteilungen</CardTitle>
+                                    </div>
+                                    <CardDescription className="text-white/60">Ihre Präferenzen für Updates und Marketing.</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                    <div className="flex items-center justify-between p-4 border border-white/10 rounded-xl bg-white/5 gap-4">
+                                        <div className="space-y-1">
+                                            <p className="font-medium text-sm text-white">Campus Newsletter</p>
+                                            <p className="text-xs text-white/50">Wichtige Neuigkeiten zur Akademie, System-Updates und neuen Kursen erhalten.</p>
+                                        </div>
+                                        <Switch
+                                            checked={optIns.newsletter}
+                                            onCheckedChange={(v: boolean) => setOptIns({ ...optIns, newsletter: v })}
+                                            className="shrink-0"
+                                        />
+                                    </div>
+                                    <div className="flex items-center justify-between p-4 border border-white/10 rounded-xl bg-white/5 gap-4">
+                                        <div className="space-y-1">
+                                            <p className="font-medium text-sm text-white">Marketing & Angebote</p>
+                                            <p className="text-xs text-white/50">Ich stimme zu, gelegentlich Informationen zu Thitronik-Produkten und Rabatten zu erhalten.</p>
+                                        </div>
+                                        <Switch
+                                            checked={optIns.marketing}
+                                            onCheckedChange={(v: boolean) => setOptIns({ ...optIns, marketing: v })}
+                                            className="shrink-0"
+                                        />
                                     </div>
                                 </CardContent>
                             </Card>

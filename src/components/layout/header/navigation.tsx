@@ -61,7 +61,7 @@ export function Navigation() {
                     }`}
                 >
                     <span className={pathname.includes("/manager") ? "animate-pulse" : ""}>📋</span>
-                    CMS / Inhalte
+                    {t("cms")}
                 </Link>
             )}
 
@@ -76,7 +76,7 @@ export function Navigation() {
                     }`}
                 >
                     <span className={pathname.includes("/admin") ? "animate-pulse" : ""}>⚙️</span>
-                    Systemeinstellungen
+                    {t("settings")}
                 </Link>
             )}
         </nav>

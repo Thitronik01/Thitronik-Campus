@@ -12,16 +12,16 @@ export function AppFooter() {
             style={{ borderTopColor: "rgba(59,169,211,0.2)" }}
         >
             <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/40">
-                <span>© 2026 THITRONIK GmbH · Händler Akademie</span>
+                <span>{t("footer_copyright")}</span>
                 <div className="flex gap-4">
                     <Link href="/impressum" className="hover:text-brand-sky transition-colors">
-                        Impressum
+                        {t("imprint")}
                     </Link>
                     <Link href="/datenschutz" className="hover:text-brand-sky transition-colors">
-                        Datenschutz
+                        {t("privacy")}
                     </Link>
                     <Link href="/kontakt" className="hover:text-brand-sky transition-colors">
-                        Kontakt
+                        {t("contact")}
                     </Link>
                 </div>
             </div>

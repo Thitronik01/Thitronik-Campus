@@ -63,22 +63,22 @@ export function MobileSidebar() {
                             onClick={() => setOpen(false)}
                             className="px-4 py-3 rounded-lg text-base font-bold text-brand-sky hover:bg-white/5"
                         >
-                            📊 Admin Dashboard
+                            📊 {t("admin_dashboard")}
                         </Link>
                     )}
 
                     <div className="mt-4 pt-4 border-t border-white/10">
                         <div className="px-4 py-2 text-xs font-bold text-white/50 uppercase tracking-wider">
-                            Rechtliches & Kontakt
+                            {t("legal_and_contact")}
                         </div>
                         <Link href="/kontakt" onClick={() => setOpen(false)} className="flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5">
-                            <span className="mr-2">✉️</span> Kontakt
+                            <span className="mr-2">✉️</span> {t("contact")}
                         </Link>
                         <Link href="/impressum" onClick={() => setOpen(false)} className="flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5">
-                            <span className="mr-2">⚖️</span> Impressum
+                            <span className="mr-2">⚖️</span> {t("imprint")}
                         </Link>
                         <Link href="/datenschutz" onClick={() => setOpen(false)} className="flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors text-white/60 hover:text-white hover:bg-white/5">
-                            <span className="mr-2">🛡️</span> Datenschutz
+                            <span className="mr-2">🛡️</span> {t("privacy")}
                         </Link>
                     </div>
                 </nav>

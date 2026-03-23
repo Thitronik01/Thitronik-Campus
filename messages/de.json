@@ -27,7 +27,17 @@
         "profile": "Mein Profil",
         "logout": "Abmelden",
         "workingCard": "Digitale Arbeitskarte",
-        "chronik": "Campus Chronik"
+        "chronik": "Campus Chronik",
+        "cms": "CMS / Inhalte",
+        "settings": "Systemeinstellungen",
+        "admin_dashboard": "Admin Dashboard",
+        "legal_and_contact": "Rechtliches & Kontakt",
+        "contact": "Kontakt",
+        "imprint": "Impressum",
+        "privacy": "Datenschutz",
+        "my_calendar": "Mein Kalender",
+        "user_settings": "Einstellungen",
+        "footer_copyright": "© 2026 THITRONIK GmbH · Händler Akademie"
     },
     "Login": {
         "subtitle": "Lernplattform für zertifizierte Partner",
@@ -59,6 +69,16 @@
         "forgot_sent": "📩 Check dein Postfach! Ein Link wurde gesendet.",
         "no_account": "Noch kein Konto?",
         "register_link": "Partner-Registrierung anfragen"
+    },
+    "Notifications": {
+        "title_new_seminar": "Neues Seminar verfügbar",
+        "body_new_seminar": "Das Seminar \"Smarte Alarmanlagen\" ist nun buchbar.",
+        "time_2h_ago": "Vor 2 Stunden",
+        "title_cert_unlocked": "Zertifikat freigeschaltet",
+        "body_cert_unlocked": "Du hast die \"Poel\" Insel erfolgreich gemeistert!",
+        "time_yesterday": "Gestern",
+        "header": "Benachrichtigungen",
+        "mark_all_read": "Alle als gelesen markieren"
     },
     "games": {
         "singleplayer": "Einzelspieler",
