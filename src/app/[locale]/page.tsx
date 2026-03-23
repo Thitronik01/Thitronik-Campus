@@ -16,16 +16,8 @@ import { QrCode } from "lucide-react";
 
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { ChronikPreviewCard } from "@/components/chronik/chronik-preview-card";
+import { ISLANDS } from "@/lib/data/islands";
 
-const ISLANDS = [
-  { id: "poel", name: "Poel", icon: "🏝️", xp: 50, status: "completed", desc: "Onboarding & Plattform-Tour" },
-  { id: "vejroe", name: "Vejrø", icon: "⚓", xp: 100, status: "completed", desc: "Produktschulung WiPro III" },
-  { id: "hiddensee", name: "Hiddensee", icon: "🌊", xp: 150, status: "active", desc: "Einbau-Praxis" },
-  { id: "samsoe", name: "Samsø", icon: "⛵", xp: 150, status: "locked", desc: "Basisfahrzeuge" },
-  { id: "langeland", name: "Langeland", icon: "🗺️", xp: 100, status: "locked", desc: "Beratung & Service" },
-  { id: "usedom", name: "Usedom", icon: "🔭", xp: 120, status: "locked", desc: "Konfigurator-Training" },
-  { id: "fehmarn", name: "Fehmarn", icon: "🔧", xp: 120, status: "locked", desc: "Support & Fehleranalyse" },
-];
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };
 const fadeUp = { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } };

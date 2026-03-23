@@ -2,18 +2,18 @@
 
 import { useUserStore } from "@/store/user-store";
 import { useAuthStore } from "@/store/auth-store";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { RoleGuard } from "@/components/auth/role-guard";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { motion } from "framer-motion";
-import { Camera, Linkedin, Instagram, Edit2, CheckCircle2 } from "lucide-react";
-import { useTheme } from "next-themes";
-import { useState } from "react";
+import { Camera, Linkedin, Instagram, Edit2, Building2, MapPin, Phone, Users, Calendar, UserCheck, Briefcase, FileText } from "lucide-react";
+import { useState, useRef } from "react";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import Link from "next/link";
 
@@ -25,18 +25,37 @@ export default function ProfilePage() {
     const initials = displayName.split(" ").map(n => n[0]).join("").slice(0, 2).toUpperCase();
     const xpPct = Math.min(100, Math.round((xp / xpToNext) * 100));
 
-    const { theme, setTheme } = useTheme();
     const [isEditing, setIsEditing] = useState(false);
+    const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const [socials, setSocials] = useState({ linkedin: "", instagram: "" });
     const [editData, setEditData] = useState({
         firstName: displayName.split(' ')[0],
         lastName: displayName.split(' ').slice(1).join(' ') || '',
-        company: "THITRONIK Partner"
+        company: user?.company || "THITRONIK Partner",
+        street: "",
+        city: "",
+        phone: "",
+        employees: "",
+        dealerSince: "",
+        contactPerson: "",
+        role: "",
+        bio: "",
     });
+
+    const handleAvatarClick = () => fileInputRef.current?.click();
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) setAvatarUrl(URL.createObjectURL(file));
+    };
+
+    const employeeOptions = ["1–9", "10–49", "50–99", "100–249", "250+"];
+    const currentYear = new Date().getFullYear();
+    const yearOptions = Array.from({ length: currentYear - 1995 + 1 }, (_, i) => String(currentYear - i));
 
     return (
         <RoleGuard requiredRole="user" fallback={
-            // Ggf wird man auf login weitergeleitet, wenn man nicht eingeloggt ist
             <div className="flex h-[50vh] items-center justify-center p-8">
                 <Card className="w-full max-w-md p-6 text-center">
                     <h2 className="mb-4">Bitte Anmelden</h2>
@@ -72,24 +91,33 @@ export default function ProfilePage() {
                         >
                             📅 Mein Kalender
                         </Link>
-                        <Link
-                            href="/certificates"
-                            className="px-4 py-2 rounded-lg text-sm font-medium text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                        >
-                            🎓 Zertifikate
-                        </Link>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {/* Gamification Stats (Left Column) */}
                         <div className="md:col-span-1 border-r border-white/10 pr-0 md:pr-8 space-y-6">
                             <div className="flex flex-col items-center text-center p-6 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-inner relative group">
-
-                                <div className="w-24 h-24 rounded-full bg-brand-navy text-white flex items-center justify-center text-3xl font-bold mb-4 shadow-lg ring-4 ring-brand-sky/20 relative overflow-hidden group-hover:ring-brand-sky transition-all cursor-pointer">
-                                    <span>{initials}</span>
+                                {/* Hidden file input */}
+                                <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"
+                                    className="hidden"
+                                    onChange={handleFileChange}
+                                />
+                                <div
+                                    onClick={handleAvatarClick}
+                                    className="w-24 h-24 rounded-full bg-brand-navy text-white flex items-center justify-center text-3xl font-bold mb-4 shadow-lg ring-4 ring-brand-sky/20 relative overflow-hidden group-hover:ring-brand-sky transition-all cursor-pointer"
+                                >
+                                    {avatarUrl ? (
+                                        <img src={avatarUrl} alt="Profilbild" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <span>{initials}</span>
+                                    )}
                                     {/* Hover Overlay for Avatar Upload */}
-                                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Camera className="w-6 h-6 text-white" />
+                                    <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity gap-1">
+                                        <Camera className="w-5 h-5 text-white" />
+                                        <span className="text-[10px] text-white font-medium">Hochladen</span>
                                     </div>
                                 </div>
                                 <h2 className="text-xl font-bold text-white">{displayName}</h2>
@@ -98,6 +126,10 @@ export default function ProfilePage() {
                                 <Badge variant="outline" className="mt-3 capitalize text-brand-lime border-brand-lime">
                                     Rolle: {user?.role || "Händler"}
                                 </Badge>
+
+                                <p className="text-xs text-white/40 mt-3 flex items-center gap-1">
+                                    <Camera className="w-3 h-3" /> Auf Avatar klicken zum Hochladen
+                                </p>
                             </div>
 
                             <Card className="bg-white/10 border-brand-navy shadow-sm overflow-hidden backdrop-blur-md border-white/20">
@@ -125,11 +157,12 @@ export default function ProfilePage() {
 
                         {/* Profile Settings (Right Column) */}
                         <div className="md:col-span-2 space-y-6">
+                            {/* ── Persönliche Daten ── */}
                             <Card className="bg-white/10 border-white/20 backdrop-blur-md shadow-sm">
                                 <CardHeader className="flex flex-row items-start justify-between pb-2">
                                     <div>
                                         <CardTitle className="text-white">Persönliche Daten</CardTitle>
-                                        <CardDescription className="text-white/60">Ihr digitales Campus-Profil ("CV").</CardDescription>
+                                        <CardDescription className="text-white/60">Ihr digitales Campus-Profil – Firmendaten &amp; Kontakt.</CardDescription>
                                     </div>
 
                                     <Dialog open={isEditing} onOpenChange={setIsEditing}>
@@ -138,14 +171,15 @@ export default function ProfilePage() {
                                                 <Edit2 className="w-3.5 h-3.5" /> Bearbeiten
                                             </Button>
                                         </DialogTrigger>
-                                        <DialogContent className="sm:max-w-[425px]">
+                                        <DialogContent className="sm:max-w-[560px] max-h-[90vh] overflow-y-auto">
                                             <DialogHeader>
                                                 <DialogTitle>Profil bearbeiten</DialogTitle>
                                                 <DialogDescription>
-                                                    Passen Sie Ihre persönlichen Daten und Social Links an.
+                                                    Passen Sie Ihre persönlichen Daten und Firmendaten an.
                                                 </DialogDescription>
                                             </DialogHeader>
-                                            <div className="grid gap-4 py-4">
+                                            <div className="grid gap-5 py-4">
+                                                {/* Name */}
                                                 <div className="grid grid-cols-2 gap-4">
                                                     <div className="space-y-2">
                                                         <Label htmlFor="firstName">Vorname</Label>
@@ -156,10 +190,55 @@ export default function ProfilePage() {
                                                         <Input id="lastName" value={editData.lastName} onChange={e => setEditData({ ...editData, lastName: e.target.value })} />
                                                     </div>
                                                 </div>
+                                                {/* Firma */}
                                                 <div className="space-y-2">
                                                     <Label htmlFor="company">Firma / Autohaus</Label>
                                                     <Input id="company" value={editData.company} onChange={e => setEditData({ ...editData, company: e.target.value })} />
                                                 </div>
+                                                {/* Adresse */}
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="street">Straße &amp; Hausnummer</Label>
+                                                    <Input id="street" placeholder="Musterstraße 42" value={editData.street} onChange={e => setEditData({ ...editData, street: e.target.value })} />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="city">PLZ &amp; Ort</Label>
+                                                    <Input id="city" placeholder="12345 Musterstadt" value={editData.city} onChange={e => setEditData({ ...editData, city: e.target.value })} />
+                                                </div>
+                                                {/* Kontakt */}
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="phone">Handynummer / Telefon</Label>
+                                                    <Input id="phone" placeholder="+49 151 00000000" value={editData.phone} onChange={e => setEditData({ ...editData, phone: e.target.value })} />
+                                                </div>
+                                                {/* Händler-Infos */}
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div className="space-y-2">
+                                                        <Label>Mitarbeiterzahl</Label>
+                                                        <Select value={editData.employees} onValueChange={v => setEditData({ ...editData, employees: v })}>
+                                                            <SelectTrigger><SelectValue placeholder="Auswählen" /></SelectTrigger>
+                                                            <SelectContent>
+                                                                {employeeOptions.map(o => <SelectItem key={o} value={o}>{o}</SelectItem>)}
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <Label>Thitronik-Händler seit</Label>
+                                                        <Select value={editData.dealerSince} onValueChange={v => setEditData({ ...editData, dealerSince: v })}>
+                                                            <SelectTrigger><SelectValue placeholder="Jahr" /></SelectTrigger>
+                                                            <SelectContent>
+                                                                {yearOptions.map(y => <SelectItem key={y} value={y}>{y}</SelectItem>)}
+                                                            </SelectContent>
+                                                        </Select>
+                                                    </div>
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="contactPerson">Ansprechpartner bei Thitronik</Label>
+                                                    <Input id="contactPerson" placeholder="Name des Außendienstbetreuers" value={editData.contactPerson} onChange={e => setEditData({ ...editData, contactPerson: e.target.value })} />
+                                                </div>
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="role">Funktion / Rolle im Betrieb</Label>
+                                                    <Input id="role" placeholder="z.B. Werkstattleiter, Verkäufer..." value={editData.role} onChange={e => setEditData({ ...editData, role: e.target.value })} />
+                                                </div>
+                                                {/* Social */}
                                                 <div className="space-y-2">
                                                     <Label htmlFor="linkedin">LinkedIn Profil URL</Label>
                                                     <Input id="linkedin" placeholder="https://linkedin.com/in/..." value={socials.linkedin} onChange={e => setSocials({ ...socials, linkedin: e.target.value })} />
@@ -168,28 +247,86 @@ export default function ProfilePage() {
                                                     <Label htmlFor="instagram">Instagram Handle</Label>
                                                     <Input id="instagram" placeholder="@autohaus..." value={socials.instagram} onChange={e => setSocials({ ...socials, instagram: e.target.value })} />
                                                 </div>
+                                                {/* Bio */}
+                                                <div className="space-y-2">
+                                                    <Label htmlFor="bio">Über mich / Notizen</Label>
+                                                    <Textarea id="bio" placeholder="Kurze Beschreibung, Spezialisierungen, besondere Stärken..." value={editData.bio} onChange={e => setEditData({ ...editData, bio: e.target.value })} className="min-h-[80px]" />
+                                                </div>
                                             </div>
                                             <DialogFooter>
                                                 <Button type="submit" onClick={() => setIsEditing(false)}>Speichern</Button>
                                             </DialogFooter>
                                         </DialogContent>
                                     </Dialog>
-
                                 </CardHeader>
                                 <CardContent className="space-y-6 pt-4">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-5 gap-x-6">
+                                        {/* Name */}
                                         <div>
-                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">Name</p>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <UserCheck className="w-3 h-3" /> Name
+                                            </p>
                                             <p className="font-medium text-white">{editData.firstName} {editData.lastName}</p>
                                         </div>
+                                        {/* Email */}
                                         <div>
                                             <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">E-Mail Adresse</p>
-                                            <p className="font-medium text-white">{user?.email}</p>
+                                            <p className="font-medium text-white text-sm break-all">{user?.email}</p>
                                         </div>
+                                        {/* Firma */}
                                         <div>
-                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">Firma / Autohaus</p>
-                                            <p className="font-medium text-white">{editData.company}</p>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Building2 className="w-3 h-3" /> Firma / Autohaus
+                                            </p>
+                                            <p className="font-medium text-white">{editData.company || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
                                         </div>
+                                        {/* Funktion */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Briefcase className="w-3 h-3" /> Funktion im Betrieb
+                                            </p>
+                                            <p className="font-medium text-white">{editData.role || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Adresse */}
+                                        <div className="sm:col-span-2">
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <MapPin className="w-3 h-3" /> Adresse
+                                            </p>
+                                            {editData.street || editData.city ? (
+                                                <p className="font-medium text-white">{editData.street}{editData.street && editData.city ? ", " : ""}{editData.city}</p>
+                                            ) : (
+                                                <p className="text-white/30 italic font-medium">Nicht angegeben</p>
+                                            )}
+                                        </div>
+                                        {/* Telefon */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Phone className="w-3 h-3" /> Telefon / Mobil
+                                            </p>
+                                            <p className="font-medium text-white">{editData.phone || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Mitarbeiterzahl */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Users className="w-3 h-3" /> Mitarbeiterzahl
+                                            </p>
+                                            <p className="font-medium text-white">{editData.employees || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Händler seit */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <Calendar className="w-3 h-3" /> Thitronik-Händler seit
+                                            </p>
+                                            <p className="font-medium text-white">{editData.dealerSince || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Ansprechpartner */}
+                                        <div>
+                                            <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                <UserCheck className="w-3 h-3" /> Ansprechpartner Thitronik
+                                            </p>
+                                            <p className="font-medium text-white">{editData.contactPerson || <span className="text-white/30 italic">Nicht angegeben</span>}</p>
+                                        </div>
+                                        {/* Social Media */}
                                         <div>
                                             <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1">Social Media</p>
                                             <div className="flex gap-3 mt-1.5">
@@ -198,7 +335,6 @@ export default function ProfilePage() {
                                                         <Linkedin className="w-5 h-5" />
                                                     </a>
                                                 ) : <Linkedin className="w-5 h-5 text-white/20" />}
-
                                                 {socials.instagram ? (
                                                     <a href={`https://instagram.com/${socials.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-pink-400 hover:text-white transition-colors">
                                                         <Instagram className="w-5 h-5" />
@@ -206,87 +342,45 @@ export default function ProfilePage() {
                                                 ) : <Instagram className="w-5 h-5 text-white/20" />}
                                             </div>
                                         </div>
+                                        {/* Bio */}
+                                        {editData.bio && (
+                                            <div className="sm:col-span-2">
+                                                <p className="text-xs text-white/50 uppercase tracking-wider font-bold mb-1 flex items-center gap-1.5">
+                                                    <FileText className="w-3 h-3" /> Über mich
+                                                </p>
+                                                <p className="font-medium text-white/80 text-sm leading-relaxed">{editData.bio}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 </CardContent>
                             </Card>
 
+                            {/* ── Sicherheit ── */}
                             <Card className="bg-white/10 border-white/20 backdrop-blur-md shadow-sm">
                                 <CardHeader>
-                                    <CardTitle className="text-white">Benachrichtigungen & System</CardTitle>
-                                    <CardDescription className="text-white/60">Einstellungen für lokale Push-Nachrichten während eines Events.</CardDescription>
+                                    <CardTitle className="text-white">Sicherheit</CardTitle>
+                                    <CardDescription className="text-white/60">Passwort ändern und Account absichern.</CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
-                                    <div className="flex items-center justify-between p-3 border border-white/10 rounded-xl bg-white/5">
-                                        <div>
-                                            <p className="font-medium text-sm text-white">Event & Check-in Reminder</p>
-                                            <p className="text-xs text-white/50">Infos zu anstehenden Workshops auf dem Campus.</p>
+                                    <form className="space-y-4 max-w-sm" onSubmit={(e) => e.preventDefault()}>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="old-pw" className="text-white">Aktuelles Passwort</Label>
+                                            <Input id="old-pw" type="password" />
                                         </div>
-                                        <div className="w-11 h-6 bg-brand-lime rounded-full relative cursor-pointer">
-                                            <div className="absolute right-1 top-1 bg-white w-4 h-4 rounded-full shadow-sm"></div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="new-pw" className="text-white">Neues Passwort</Label>
+                                            <Input id="new-pw" type="password" />
                                         </div>
-                                    </div>
-                                    <div className="flex items-center justify-between p-3 border border-white/10 rounded-xl bg-white/5">
-                                        <div>
-                                            <p className="font-medium text-sm text-white">XP & Level Updates</p>
-                                            <p className="text-xs text-white/50">Visuelle Effekte bei Gamification-Fortschritten.</p>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="new-pw-confirm" className="text-white">Neues Passwort bestätigen</Label>
+                                            <Input id="new-pw-confirm" type="password" />
                                         </div>
-                                        <div className="w-11 h-6 bg-brand-lime rounded-full relative cursor-pointer">
-                                            <div className="absolute right-1 top-1 bg-white w-4 h-4 rounded-full shadow-sm"></div>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-
-                            <Card className="bg-white/10 border-white/20 backdrop-blur-md shadow-sm">
-                                <CardHeader>
-                                    <CardTitle className="text-white">Sicherheit & Darstellung</CardTitle>
-                                    <CardDescription className="text-white/60">Passwort ändern und visuelles Theme anpassen.</CardDescription>
-                                </CardHeader>
-                                <CardContent className="space-y-6">
-                                    <div>
-                                        <h3 className="text-sm font-semibold mb-3 text-white">Erscheinungsbild</h3>
-                                        <div className="flex gap-4">
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => setTheme("light")}
-                                                className={`flex-1 flex gap-2 border-white/10 text-white hover:bg-white/10 ${theme === 'light' ? 'border-brand-sky text-brand-sky bg-brand-sky/5 ring-1 ring-brand-sky/30' : ''}`}
-                                            >
-                                                <span>☀️</span> Light
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => setTheme("dark")}
-                                                className={`flex-1 flex gap-2 border-white/10 text-white hover:bg-white/10 ${theme === 'dark' ? 'border-brand-sky text-brand-sky bg-brand-sky/5 ring-1 ring-brand-sky/30' : ''}`}
-                                            >
-                                                <span>🌙</span> Dark
-                                            </Button>
-                                            <Button
-                                                variant="outline"
-                                                onClick={() => setTheme("system")}
-                                                className={`flex-1 flex gap-2 border-white/10 text-white hover:bg-white/10 ${theme === 'system' ? 'border-brand-sky text-brand-sky bg-brand-sky/5 ring-1 ring-brand-sky/30' : ''}`}
-                                            >
-                                                <span>⚙️</span> System
-                                            </Button>
-                                        </div>
-                                    </div>
-                                    <div className="border-t border-white/10 pt-4">
-                                        <h3 className="text-sm font-semibold mb-3 text-white">Passwort ändern</h3>
-                                        <form className="space-y-4 max-w-sm" onSubmit={(e) => e.preventDefault()}>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="old-pw" className="text-white">Aktuelles Passwort</Label>
-                                                <Input id="old-pw" type="password" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="new-pw" className="text-white">Neues Passwort</Label>
-                                                <Input id="new-pw" type="password" />
-                                            </div>
-                                            <div className="space-y-2">
-                                                <Label htmlFor="new-pw-confirm" className="text-white">Neues Passwort bestätigen</Label>
-                                                <Input id="new-pw-confirm" type="password" />
-                                            </div>
-                                            <Button type="button" className="w-full bg-brand-sky hover:bg-brand-sky/90 text-white border-none">Passwort speichern</Button>
-                                        </form>
-                                    </div>
+                                        <Button type="button" className="w-full bg-brand-sky hover:bg-brand-sky/90 text-white border-none">Passwort speichern</Button>
+                                    </form>
+                                    <p className="text-xs text-white/40 mt-2">
+                                        💡 Einstellungen für Benachrichtigungen und Dark Mode finden Sie unter{" "}
+                                        <Link href="/settings" className="text-brand-sky underline hover:text-white transition-colors">Einstellungen</Link>.
+                                    </p>
                                 </CardContent>
                             </Card>
 

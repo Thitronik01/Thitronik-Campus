@@ -9,15 +9,19 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { RoleGuard } from "@/components/auth/role-guard";
-import { Settings as SettingsIcon, User, Bell, Palette, Shield, Globe, LogOut, ChevronRight } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, Shield, Globe, LogOut } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function SettingsPage() {
     const { user, logout } = useAuthStore();
     const { theme, setTheme } = useTheme();
     const t = useTranslations("Navigation");
+
+    const [notifyEvents, setNotifyEvents] = useState(true);
+    const [notifyXp, setNotifyXp] = useState(true);
 
     const sections = [
         {
@@ -28,7 +32,7 @@ export default function SettingsPage() {
             items: [
                 { label: "Anzeigename", value: user?.name || "Gast", type: "text" },
                 { label: "E-Mail Adresse", value: user?.email || "demo@thitronik.de", type: "text" },
-                { label: "Firma", value: "THITRONIK Partner", type: "text" }
+                { label: "Firma", value: user?.company || "THITRONIK Partner", type: "text" }
             ]
         },
         {
@@ -58,14 +62,31 @@ export default function SettingsPage() {
             icon: <Bell className="w-5 h-5 text-yellow-400" />,
             content: (
                 <div className="space-y-4 pt-2">
-                    <div className="flex items-center justify-between p-3 border border-white/10 rounded-xl bg-white/5">
-                        <span className="text-sm font-medium text-white">Event Reminder</span>
-                        <Switch checked />
+                    <div className="flex items-center justify-between p-4 border border-white/10 rounded-xl bg-white/5 gap-4">
+                        <div className="space-y-1">
+                            <p className="font-medium text-sm text-white">Event &amp; Check-in Reminder</p>
+                            <p className="text-xs text-white/50">Infos zu anstehenden Workshops, Seminaren und Events auf dem Campus. Sie erhalten eine Erinnerung 24 Stunden vor Beginn.</p>
+                        </div>
+                        <Switch
+                            checked={notifyEvents}
+                            onCheckedChange={setNotifyEvents}
+                            className="shrink-0"
+                        />
                     </div>
-                    <div className="flex items-center justify-between p-3 border border-white/10 rounded-xl bg-white/5">
-                        <span className="text-sm font-medium text-white">Level-Up News</span>
-                        <Switch checked />
+                    <div className="flex items-center justify-between p-4 border border-white/10 rounded-xl bg-white/5 gap-4">
+                        <div className="space-y-1">
+                            <p className="font-medium text-sm text-white">XP &amp; Level Updates</p>
+                            <p className="text-xs text-white/50">Visuelle Benachrichtigungen bei Gamification-Fortschritten – Level-Aufstiege, neue Abzeichen und XP-Gewinne.</p>
+                        </div>
+                        <Switch
+                            checked={notifyXp}
+                            onCheckedChange={setNotifyXp}
+                            className="shrink-0"
+                        />
                     </div>
+                    <p className="text-xs text-white/30 pl-1">
+                        ℹ️ Die Benachrichtigungen gelten nur für dieses Gerät und werden lokal gespeichert.
+                    </p>
                 </div>
             )
         },
@@ -92,6 +113,7 @@ export default function SettingsPage() {
         }
     ];
 
+
     return (
         <RoleGuard requiredRole="user">
             <PremiumBackground>
@@ -109,7 +131,7 @@ export default function SettingsPage() {
                         <Button 
                             variant="destructive" 
                             size="sm" 
-                            className="bg-brand-red/20 hover:bg-brand-red text-brand-red hover:text-white border-brand-red/30 transition-all font-bold gap-2"
+                            className="bg-brand-red/20 hover:bg-brand-red text-white hover:text-white border-brand-red/30 transition-all font-bold gap-2"
                             onClick={() => logout()}
                         >
                             <LogOut className="w-4 h-4" /> Abmelden

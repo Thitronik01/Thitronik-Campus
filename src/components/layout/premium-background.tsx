@@ -25,7 +25,7 @@ export function PremiumBackground({
                 <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000"
                     style={{
-                        backgroundImage: "url('/background.png.png')",
+                        backgroundImage: "url('/background.png')",
                     }}
                 />
                 {/* Glassmorphism Overlay */}

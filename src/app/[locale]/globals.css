@@ -373,6 +373,44 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
   overflow: hidden;
 }
 
+/* ── Outer centering wrapper ─────────────────── */
+.login-outer {
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+}
+
+/* ── Inner card column ───────────────────────── */
+.login-inner {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Logo section ────────────────────────────── */
+.login-logo-section {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Subtitle ────────────────────────────────── */
+.login-subtitle {
+  color: #CE132D;
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
 /* Topographic line pattern (SVG overlay) */
 .login-topo {
   position: absolute;
@@ -443,15 +481,56 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
 }
 
 /* ── Login Inputs ────────────────────────────── */
+/* ── Field group ──────────────────────────────── */
+.login-field {
+  margin-bottom: 1.125rem;
+}
+
+.login-field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.login-label {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.login-forgot-btn {
+  background: none;
+  border: none;
+  color: rgba(59, 169, 211, 0.7);
+  font-size: 0.6875rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.login-forgot-btn:hover {
+  color: #3BA9D3;
+}
+
+/* ── Login Inputs ────────────────────────────── */
 .login-input {
   width: 100%;
-  padding: 0.875rem 3rem 0.875rem 1rem;
+  padding: 0.875rem 1rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.625rem;
   color: #ffffff;
   font-size: 0.9375rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-input--with-icon {
+  padding-left: 2.75rem;
 }
 
 .login-input::placeholder {
@@ -470,12 +549,58 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
 
 .login-input-icon {
   position: absolute;
-  right: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: rgba(255, 255, 255, 0.35);
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.login-input-icon--left {
+  left: 0.9rem;
+}
+
+/* ── Error / Feedback messages ─────────────────── */
+.login-error {
+  font-size: 0.75rem;
+  color: #CE132D;
+  font-weight: 600;
+  background: rgba(206, 19, 45, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.login-forgot-sent {
+  font-size: 0.75rem;
+  color: #D4FF00;
+  font-weight: 600;
+  background: rgba(212, 255, 0, 0.08);
+  border: 1px solid rgba(212, 255, 0, 0.2);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* ── Loading spinner ──────────────────────────── */
+.login-btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(10, 22, 40, 0.3);
+  border-top-color: #0a1628;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ── Gradient Submit Button ──────────────────── */
@@ -537,6 +662,112 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
   50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(74, 222, 128, 0); }
 }
 
+/* ── Status sub-classes ──────────────────────── */
+.login-status-left {
+  display: flex;
+  align-items: center;
+}
+
+.login-status-text {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.login-version-text {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* ── Demo section ────────────────────────────── */
+.login-demo-section {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.login-demo-title {
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.75rem;
+}
+
+.login-demo-pills {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ── Register section ────────────────────────── */
+.login-register-section {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.login-no-account {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.login-register-link {
+  color: #3BA9D3;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: inline-block;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.login-register-link:hover {
+  color: #6dd2fe;
+}
+
+/* ── Footer section ──────────────────────────── */
+.login-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-footer-text {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.6875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.login-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+}
+
+.login-footer-link {
+  color: #3BA9D3;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(59, 169, 211, 0.3);
+  background: rgba(59, 169, 211, 0.07);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.login-footer-link:hover {
+  background: rgba(59, 169, 211, 0.14);
+  border-color: rgba(59, 169, 211, 0.5);
+}
+
 /* ── Demo Pill Buttons ───────────────────────── */
 .login-pill {
   display: inline-flex;
@@ -589,18 +820,20 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
 
 /* ── Sparkle decorative element ──────────────── */
 .login-sparkle {
-  position: absolute;
+  position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 30px;
-  height: 30px;
-  opacity: 0.2;
+  width: 22px;
+  height: 22px;
+  opacity: 0.15;
+  pointer-events: none;
   animation: sparkle-pulse 3s ease-in-out infinite;
+  z-index: 1;
 }
 
 @keyframes sparkle-pulse {
-  0%, 100% { opacity: 0.15; transform: scale(1) rotate(0deg); }
-  50% { opacity: 0.3; transform: scale(1.1) rotate(15deg); }
+  0%, 100% { opacity: 0.12; transform: scale(1) rotate(0deg); }
+  50% { opacity: 0.25; transform: scale(1.1) rotate(15deg); }
 }
 
 /* ── Login Responsive ────────────────────────── */
@@ -614,4 +847,9 @@ html[data-fullscreen="true"] .fullscreen-toggle-btn {
     padding: 0.875rem;
     font-size: 0.8125rem;
   }
-}
+
+  .login-outer {
+    align-items: flex-start;
+    padding-top: 3rem;
+  }
+}
