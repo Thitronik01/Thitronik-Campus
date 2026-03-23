@@ -162,5 +162,25 @@
                 }
             }
         }
+    },
+    "Metadata": {
+        "dashboard_title": "Tableau de bord | THITRONIK Campus",
+        "dashboard_desc": "Votre aperçu personnel sur le Campus THITRONIK.",
+        "login_title": "Connexion | THITRONIK Campus",
+        "login_desc": "Connectez-vous pour accéder à l'Académie des concessionnaires.",
+        "modules_title": "Modules | THITRONIK Campus",
+        "modules_desc": "Découvrez les 7 îles et élargissez vos connaissances.",
+        "games_title": "Jeux | THITRONIK Campus",
+        "games_desc": "Jeux interactifs pour le Campus THITRONIK.",
+        "tools_title": "Outils | THITRONIK Campus",
+        "tools_desc": "Outils utiles pour les partenaires THITRONIK.",
+        "admin_title": "Tableau de bord de l'administrateur | THITRONIK Campus",
+        "admin_desc": "Gérez les utilisateurs et les événements.",
+        "profile_title": "Mon profil | THITRONIK Campus",
+        "profile_desc": "Consultez votre progression et vos certificats.",
+        "certificates_title": "Certificats | THITRONIK Campus",
+        "certificates_desc": "Vos certificats THITRONIK obtenus.",
+        "chronik_title": "Chronique du Campus | THITRONIK Campus",
+        "chronik_desc": "Découvrez les anciens campus et souvenirs."
     }
 }

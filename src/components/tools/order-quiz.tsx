@@ -16,7 +16,6 @@ import {
     Target,
     Sparkles,
 } from "lucide-react";
-import { motion } from "framer-motion";
 
 type Step = {
     id: string;
@@ -156,19 +155,13 @@ export function OrderQuiz() {
     const scenario = scenarios[scenarioIndex];
 
     const [roundSeed, setRoundSeed] = useState(1);
-    const [items, setItems] = useState<Step[]>([]);
+    const [items, setItems] = useState<Step[]>(() => createRound(scenarios[0], 1));
     const [draggedId, setDraggedId] = useState<string | null>(null);
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [showSolution, setShowSolution] = useState(false);
     const [attempts, setAttempts] = useState(0);
     const [solvedRounds, setSolvedRounds] = useState<string[]>([]);
     const [lastCheck, setLastCheck] = useState<CheckResult | null>(null);
-    const [isClient, setIsClient] = useState(false);
-
-    useEffect(() => {
-        setIsClient(true);
-        setItems(createRound(scenarios[0], 1));
-    }, []);
 
     const solved = lastCheck?.isSolved ?? false;
     const correctCount = lastCheck?.correctPositions.length ?? 0;
@@ -262,8 +255,6 @@ export function OrderQuiz() {
         startScenario(nextIndex);
     }
 
-    if (!isClient) return null;
-
     return (
         <div className="mx-auto grid max-w-[1400px] gap-6 xl:grid-cols-[360px_minmax(0,1fr)]">
             <aside className="space-y-6 rounded-[28px] border border-white/10 bg-[#1D3661] p-6 text-white shadow-[0_24px_60px_rgba(29,54,97,0.18)] xl:sticky xl:top-6 xl:h-fit">
@@ -347,16 +338,24 @@ export function OrderQuiz() {
                                     type="button"
                                     onClick={() => startScenario(index)}
                                     className={`w-full rounded-[22px] border px-4 py-3 text-left transition-all duration-200 ${isActive
-                                            ? "border-[#3BA9D3]/40 bg-[#3BA9D3]/14 shadow-[0_10px_30px_rgba(59,169,211,0.10)]"
-                                            : "border-white/10 bg-white/6 hover:bg-white/10"
+                                            ? "border-white/40 bg-[#E3000F] shadow-[0_10px_30px_rgba(227,0,15,0.30)]"
+                                            : "border-transparent bg-[#E3000F]/70 hover:bg-[#E3000F]/90"
                                         }`}
                                 >
                                     <div className="flex items-center justify-between gap-3">
                                         <div>
-                                            <div className="font-semibold text-white">{entry.title}</div>
-                                            <div className="mt-1 text-xs text-white/55">{entry.difficulty}</div>
+                                            <div className="flex items-center gap-2 font-semibold text-white">
+                                                {entry.title}
+                                                {isActive && (
+                                                    <span className="relative flex h-2.5 w-2.5">
+                                                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#AFCA05] opacity-75"></span>
+                                                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#AFCA05]"></span>
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="mt-1 text-xs text-white/80">{entry.difficulty}</div>
                                         </div>
-                                        {isDone ? <CheckCircle2 className="h-5 w-5 text-[#AFCA05]" /> : <div className="h-2.5 w-2.5 rounded-full bg-white/20" />}
+                                        {isDone ? <CheckCircle2 className="h-5 w-5 text-white" /> : <div className="h-2.5 w-2.5 rounded-full bg-white/30" />}
                                     </div>
                                 </button>
                             );
@@ -443,9 +442,8 @@ export function OrderQuiz() {
                                 const isSelected = selectedId === step.id;
 
                                 return (
-                                    <motion.div
+                                    <div
                                         key={step.id}
-                                        layout
                                         draggable
                                         onDragStart={() => setDraggedId(step.id)}
                                         onDragEnd={() => setDraggedId(null)}
@@ -459,8 +457,6 @@ export function OrderQuiz() {
                                             setSelectedId(null);
                                             setLastCheck(null);
                                         }}
-                                        initial={{ opacity: 0, y: 8 }}
-                                        animate={{ opacity: 1, y: 0 }}
                                         className={`group rounded-[24px] border p-4 transition-all duration-200 ${isCorrect
                                                 ? "border-[#AFCA05]/45 bg-[#AFCA05]/10"
                                                 : isSelected
@@ -520,7 +516,7 @@ export function OrderQuiz() {
                                                 </button>
                                             </div>
                                         </div>
-                                    </motion.div>
+                                    </div>
                                 );
                             })}
                         </div>

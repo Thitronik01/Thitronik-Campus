@@ -1,10 +1,18 @@
-import type { Metadata } from "next";
-import "../globals.css";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-    title: "Login | THITRONIK Campus 2.0",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "Metadata" });
+    return {
+        title: t("login_title"),
+        description: t("login_desc"),
+        openGraph: {
+            title: t("login_title"),
+            description: t("login_desc"),
+        }
+    };
+}
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
-    return children;
+    return <>{children}</>;
 }

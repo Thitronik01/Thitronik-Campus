@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, ArrowRight, Users, ClipboardCheck, Wrench, StickyNote } from "lucide-react";
+import { FileText, ArrowRight, Users, ClipboardCheck, Wrench, StickyNote, Clock, Volume2, Sliders } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -27,6 +27,13 @@ export default function ToolsPage() {
             href: "/tools/customer-sheet",
         },
         {
+            id: "configurator",
+            title: "Campus Konfigurator",
+            description: "Finden Sie die richtige Thitronik-Sicherheitskonfiguration für jedes Fahrzeug.",
+            icon: <Sliders className="w-8 h-8 text-brand-lime" />,
+            href: "/tools/configurator",
+        },
+        {
             id: "feedback",
             title: "Veranstaltungs-Feedback",
             description: "Digitaler Feedbackbogen zur Bewertung der Campus-Schulung.",
@@ -39,6 +46,20 @@ export default function ToolsPage() {
             description: "Notizen tippen oder handschriftlich erfassen – mit Texterkennung und PDF-Export.",
             icon: <StickyNote className="w-8 h-8 text-brand-lime" />,
             href: "/tools/notizen",
+        },
+        {
+            id: "einbau-stoppuhr",
+            title: "Einbau-Stoppuhr",
+            description: "Professionelle Stoppuhr für Einbau-Übungen mit Rundenzeiten und Teilnehmer-Tracking.",
+            icon: <Clock className="w-8 h-8 text-brand-lime" />,
+            href: "/tools/einbau-stoppuhr",
+        },
+        {
+            id: "sound-board",
+            title: "Sound-Board",
+            description: "Thitronik Alarm- und Signaltöne abspielen, kennenlernen und im Quiz testen.",
+            icon: <Volume2 className="w-8 h-8 text-brand-lime" />,
+            href: "/tools/sound-board",
         },
     ];
 

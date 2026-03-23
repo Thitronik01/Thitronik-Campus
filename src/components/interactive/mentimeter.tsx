@@ -668,7 +668,7 @@ function HeaderBar({ identity, room, onLeave }: { identity: any, room: any, onLe
         <div style={{ padding: "12px 18px", borderBottom: "1px solid #1e293b", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", background: "#0f172a" }}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <Link href="/tools">
-                    <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+                    <Button aria-label="Zurück" variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
                         <ArrowLeft className="w-5 h-5" />
                     </Button>
                 </Link>

@@ -30,7 +30,7 @@ export function MobileSidebar() {
     return (
         <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="lg:hidden text-white hover:bg-white/10">
+                <Button variant="ghost" size="icon" aria-label="Navigation umschalten" className="lg:hidden text-white hover:bg-white/10">
                     <span className="text-xl">☰</span>
                 </Button>
             </SheetTrigger>

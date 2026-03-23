@@ -16,7 +16,6 @@ import { QrCode } from "lucide-react";
 
 import { PremiumBackground } from "@/components/layout/premium-background";
 import { ChronikPreviewCard } from "@/components/chronik/chronik-preview-card";
-import { ISLANDS } from "@/lib/data/islands";
 
 
 const stagger = { hidden: {}, visible: { transition: { staggerChildren: 0.08 } } };

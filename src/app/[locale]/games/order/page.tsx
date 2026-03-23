@@ -9,7 +9,6 @@ import { RoomLobby } from "@/lib/multiplayer/RoomLobby";
 import { Scoreboard } from "@/lib/multiplayer/Scoreboard";
 import { buildRoomUrl } from "@/lib/multiplayer/roomUtils";
 import { MSG } from "@/lib/multiplayer/types";
-import { motion } from "framer-motion";
 import { ArrowLeft, ListOrdered, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -54,7 +53,7 @@ function shuffleArray<T>(arr: T[]): T[] {
 function OrderMultiplayer({ roomId, role: initialRole }: { roomId: string; role: "host" | "participant" }) {
     const [playerName, setPlayerName] = useState("");
     const [nameSet, setNameSet] = useState(initialRole === "host");
-    const [localOrder, setLocalOrder] = useState<string[]>(() => shuffleArray(CORRECT_ORDER));
+    const [localOrder, setLocalOrder] = useState<string[]>(CORRECT_ORDER);
     const [submitted, setSubmitted] = useState(false);
 
     const { room, participants, clientId, sendMessage, updateGameState, setStatus, updateParticipantScore } =
@@ -136,9 +135,9 @@ function OrderMultiplayer({ roomId, role: initialRole }: { roomId: string; role:
                 <div className="absolute top-4 left-4 z-20">
                     <Link href="/games"><Button variant="ghost" className="gap-2 text-white hover:bg-white/20"><ArrowLeft className="w-4 h-4" /> Zurück</Button></Link>
                 </div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                <div className="text-3xl font-bold text-white mb-6 flex items-center gap-3 animate-[fade-in_0.3s_ease-out]">
                     <ListOrdered className="w-8 h-8 text-brand-lime" /> Multiplayer Reihenfolge-Quiz
-                </motion.div>
+                </div>
                 <RoomLobby roomId={roomId} roomUrl={roomUrl} isHost={initialRole === "host"} participants={participants}
                     hostName={room?.host.name ?? "Host"} onStart={startGame} />
             </div>
@@ -215,7 +214,7 @@ function OrderMultiplayer({ roomId, role: initialRole }: { roomId: string; role:
                     {localOrder.map((id, idx) => {
                         const item = ORDER_ITEMS.find((it) => it.id === id);
                         return (
-                            <motion.div key={id} layout className={`flex items-center gap-3 p-3 rounded-xl border transition-all ${
+                            <div key={id} className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-300 ${
                                 submitted ? "bg-white/5 border-white/10 opacity-60" : "bg-white/10 border-white/20 hover:bg-white/15"
                             }`}>
                                 <span className="w-8 h-8 rounded-lg bg-white/10 font-bold flex items-center justify-center text-sm shrink-0">{idx + 1}</span>
@@ -228,7 +227,7 @@ function OrderMultiplayer({ roomId, role: initialRole }: { roomId: string; role:
                                             className="px-2 py-1 rounded bg-white/10 text-xs disabled:opacity-30 hover:bg-white/20">↓</button>
                                     </div>
                                 )}
-                            </motion.div>
+                            </div>
                         );
                     })}
                 </div>

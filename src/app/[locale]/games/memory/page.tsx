@@ -360,7 +360,7 @@ function MemoryPageInner() {
             <div className="max-w-6xl mx-auto space-y-8 animate-fade-in pb-20">
                 <div className="flex items-center gap-4 border-b border-border pb-6">
                     <Link href="/games">
-                        <Button variant="outline" size="icon" className="h-10 w-10 shrink-0 border-white/20 text-white hover:bg-white/10">
+                        <Button aria-label="Zurück" variant="outline" size="icon" className="h-10 w-10 shrink-0 border-white/20 text-white hover:bg-white/10">
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
                     </Link>

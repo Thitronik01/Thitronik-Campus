@@ -665,7 +665,7 @@ export default function IslandsHeadPage() {
                 <div style={{ background: `linear-gradient(135deg,${CI.navyD},${CI.navy})`, padding: '14px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, flexShrink: 0 }}>
                     <div className="flex items-center gap-4">
                         <Link href="/">
-                            <Button variant="ghost" size="icon" className="shrink-0 rounded-full h-8 w-8 text-white hover:bg-white/10">
+                            <Button aria-label="Zurück" variant="ghost" size="icon" className="shrink-0 rounded-full h-8 w-8 text-white hover:bg-white/10">
                                 <ArrowLeft className="w-4 h-4" />
                             </Button>
                         </Link>

@@ -12,7 +12,7 @@ export default function OrderQuizPage() {
             <div className="max-w-4xl mx-auto space-y-8 animate-fade-in pb-20">
                 <div className="flex items-center gap-4 border-b border-border pb-6">
                     <Link href="/tools">
-                        <Button variant="outline" size="icon" className="h-10 w-10 shrink-0">
+                        <Button aria-label="Zurück" variant="outline" size="icon" className="h-10 w-10 shrink-0">
                             <ArrowLeft className="h-5 w-5" />
                         </Button>
                     </Link>

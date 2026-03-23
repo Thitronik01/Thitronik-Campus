@@ -11,18 +11,30 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 const nunito = Nunito({ variable: "--font-nunito", subsets: ["latin"], weight: ["400", "600", "700", "800"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+import { getTranslations } from "next-intl/server";
+import { PwaRegistry } from "@/components/pwa-registry";
 
-export const metadata: Metadata = {
-  title: "THITRONIK Campus 2.0 | Händler Akademie",
-  description: "Partner-Schulungsplattform für den DACH-Raum – Schulungen, Zertifizierungen und Gamification für THITRONIK Händler.",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Campus 2.0",
-  },
-};
-
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+  return {
+    title: t("dashboard_title"),
+    description: t("dashboard_desc"),
+    manifest: "/manifest.json",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "black-translucent",
+      title: "Campus 2.0",
+    },
+    icons: {
+      apple: "/icons/apple-touch-icon.png",
+    },
+    openGraph: {
+      title: t("dashboard_title"),
+      description: t("dashboard_desc"),
+    }
+  };
+}
 export const viewport: Viewport = {
   themeColor: "#1D3661",
   width: "device-width",
@@ -60,6 +72,7 @@ export default async function RootLayout({
               <AppShell>{children}</AppShell>
             </TooltipProvider>
           </ThemeProvider>
+          <PwaRegistry />
         </NextIntlClientProvider>
       </body>
     </html>

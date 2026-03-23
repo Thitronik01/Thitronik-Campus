@@ -177,5 +177,25 @@
         "image_alt": "History Image",
         "loading": "Loading...",
         "nav_label": "Campus Chronik"
+    },
+    "Metadata": {
+        "dashboard_title": "Dashboard | THITRONIK Campus",
+        "dashboard_desc": "Your personal overview on the THITRONIK Campus.",
+        "login_title": "Login | THITRONIK Campus",
+        "login_desc": "Log in to access the Dealer Academy.",
+        "modules_title": "Modules | THITRONIK Campus",
+        "modules_desc": "Discover the 7 islands and expand your knowledge.",
+        "games_title": "Games | THITRONIK Campus",
+        "games_desc": "Interactive games for the THITRONIK Campus.",
+        "tools_title": "Tools | THITRONIK Campus",
+        "tools_desc": "Helpful tools for THITRONIK partners.",
+        "admin_title": "Admin Dashboard | THITRONIK Campus",
+        "admin_desc": "Manage users and events.",
+        "profile_title": "My Profile | THITRONIK Campus",
+        "profile_desc": "View your learning progress and certificates.",
+        "certificates_title": "Certificates | THITRONIK Campus",
+        "certificates_desc": "Your collected THITRONIK certificates.",
+        "chronik_title": "Campus Chronik | THITRONIK Campus",
+        "chronik_desc": "Discover past campuses and memories."
     }
 }

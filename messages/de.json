@@ -235,5 +235,25 @@
         "image_alt": "Chronik Bild",
         "loading": "Wird geladen...",
         "nav_label": "Campus Chronik"
+    },
+    "Metadata": {
+        "dashboard_title": "Dashboard | THITRONIK Campus",
+        "dashboard_desc": "Ihre persönliche Übersicht auf dem THITRONIK Campus.",
+        "login_title": "Login | THITRONIK Campus",
+        "login_desc": "Melden Sie sich an, um auf die Händler-Akademie zuzugreifen.",
+        "modules_title": "Module | THITRONIK Campus",
+        "modules_desc": "Entdecken Sie die 7 Inseln und erweitern Sie Ihr Wissen.",
+        "games_title": "Games | THITRONIK Campus",
+        "games_desc": "Interaktive Spiele für den THITRONIK Campus.",
+        "tools_title": "Tools | THITRONIK Campus",
+        "tools_desc": "Hilfreiche Werkzeuge für THITRONIK Partner.",
+        "admin_title": "Admin Dashboard | THITRONIK Campus",
+        "admin_desc": "Verwalten Sie Benutzer und Events.",
+        "profile_title": "Mein Profil | THITRONIK Campus",
+        "profile_desc": "Sehen Sie Ihren Lernfortschritt und Ihre Zertifikate.",
+        "certificates_title": "Zertifikate | THITRONIK Campus",
+        "certificates_desc": "Ihre gesammelten THITRONIK Zertifikate.",
+        "chronik_title": "Campus Chronik | THITRONIK Campus",
+        "chronik_desc": "Vergangene Campuse und Erinnerungen entdecken."
     }
 }

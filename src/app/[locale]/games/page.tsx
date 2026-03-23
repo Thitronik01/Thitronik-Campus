@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
     Puzzle, Brain, ListOrdered, Search, MessageSquare,
     Presentation, BarChart2, Briefcase, HelpCircle,
-    User, Users, LogIn,
+    User, Users, LogIn, PenLine,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -43,6 +43,12 @@ export default function GamesPage() {
             title: "Was bin ich?",
             description: "Erraten Sie THITRONIK-Produkte anhand schrittweiser Hinweise.",
             icon: <HelpCircle className="w-8 h-8 text-brand-lime" />,
+        },
+        {
+            id: "fill-the-gap",
+            title: "Lückentext",
+            description: "Fülle die Lücken in Sätzen über Thitronik-Produkte und Einbau-Wissen.",
+            icon: <PenLine className="w-8 h-8 text-brand-lime" />,
         },
         {
             id: "kahoot",

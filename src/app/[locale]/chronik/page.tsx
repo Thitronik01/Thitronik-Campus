@@ -3,6 +3,20 @@ import { PremiumBackground } from "@/components/layout/premium-background";
 import { ChronikTimeline } from "@/components/chronik/chronik-timeline";
 import { getChronikEntries } from "@/actions/chronik";
 import { createClient } from "@/lib/supabase/server";
+import { getTranslations } from "next-intl/server";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "Metadata" });
+    return {
+        title: t("chronik_title"),
+        description: t("chronik_desc"),
+        openGraph: {
+            title: t("chronik_title"),
+            description: t("chronik_desc"),
+        }
+    };
+}
 
 export default async function ChronikPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

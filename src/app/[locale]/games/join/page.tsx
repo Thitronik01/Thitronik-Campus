@@ -42,7 +42,7 @@ export default function JoinGamePage() {
                 {/* Back Button */}
                 <div className="w-full max-w-md mb-8">
                     <Link href="/games">
-                        <Button
+                        <Button aria-label="Zurück"
                             variant="outline"
                             size="icon"
                             className="h-10 w-10 border-white/20 text-white hover:bg-white/10"

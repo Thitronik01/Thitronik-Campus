@@ -6,12 +6,13 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useTranslations, useFormatter } from "next-intl";
+import { useTranslations, useFormatter, useNow } from "next-intl";
 import { useNotificationStore } from "@/store/notification-store";
 
 export function NotificationDropdown() {
     const t = useTranslations("Notifications");
     const format = useFormatter();
+    const now = useNow();
     const { notifications, markAsRead, markAllAsRead } = useNotificationStore();
 
     const unreadCount = notifications.filter(n => !n.read).length;
@@ -19,7 +20,7 @@ export function NotificationDropdown() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative text-white hover:bg-white/10 outline-none">
+                <Button variant="ghost" size="icon" aria-label={t("header") || "Benachrichtigungen"} className="relative text-white hover:bg-white/10 outline-none">
                     <span className="text-lg">🔔</span>
                     {unreadCount > 0 && (
                         <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-brand-red text-[9px] font-bold rounded-full flex items-center justify-center border-2 border-brand-navy">
@@ -49,7 +50,7 @@ export function NotificationDropdown() {
                                     <p className="text-sm font-medium">{t(n.titleKey)}</p>
                                     <p className="text-xs text-muted-foreground mt-0.5">{t(n.descriptionKey)}</p>
                                     <p className="text-[10px] text-muted-foreground mt-1">
-                                        {format.relativeTime(new Date(n.timestamp))}
+                                        {format.relativeTime(new Date(n.timestamp), { now })}
                                     </p>
                                 </div>
                             </div>
